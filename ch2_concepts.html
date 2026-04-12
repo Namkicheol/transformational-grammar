@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.2 Structure — 개념 정리 | TG Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #2d2d6b;
+  --primary-light: #f0f0fa;
+  --accent: #e8533a;
+  --green: #1a6e42;
+  --green-bg: #eaf6f0;
+  --red-bg: #fdf0ed;
+  --yellow-bg: #fffbee;
+  --yellow-border: #f0d060;
+  --gray: #f7f7f9;
+  --border: #e4e4f0;
+  --text: #1a1a2e;
+  --muted: #666;
+  --serif: 'Noto Serif KR', serif;
+  --sans: 'Noto Sans KR', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); color: var(--text); background: #fff; line-height: 1.9; }
+
+/* ── 헤더 ── */
+.hero {
+  background: var(--primary);
+  color: #fff;
+  padding: 48px 32px 40px;
+  text-align: center;
+}
+.hero-tag {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 14px;
+  font-family: var(--mono);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 30px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.hero h1 span { color: #ffd166; }
+.hero p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  max-width: 500px;
+  margin: 0 auto;
+}
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  font-family: var(--mono);
+}
+
+/* ── 본문 ── */
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px 60px; }
+
+/* ── 섹션 헤더 ── */
+.sec-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 52px 0 20px;
+}
+.sec-num {
+  width: 36px; height: 36px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.sec-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--primary);
+}
+.sec-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── 본문 텍스트 ── */
+.body-text {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #2a2a3e;
+  margin-bottom: 18px;
+}
+.body-text strong { color: var(--primary); }
+
+/* ── 개념 카드 ── */
+.concept-card {
+  background: var(--primary-light);
+  border: 1px solid #d0d0ec;
+  border-left: 5px solid var(--primary);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+  margin: 18px 0;
+}
+.concept-card .card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-family: var(--mono);
+}
+.concept-card p {
+  font-size: 14px;
+  margin: 6px 0;
+  line-height: 1.8;
+}
+.concept-card strong { color: var(--primary); }
+
+/* ── 포인트 박스 ── */
+.point-box {
+  background: #fffbe6;
+  border: 1px solid #f0d060;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.point-box::before {
+  content: '💡 ';
+}
+.point-box strong { color: #b8860b; }
+
+/* ── 예문 박스 ── */
+.eg-box {
+  background: var(--gray);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
+}
+.eg-box .eg-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.eg-box .en {
+  font-family: var(--mono);
+  font-size: 13px;
+  display: block;
+  margin: 4px 0;
+  color: #2a2a3e;
+  line-height: 1.7;
+}
+.eg-box .ok { color: var(--green); }
+.eg-box .ok::before { content: '✓ '; }
+.eg-box .bad { color: var(--accent); }
+.eg-box .bad::before { content: '✗ '; }
+.eg-box .note {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── 비교 테이블 ── */
+.cmp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin: 18px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+.cmp-table th {
+  background: var(--primary);
+  color: #fff;
+  padding: 11px 16px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 13px;
+}
+.cmp-table th:first-child { width: 30%; }
+.cmp-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.7;
+}
+.cmp-table tr:last-child td { border-bottom: none; }
+.cmp-table tr:nth-child(even) td { background: #fafafe; }
+.cmp-table .o { color: var(--green); font-weight: 600; }
+.cmp-table .x { color: var(--accent); font-weight: 600; }
+
+/* ── 흐름도 ── */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+  font-size: 14px;
+}
+.flow-item {
+  background: var(--primary);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+.flow-arrow { color: var(--muted); font-size: 18px; }
+
+/* ── 구분선 ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* ── 미니퀴즈 ── */
+.quiz-wrap {
+  background: var(--yellow-bg);
+  border: 1px solid var(--yellow-border);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin: 28px 0;
+}
+.quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.quiz-icon {
+  width: 30px; height: 30px;
+  background: #f0d060;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+.quiz-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #7a6000;
+  letter-spacing: 1px;
+  font-family: var(--mono);
+}
+.quiz-item { margin-bottom: 20px; }
+.quiz-item:last-child { margin-bottom: 0; }
+.quiz-q {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.quiz-q .en {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: #555;
+  display: block;
+  margin-top: 4px;
+  background: rgba(255,255,255,0.6);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.quiz-opts { display: flex; flex-direction: column; gap: 7px; }
+.quiz-btn {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  border: 1.5px solid #e0d080;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-family: var(--sans);
+  line-height: 1.6;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.quiz-btn:hover:not([disabled]) {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.quiz-btn.c {
+  border-color: var(--green) !important;
+  background: var(--green-bg) !important;
+  color: var(--green) !important;
+}
+.quiz-btn.w {
+  border-color: var(--accent) !important;
+  background: var(--red-bg) !important;
+  color: var(--accent) !important;
+}
+.quiz-fb {
+  display: none;
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+.quiz-fb.ok {
+  background: var(--green-bg);
+  border: 1px solid #90d0b0;
+  color: #145535;
+}
+.quiz-fb.ng {
+  background: var(--red-bg);
+  border: 1px solid #e0a090;
+  color: #8a2010;
+}
+</style>
+</head>
+<body>
+
+<!-- ── 헤더 ── -->
+<div class="hero">
+  <div class="hero-tag">Transformational Grammar · Andrew Radford</div>
+  <h1>Ch.2 <span>Structure</span><br>개념 정리</h1>
+  <p>문장은 어떻게 구조화되는가? — Constituency, Phrasal Verb, Adverb, Proform, Coordination</p>
+  <div class="hero-badges">
+    <span class="badge">Phrasal V vs Prep V</span>
+    <span class="badge">S / VP-adverb</span>
+    <span class="badge">Proform</span>
+    <span class="badge">Coordination</span>
+    <span class="badge">Constituent Structure Tests</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ════════════════════════════════════
+     1. Constituent Structure
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">1</div>
+  <div>
+    <div class="sec-title">Constituent Structure</div>
+    <div class="sec-sub">문장은 위계적 구조를 가진다</div>
+  </div>
+</div>
+
+<p class="body-text">
+  언어학자들은 문장이 단순히 단어의 나열이 아니라, <strong>위계적(hierarchical) 구조</strong>를 이루고 있다고 주장합니다.
+  단어들은 phrase로, phrase들은 sentence로 묶이며, 각각의 구성 요소는 <strong>syntactic category</strong>에 속합니다.
+</p>
+
+<div class="flow">
+  <div class="flow-item">sound</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-item">word</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-item">phrase</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-item">sentence</div>
+</div>
+
+<div class="concept-card">
+  <div class="card-title">Constituent Structure 핵심 원칙</div>
+  <p><strong>Constituent</strong>: larger structural unit / a single structural unit</p>
+  <p><strong>Phrase-marker (P-marker)</strong>: labelled tree diagram. 문장의 categorial constituent structure를 시각적으로 표현</p>
+  <p><strong>Category</strong>: N, V, Adj, Adv, P, M (Modal) → NP, VP, AP, ADVP, PP</p>
+</div>
+
+<p class="body-text">
+  구성소(constituent)의 존재를 증명하는 테스트는 여러 가지가 있습니다.
+  Radford는 <strong>8가지 constituent structure test</strong>를 제시합니다 (§2.8).
+</p>
+
+<div class="eg-box">
+  <div class="eg-label">Constituent Structure Tests (§2.8)</div>
+  <span class="en">(a) Distribution — 같은 종류의 phrase로 대치 가능한가?</span>
+  <span class="en">(b) Movement — preposing / postposing 가능한가?</span>
+  <span class="en">(c) Sentence-fragment — 질문의 짧은 답변으로 쓸 수 있는가?</span>
+  <span class="en">(d) S/VP-adverbial 삽입 — S-adverb나 VP-adverb를 내부에 넣을 수 있는가?</span>
+  <span class="en">(e) Ordinary Coordination — 다른 string과 등위접속 가능한가?</span>
+  <span class="en">(f) Shared Constituent Coordination — 공유 구성소로 기능하는가?</span>
+  <span class="en">(g) Proform — 적절한 proform으로 대치되거나 antecedent가 되는가?</span>
+  <span class="en">(h) Ellipsis — VP ellipsis가 가능한가?</span>
+</div>
+
+<div class="point-box">
+  <strong>Only phrasal constituents (whole phrases) can undergo Movement, Preposing, or Postposing.</strong><br>
+  오직 완전한 phrase 전체만이 이동하거나 생략될 수 있습니다. part는 불가.
+</div>
+
+<p class="body-text">
+  또한 <strong>단어 하나도 phrase가 될 수 있습니다</strong> (§2.7 Words used as Phrases).
+  예를 들어 <em>Hypocrisy, most people can't stand</em>에서 <em>hypocrisy</em>는 단어 하나지만,
+  prepose되고 sentence-fragment로도 쓰이므로 완전한 NP입니다.
+  <strong>단어의 개수가 아니라 distribution이 phrase를 결정합니다.</strong>
+</p>
+
+<!-- 미니퀴즈 1 -->
+<div class="quiz-wrap">
+  <div class="quiz-header">
+    <div class="quiz-icon">✏️</div>
+    <div class="quiz-title">CHECK — Constituent Structure</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q1. 다음 중 constituent structure를 증명하는 테스트가 <u>아닌</u> 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,0)">① Preposing (구 전치)</button>
+      <button class="quiz-btn" onclick="qz(this,0)">② Sentence-fragment (짧은 답변 가능 여부)</button>
+      <button class="quiz-btn" onclick="qz(this,1)">③ 단어 수 세기</button>
+      <button class="quiz-btn" onclick="qz(this,0)">④ Proform 대치</button>
+    </div>
+    <div class="quiz-fb" id="qf1">정답: ③
+Constituent를 결정하는 것은 단어의 수가 아니라 distribution입니다.
+단어 하나도 전체 NP/VP가 될 수 있습니다.
+(예) Hypocrisy, most people can't stand. → hypocrisy 하나가 NP</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q2. 다음 문장에서 VP Ellipsis가 일어났다. 생략된 것은?
+      <span class="en">John won't help me with the dishes, but his brother will ___.</span>
+    </div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,0)">① help</button>
+      <button class="quiz-btn" onclick="qz(this,1)">② help me with the dishes (VP 전체)</button>
+      <button class="quiz-btn" onclick="qz(this,0)">③ me with the dishes</button>
+    </div>
+    <div class="quiz-fb" id="qf2">정답: ②
+Ellipsis는 오직 VP 전체만 생략 가능합니다.
+"will [help me with the dishes]" — VP가 생략되어 "will"만 남은 것
+*will put [the vodka into the drink] 처럼 VP 일부만 생략하면 비문</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     2. Phrasal V vs Prep V
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">2</div>
+  <div>
+    <div class="sec-title">Phrasal Verb vs Prepositional Verb</div>
+    <div class="sec-sub">§2.8 Testing the Structure — 가장 중요한 구분 중 하나</div>
+  </div>
+</div>
+
+<p class="body-text">
+  <em>Drunks would get off the bus</em>와 <em>Drunks would put off the customers</em>는 겉모양이 비슷하지만,
+  통사적 행동이 완전히 다릅니다.
+  전자에서 <em>off the bus</em>는 <strong>PP (Prepositional Phrase)</strong>이고,
+  후자에서 <em>put off</em>는 <strong>Phrasal Verb</strong>입니다.
+</p>
+
+<div class="concept-card">
+  <div class="card-title">핵심 정의</div>
+  <p><strong>Phrasal Verb</strong>: V + particle이 하나의 의미 단위 (idiomatic / idiosyncratic meaning)</p>
+  <p>→ particle은 NP와 constituent를 이루지 않음. prepose 불가, 부사 삽입 불가</p>
+  <p style="margin-top:10px"><strong>Prepositional Verb</strong>: V + PP. 전치사는 독립적 의미 유지 (compositional meaning)</p>
+  <p>→ PP 전체가 constituent. prepose 가능, 부사 삽입 가능, sentence-fragment 가능</p>
+</div>
+
+<p class="body-text">
+  두 구조의 차이를 보여주는 핵심 증거 중 하나가 <strong>Replacement</strong>입니다.
+  Prepositional Verb에서는 전치사를 반의어 전치사로 교체해도 의미가 유지되지만,
+  Phrasal Verb에서는 불가능합니다.
+</p>
+
+<div class="eg-box">
+  <div class="eg-label">Replacement 테스트 (§2.8)</div>
+  <span class="en ok">Drunks would get off the bus → get on the bus (반의어 대체 ✓ → Prep V 증거)</span>
+  <span class="en bad">Drunks would put off the customers → *put on the customers (반의어 대체 ✗ → Phrasal V 증거)</span>
+  <div class="note">get off / get on: compositional meaning 유지 (constituent parallelism)<br>put off / put on: 각각 deter / wear — 의미 무관 (idiom)</div>
+</div>
+
+<p class="body-text">
+  또한 <strong>Selection Restriction</strong>도 다릅니다.
+  Prepositional Verb 쌍(get off / get on)은 같은 범위의 complement를 취하지만,
+  Phrasal Verb 쌍(put off / put on)은 그렇지 않습니다.
+</p>
+
+<h3 style="font-size:15px; font-weight:700; margin:24px 0 12px; color:var(--primary);">판별 테스트 5가지</h3>
+
+<table class="cmp-table">
+  <tr>
+    <th>테스트</th>
+    <th>Phrasal V <small>— pick up</small></th>
+    <th>Prep V <small>— climb up</small></th>
+  </tr>
+  <tr>
+    <td>① Particle movement<br><small>particle을 NP 뒤로</small></td>
+    <td class="o">✓ pick the ladder <u>up</u></td>
+    <td class="x">✗ *climb the ladder up</td>
+  </tr>
+  <tr>
+    <td>② 대명사화<br><small>NP → it / them</small></td>
+    <td class="o">✓ pick <u>it</u> up</td>
+    <td class="x">✗ *climb it up</td>
+  </tr>
+  <tr>
+    <td>③ 부사 삽입<br><small>V와 P 사이</small></td>
+    <td class="x">✗ *pick quickly up the ladder</td>
+    <td class="o">✓ climb quickly up the ladder</td>
+  </tr>
+  <tr>
+    <td>④ 구 전치 (Preposing)</td>
+    <td class="x">✗ *Up the ladder he will pick.</td>
+    <td class="o">✓ Up the ladder he will climb.</td>
+  </tr>
+  <tr>
+    <td>⑤ Sentence fragment</td>
+    <td class="x">✗ *Up the ladder. (답변 불가)</td>
+    <td class="o">✓ Up the ladder. (O)</td>
+  </tr>
+</table>
+
+<div class="point-box">
+  <strong>Strict Adjacency Principle (§2.8)</strong>: An NP complement of a Verb must be positioned strictly adjacent to its Verb.<br>
+  → NP는 반드시 동사 바로 뒤에 와야 합니다. 부사가 V와 NP 사이에 끼어들 수 없는 이유입니다.<br>
+  (예) *finish completely the assignment — completely가 V와 NP 사이에 낌 → 비문
+</div>
+
+<!-- 미니퀴즈 2 -->
+<div class="quiz-wrap">
+  <div class="quiz-header">
+    <div class="quiz-icon">✏️</div>
+    <div class="quiz-title">CHECK — Phrasal V vs Prep V</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q3. 다음 중 Prepositional Verb 판별의 증거로 올바른 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,0)">① NP를 대명사(it)로 바꿔도 문법적이다</button>
+      <button class="quiz-btn" onclick="qz(this,1)">② 동사와 전치사 사이에 부사를 삽입할 수 있다</button>
+      <button class="quiz-btn" onclick="qz(this,0)">③ particle을 NP 뒤로 이동시킬 수 있다</button>
+    </div>
+    <div class="quiz-fb" id="qf3">정답: ②
+부사 삽입: climb quickly up the ladder (O) → Prep V 증거
+대명사화(it)와 particle movement는 Phrasal V의 증거입니다.
+(pick it up ✓, pick the ladder up ✓ → pick up = Phrasal V)</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q4. 다음 비문의 이유로 가장 적절한 것은?
+      <span class="en">*John will finish completely the assignment.</span>
+    </div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,0)">① completely가 S-adverb라서</button>
+      <button class="quiz-btn" onclick="qz(this,1)">② Strict Adjacency Principle — NP complement는 V 바로 뒤에 와야 함</button>
+      <button class="quiz-btn" onclick="qz(this,0)">③ finish가 자동사여서 목적어를 취할 수 없어서</button>
+    </div>
+    <div class="quiz-fb" id="qf4">정답: ②
+Strict Adjacency Principle: NP complement는 동사 바로 뒤에 위치해야 합니다.
+completely(VP-adverb)가 V(finish)와 NP(the assignment) 사이에 끼어들면 비문
+→ [finish the assignment completely] ✓ / [completely finish the assignment] ✓
+→ *[finish completely the assignment] ✗</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     3. S-adverb vs VP-adverb
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">3</div>
+  <div>
+    <div class="sec-title">S-adverb vs VP-adverb</div>
+    <div class="sec-sub">§2.5 Insertion of Adverbials — 위치로 구조를 증명</div>
+  </div>
+</div>
+
+<p class="body-text">
+  부사의 <strong>위치(distribution)</strong>는 문장이 [NP M VP]로 이루어져 있다는 증거가 됩니다.
+  부사는 어느 node에 부착되느냐에 따라 두 가지로 나뉩니다.
+</p>
+
+<div class="concept-card">
+  <div class="card-title">S-adverb vs VP-adverb</div>
+  <p><strong>S-adverb</strong>: S node에 부착. 명제 전체 / 화자의 인식·평가·확률을 수식.</p>
+  <p style="margin-left:12px; color:var(--muted); font-size:13px">→ certainly, naturally, obviously, definitely, fortunately, surprisingly, possibly</p>
+  <p>→ [S * NP * M * [VP … ] *] 위치에 올 수 있음 (Modal 앞·뒤, VP 앞·뒤)</p>
+  <p style="margin-top:10px"><strong>VP-adverb</strong>: VP node에 부착. 동작의 방식(manner)을 수식.</p>
+  <p style="margin-left:12px; color:var(--muted); font-size:13px">→ completely, entirely, passionately, carefully, quickly, slowly</p>
+  <p>→ [S NP M [VP * V * NP *]] 위치에만 올 수 있음 (VP 내부)</p>
+</div>
+
+<div class="eg-box">
+  <div class="eg-label">위치로 구분 — 교재 예문</div>
+  <span class="en ok">He <u>obviously</u> will appeal passionately for support. ✓</span>
+  <span class="en bad">*He passionately will appeal obviously for support. ✗</span>
+  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ obviously=S-adv, passionately=VP-adv. VP-adverb는 Modal 앞에 올 수 없음.</span>
+  <br>
+  <span class="en ok">You can rely on my help <u>entirely</u>, naturally. ✓</span>
+  <span class="en bad">*You can rely on my help naturally, <u>entirely</u>. ✗</span>
+  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ S-adverb(naturally)는 VP-adverb(entirely) 앞에 와야 함.</span>
+</div>
+
+<div class="point-box">
+  <strong>순서 규칙</strong>: S-adverb &gt; VP-adverb<br>
+  S-adverb가 VP-adverb보다 앞에 와야 합니다.<br>
+  VP-adverb가 Modal 앞에 오거나, S-adverb 앞에 오면 비문입니다.
+</div>
+
+<!-- 미니퀴즈 3 -->
+<div class="quiz-wrap">
+  <div class="quiz-header">
+    <div class="quiz-icon">✏️</div>
+    <div class="quiz-title">CHECK — S-adverb vs VP-adverb</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q5. 다음 중 S-adverb가 아닌 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,0)">① certainly</button>
+      <button class="quiz-btn" onclick="qz(this,0)">② obviously</button>
+      <button class="quiz-btn" onclick="qz(this,1)">③ completely</button>
+      <button class="quiz-btn" onclick="qz(this,0)">④ naturally</button>
+    </div>
+    <div class="quiz-fb" id="qf5">정답: ③ completely = VP-adverb (manner adverb)
+S-adverb: certainly, obviously, naturally, definitely, fortunately, surprisingly, possibly
+→ 화자의 인식(epistemic)이나 명제 평가를 나타냄
+VP-adverb: completely, entirely, passionately, carefully, quickly
+→ 동작의 방식(manner)을 나타냄</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q6. 다음 문장이 비문인 이유는?
+      <span class="en">*He passionately will appeal obviously for support.</span>
+    </div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,1)">① passionately=VP-adverb가 Modal 앞에 왔고, obviously=S-adverb가 VP-adverb 뒤에 옴</button>
+      <button class="quiz-btn" onclick="qz(this,0)">② 두 부사가 연속으로 나오는 것 자체가 비문</button>
+      <button class="quiz-btn" onclick="qz(this,0)">③ obviously가 VP 내부에서만 써야 하는 부사여서</button>
+    </div>
+    <div class="quiz-fb" id="qf6">정답: ①
+passionately = VP-adverb → [S NP M [VP * … ]] 위치에만 가능
+→ Modal(will) 앞에 올 수 없음
+obviously = S-adverb → [S * NP * M * VP *] 위치 가능
+→ S-adverb(obviously)가 VP-adverb(passionately) 뒤에 오면 비문
+올바른 순서: He obviously will appeal passionately for support. ✓</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     4. Proform
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">4</div>
+  <div>
+    <div class="sec-title">Proform (대용어)</div>
+    <div class="sec-sub">§2.6 Proforms — syntax와 semantics를 구분하라</div>
+  </div>
+</div>
+
+<p class="body-text">
+  Proform은 앞서 나온 constituent를 대치하는 표현입니다.
+  Proform의 분석에서 중요한 것은 <strong>syntax적 측면</strong>과 <strong>semantic적 측면</strong>을 구분하는 것입니다.
+</p>
+
+<div class="concept-card">
+  <div class="card-title">Proform의 두 가지 측면</div>
+  <p><strong>Syntax적 측면</strong>: 어느 sentence position을 대치하는가? (어디에 올 수 있는가)</p>
+  <p><strong>Semantic적 측면</strong>: antecedent로 어떤 종류의 표현이 해석되는가?</p>
+  <p style="margin-top:10px; font-size:13px; color:var(--muted)">※ 이 두 측면이 항상 일치하지는 않습니다 — 특히 'it'의 경우</p>
+</div>
+
+<p class="body-text">
+  예를 들어 <em>it</em>은 <strong>syntactically</strong> NP position에만 올 수 있지만,
+  <strong>semantically</strong>로는 NP뿐만 아니라 S(절 전체)도 antecedent가 될 수 있습니다.
+</p>
+
+<div class="eg-box">
+  <div class="eg-label">it의 syntax vs. semantics (§2.6)</div>
+  <span class="en ok">Mary has finished her assignment — I don't believe <u>it</u>.</span>
+  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ it은 NP position에 있지만, antecedent는 S(절 전체)</span>
+  <span class="en bad">*I hope [it]. (it이 S 위치에 오면 비문)</span>
+  <span class="en ok">I hope [you will come]. (S complement는 that절로만 가능)</span>
+</div>
+
+<table class="cmp-table">
+  <tr><th>Proform</th><th>대치 범주</th><th>예문</th></tr>
+  <tr><td><strong>it / them</strong></td><td>Pro-NP</td><td>found out about <em>it</em> → the hash 대치</td></tr>
+  <tr><td><strong>there</strong></td><td>Pro-PP</td><td>never been <em>there</em> → (to) Paris 대치</td></tr>
+  <tr><td><strong>so</strong> (hope so)</td><td>Pro-CP</td><td>I certainly hope <em>so</em> → that절 대치</td></tr>
+  <tr><td><strong>so</strong> (so he may be)</td><td>Pro-AP</td><td>and <em>so</em> he may be → extremely intelligent 대치</td></tr>
+  <tr><td><strong>which</strong></td><td>Pro-PP</td><td>in Paris (<em>which</em> he is) → in Paris 대치</td></tr>
+</table>
+
+<!-- 미니퀴즈 4 -->
+<div class="quiz-wrap">
+  <div class="quiz-header">
+    <div class="quiz-icon">✏️</div>
+    <div class="quiz-title">CHECK — Proform</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q7. 다음에서 'so'가 대치하는 범주는?
+      <span class="en">I don't know whether the President will retire next year, but I certainly hope so.</span>
+    </div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,1)">① Pro-CP: that절 전체를 대치</button>
+      <button class="quiz-btn" onclick="qz(this,0)">② Pro-AP: extremely intelligent를 대치</button>
+      <button class="quiz-btn" onclick="qz(this,0)">③ Pro-NP: the President를 대치</button>
+      <button class="quiz-btn" onclick="qz(this,0)">④ Pro-VP: retire를 대치</button>
+    </div>
+    <div class="quiz-fb" id="qf7">정답: ① Pro-CP
+so = "(that) the President will retire next year"라는 CP 전체 대치
+비교: "They say he's extremely intelligent, and so he may be."
+→ 여기서 so = Pro-AP (extremely intelligent 대치)</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q8. 'it'의 syntax와 semantics에 대한 설명 중 옳은 것은?</div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,0)">① it은 syntactically도, semantically도 NP만 대치한다</button>
+      <button class="quiz-btn" onclick="qz(this,1)">② syntactically NP position에만 오지만, semantically NP뿐 아니라 S도 antecedent가 될 수 있다</button>
+      <button class="quiz-btn" onclick="qz(this,0)">③ it은 S position에도 올 수 있다</button>
+    </div>
+    <div class="quiz-fb" id="qf8">정답: ②
+Syntax: it은 NP position에만 올 수 있음
+→ *I hope [it]. (S 위치에는 불가)
+Semantics: S(절 전체)도 antecedent가 될 수 있음
+→ Mary has finished her assignment — I don't believe it.
+→ 여기서 it의 antecedent는 S(Mary has finished her assignment)</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════════════════════════
+     5. Coordination & Constituent
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">5</div>
+  <div>
+    <div class="sec-title">Coordination & Constituent</div>
+    <div class="sec-sub">§2.6 Ordinary / Shared Constituent Coordination</div>
+  </div>
+</div>
+
+<p class="body-text">
+  Coordination(등위접속)은 constituent structure를 증명하는 강력한 도구입니다.
+  등위접속에는 두 가지 원칙이 있습니다.
+</p>
+
+<div class="concept-card">
+  <div class="card-title">Coordination의 두 원칙 (§2.6)</div>
+  <p><strong>① Ordinary Coordination</strong>:</p>
+  <p style="margin-left:12px">Only constituents can be conjoined. (nonconstituent sequence는 불가)</p>
+  <p style="margin-left:12px">Only identical categories can be conjoined. (NP+CP, NP+PP 등 다른 범주 불가)</p>
+  <p style="margin-top:10px"><strong>② Shared Constituent Coordination</strong> (= Right Node Raising):</p>
+  <p style="margin-left:12px">오른쪽 끝 공유 constituent는 반드시 complete phrase여야 함.</p>
+  <p style="margin-left:12px">(예) John walked [and Mary ran] [up the hill] → up the hill이 공유 PP</p>
+</div>
+
+<div class="eg-box">
+  <div class="eg-label">비문 분석 — nonconstituent sequence</div>
+  <span class="en bad">*John rang up his mother and up his sister.</span>
+  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ ring up = Phrasal V. 'up his sister'는 nonconstituent</span>
+  <span class="en bad">*John wrote a letter and to Fred.</span>
+  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ NP(a letter) ≠ PP(to Fred) — 다른 범주 등위접속 불가</span>
+</div>
+
+<p class="body-text">
+  또한 <strong>Gapping</strong>에 주의해야 합니다. 겉보기에 비구성소처럼 보이는 것이
+  실은 empty VP가 포함된 구조일 수 있습니다.
+</p>
+
+<div class="eg-box">
+  <div class="eg-label">Gapping — empty VP 포함 구조 (§2.8)</div>
+  <span class="en ok">John will give his father a shirt, and [give] his mother a skirt.</span>
+  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ 실제로는 VP[give his father a shirt]와 VP[give his mother a skirt]의 등위접속</span>
+  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ 두 번째 VP에서 give가 생략(Gapping)된 것</span>
+</div>
+
+<!-- 미니퀴즈 5 -->
+<div class="quiz-wrap">
+  <div class="quiz-header">
+    <div class="quiz-icon">✏️</div>
+    <div class="quiz-title">CHECK — Coordination</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q9. 다음이 비문인 이유는?
+      <span class="en">*Your mother won't put (and your wife is fed) up with your disgusting behaviour.</span>
+    </div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,1)">① 'up with your disgusting behaviour'는 두 구조의 공통 constituent가 아님 → Shared Constituent Coordination 불가</button>
+      <button class="quiz-btn" onclick="qz(this,0)">② put up with와 fed up with는 의미가 달라서</button>
+      <button class="quiz-btn" onclick="qz(this,0)">③ your mother와 your wife가 다른 주어여서</button>
+    </div>
+    <div class="quiz-fb" id="qf9">정답: ①
+put up with (Phrasal Prep V) = tolerate → [put up] with your behaviour
+fed up (Adj) = unhappy → [fed up] [with your behaviour]
+→ "up with your disgusting behaviour"는 두 구조의 공통 constituent가 아님
+→ nonconstituent sequence는 Shared Constituent Coordination 불가 → 비문</div>
+  </div>
+  <div class="quiz-item">
+    <div class="quiz-q">Q10. 'John will give his father a shirt and his mother a skirt'에서 겉보기에 constituent처럼 보이는 'his father a shirt'가 사실 constituent가 아닌 이유는?</div>
+    <div class="quiz-opts">
+      <button class="quiz-btn" onclick="qz(this,0)">① give가 두 개의 목적어를 취할 수 없어서</button>
+      <button class="quiz-btn" onclick="qz(this,1)">② 실제로는 Gapping — [give his father a shirt] and [give his mother a skirt]에서 두 번째 VP의 give가 생략된 것</button>
+      <button class="quiz-btn" onclick="qz(this,0)">③ his father와 his mother가 동일 지시 대상이어서</button>
+    </div>
+    <div class="quiz-fb" id="qf10">정답: ②
+이 문장은 실제로 VP[give his father a shirt]와 VP[give his mother a skirt]의 등위접속입니다.
+두 번째 VP에서 give가 Gapping(생략)되어 'his mother a skirt'만 남은 것입니다.
+→ 'his father a shirt'는 prepose 불가 / proform 불가 → nonconstituent 확인</div>
+  </div>
+</div>
+
+</div><!-- .wrap -->
+
+<script>
+const qzd = {};
+function qz(btn, correct) {
+  const item = btn.closest('.quiz-item');
+  const idx = [...document.querySelectorAll('.quiz-item')].indexOf(item) + 1;
+  const fbId = 'qf' + idx;
+  if (qzd[fbId]) return;
+  qzd[fbId] = true;
+  item.querySelectorAll('.quiz-btn').forEach(b => b.disabled = true);
+  btn.classList.add(correct ? 'c' : 'w');
+  const fb = document.getElementById(fbId);
+  if (fb) {
+    fb.style.display = 'block';
+    fb.className = 'quiz-fb ' + (correct ? 'ok' : 'ng');
+    fb.textContent = (correct ? '✓ 정답!\n' : '✗ 오답.\n') + fb.textContent;
+  }
+}
+</script>
+</body>
+</html>
