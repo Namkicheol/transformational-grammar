@@ -827,6 +827,253 @@ fed up (Adj) = unhappy → [fed up] [with your behaviour]
   </div>
 </div>
 
+<!-- ════════════════════════════════════
+     6. Phrase Structure Trees
+════════════════════════════════════ -->
+<hr class="divider">
+
+<div class="sec-header">
+  <div class="sec-num">6</div>
+  <div>
+    <div class="sec-title">Phrase Structure Trees</div>
+    <div class="sec-sub">핵심 구조 SVG 트리로 확인하기</div>
+  </div>
+</div>
+
+<p class="body-text">
+  지금까지 배운 개념들을 <strong>트리 다이어그램</strong>으로 확인해봅시다.
+  각 구조의 차이가 트리에서 어떻게 나타나는지 주목하세요.
+</p>
+
+<!-- 트리 공통 스타일 -->
+<style>
+.tree-block { margin: 24px 0; }
+.tree-label { font-size: 13px; color: var(--muted); margin-bottom: 8px; font-style: italic; }
+.tree-note { font-size: 12.5px; color: var(--muted); text-align: center; margin-top: 8px; line-height: 1.7; }
+.tree-note strong { color: var(--primary); }
+.tree-note .x { color: var(--accent); }
+svg text { font-family: 'Noto Serif KR', Georgia, serif; }
+.tree-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width: 540px) { .tree-compare { grid-template-columns: 1fr; } }
+.tree-box { background: var(--gray); border: 1.5px solid var(--border); border-radius: 12px; padding: 16px 12px; }
+.tree-box.ok { border-color: #6dbf9a; background: #f8fdf9; }
+.tree-box.ng { border-color: #e8a090; background: #fdf8f7; }
+.tree-box-title { font-size: 12px; font-weight: 700; margin-bottom: 10px; font-family: var(--mono); }
+.tree-box.ok .tree-box-title { color: var(--green); }
+.tree-box.ng .tree-box-title { color: var(--accent); }
+</style>
+
+<!-- ── 트리 1: Prep V vs Phrasal V ── -->
+<h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:28px 0 12px;">① Prepositional Verb vs Phrasal Verb</h3>
+
+<div class="tree-compare">
+  <div class="tree-box ok">
+    <div class="tree-box-title">✓ Prepositional Verb</div>
+    <div class="tree-label" style="font-size:12px">Drunks would get off the bus.</div>
+    <svg width="100%" viewBox="0 0 260 280" style="display:block;margin:0 auto;">
+      <text x="130" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">S</text>
+      <line x1="130" y1="27" x2="46" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="130" y1="27" x2="120" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="130" y1="27" x2="200" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <text x="46" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">NP</text>
+      <text x="120" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">M</text>
+      <text x="200" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">VP</text>
+      <line x1="46" y1="78" x2="46" y2="100" stroke="#aaa" stroke-width="1.3"/>
+      <text x="46" y="113" text-anchor="middle" font-size="11" fill="#666">N</text>
+      <line x1="46" y1="117" x2="46" y2="136" stroke="#aaa" stroke-width="1.3"/>
+      <text x="46" y="150" text-anchor="middle" font-size="11" fill="#1a1a2e">Drunks</text>
+      <line x1="120" y1="78" x2="120" y2="136" stroke="#aaa" stroke-width="1.3"/>
+      <text x="120" y="150" text-anchor="middle" font-size="11" fill="#1a1a2e">would</text>
+      <line x1="200" y1="78" x2="164" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="200" y1="78" x2="228" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <text x="164" y="122" text-anchor="middle" font-size="11" fill="#666">V</text>
+      <text x="228" y="122" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a7a4a">PP</text>
+      <line x1="164" y1="126" x2="164" y2="136" stroke="#aaa" stroke-width="1.3"/>
+      <text x="164" y="150" text-anchor="middle" font-size="11" fill="#1a1a2e">get</text>
+      <line x1="228" y1="126" x2="210" y2="150" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="228" y1="126" x2="246" y2="150" stroke="#aaa" stroke-width="1.3"/>
+      <text x="210" y="164" text-anchor="middle" font-size="11" fill="#666">P</text>
+      <text x="246" y="164" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a7a4a">NP</text>
+      <line x1="210" y1="168" x2="210" y2="186" stroke="#aaa" stroke-width="1.3"/>
+      <text x="210" y="200" text-anchor="middle" font-size="11" fill="#1a1a2e">off</text>
+      <line x1="246" y1="168" x2="234" y2="186" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="246" y1="168" x2="258" y2="186" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="234" y1="186" x2="258" y2="186" stroke="#aaa" stroke-width="1.3"/>
+      <text x="246" y="200" text-anchor="middle" font-size="11" fill="#1a1a2e">the bus</text>
+      <!-- PP 강조 박스 -->
+      <rect x="196" y="112" width="66" height="96" rx="4" fill="none" stroke="#1a7a4a" stroke-width="1.5" stroke-dasharray="4,2"/>
+      <text x="229" y="220" text-anchor="middle" font-size="10" fill="#1a7a4a">[off the bus] = PP</text>
+    </svg>
+    <div class="tree-note">VP → V + <strong>PP</strong><br>off는 전치사 · [off the bus]가 constituent</div>
+  </div>
+
+  <div class="tree-box ng">
+    <div class="tree-box-title">Phrasal Verb</div>
+    <div class="tree-label" style="font-size:12px">Drunks would put off the customers.</div>
+    <svg width="100%" viewBox="0 0 260 280" style="display:block;margin:0 auto;">
+      <text x="130" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">S</text>
+      <line x1="130" y1="27" x2="46" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="130" y1="27" x2="120" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="130" y1="27" x2="200" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <text x="46" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">NP</text>
+      <text x="120" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">M</text>
+      <text x="200" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">VP</text>
+      <line x1="46" y1="78" x2="46" y2="100" stroke="#aaa" stroke-width="1.3"/>
+      <text x="46" y="113" text-anchor="middle" font-size="11" fill="#666">N</text>
+      <line x1="46" y1="117" x2="46" y2="136" stroke="#aaa" stroke-width="1.3"/>
+      <text x="46" y="150" text-anchor="middle" font-size="11" fill="#1a1a2e">Drunks</text>
+      <line x1="120" y1="78" x2="120" y2="136" stroke="#aaa" stroke-width="1.3"/>
+      <text x="120" y="150" text-anchor="middle" font-size="11" fill="#1a1a2e">would</text>
+      <line x1="200" y1="78" x2="158" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="200" y1="78" x2="236" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <text x="158" y="122" text-anchor="middle" font-size="11" fill="#666">V</text>
+      <text x="236" y="122" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">NP</text>
+      <!-- V → put + off -->
+      <line x1="158" y1="126" x2="136" y2="150" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="158" y1="126" x2="180" y2="150" stroke="#aaa" stroke-width="1.3"/>
+      <text x="136" y="164" text-anchor="middle" font-size="11" fill="#1a1a2e">put</text>
+      <text x="180" y="164" text-anchor="middle" font-size="12" fill="#e8533a" font-weight="bold">off</text>
+      <!-- NP triangle -->
+      <line x1="236" y1="126" x2="220" y2="150" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="236" y1="126" x2="252" y2="150" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="220" y1="150" x2="252" y2="150" stroke="#aaa" stroke-width="1.3"/>
+      <text x="236" y="166" text-anchor="middle" font-size="10" fill="#1a1a2e">the customers</text>
+      <!-- V 강조 박스 -->
+      <rect x="120" y="112" width="74" height="62" rx="4" fill="none" stroke="#e8533a" stroke-width="1.5" stroke-dasharray="4,2"/>
+      <text x="158" y="192" text-anchor="middle" font-size="10" fill="#e8533a">[put off] = V</text>
+    </svg>
+    <div class="tree-note">VP → <strong>V</strong> + NP<br>off는 particle · [off the customers] = nonconstituent</div>
+  </div>
+</div>
+
+<!-- ── 트리 2: S-adverb vs VP-adverb ── -->
+<h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:32px 0 12px;">② S-adverb vs VP-adverb 위치</h3>
+
+<div class="tree-compare">
+  <div class="tree-box ok">
+    <div class="tree-box-title">✓ S-adverb (certainly)</div>
+    <div class="tree-label" style="font-size:12px">Drunks certainly would get off the bus.</div>
+    <svg width="100%" viewBox="0 0 280 220" style="display:block;margin:0 auto;">
+      <text x="140" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">S</text>
+      <line x1="140" y1="27" x2="36" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="140" y1="27" x2="106" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="140" y1="27" x2="176" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="140" y1="27" x2="240" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <text x="36" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">NP</text>
+      <text x="106" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#b8860b">AdvP</text>
+      <text x="176" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">M</text>
+      <text x="240" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">VP</text>
+      <line x1="36" y1="78" x2="36" y2="100" stroke="#aaa" stroke-width="1.3"/>
+      <text x="36" y="113" text-anchor="middle" font-size="11" fill="#666">N</text>
+      <line x1="36" y1="117" x2="36" y2="130" stroke="#aaa" stroke-width="1.3"/>
+      <text x="36" y="144" text-anchor="middle" font-size="11" fill="#1a1a2e">Drunks</text>
+      <line x1="106" y1="78" x2="106" y2="130" stroke="#aaa" stroke-width="1.3"/>
+      <text x="106" y="144" text-anchor="middle" font-size="11" fill="#b8860b" font-weight="bold">certainly</text>
+      <line x1="176" y1="78" x2="176" y2="130" stroke="#aaa" stroke-width="1.3"/>
+      <text x="176" y="144" text-anchor="middle" font-size="11" fill="#1a1a2e">would</text>
+      <line x1="240" y1="78" x2="220" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="240" y1="78" x2="260" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="220" y1="108" x2="260" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <text x="240" y="128" text-anchor="middle" font-size="10" fill="#1a1a2e">get off the bus</text>
+      <!-- S 범위 표시 -->
+      <text x="140" y="175" text-anchor="middle" font-size="10" fill="#b8860b">← S node에 직접 부착 →</text>
+    </svg>
+    <div class="tree-note"><strong>S-adverb</strong>: S node에 부착<br>NP·M·VP 사이 어디든 가능</div>
+  </div>
+
+  <div class="tree-box ok">
+    <div class="tree-box-title">✓ VP-adverb (slowly)</div>
+    <div class="tree-label" style="font-size:12px">Drunks would get slowly off the bus.</div>
+    <svg width="100%" viewBox="0 0 280 240" style="display:block;margin:0 auto;">
+      <text x="140" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">S</text>
+      <line x1="140" y1="27" x2="40" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="140" y1="27" x2="120" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="140" y1="27" x2="210" y2="60" stroke="#aaa" stroke-width="1.3"/>
+      <text x="40" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">NP</text>
+      <text x="120" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">M</text>
+      <text x="210" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">VP</text>
+      <line x1="40" y1="78" x2="40" y2="100" stroke="#aaa" stroke-width="1.3"/>
+      <text x="40" y="113" text-anchor="middle" font-size="11" fill="#666">N</text>
+      <line x1="40" y1="117" x2="40" y2="130" stroke="#aaa" stroke-width="1.3"/>
+      <text x="40" y="144" text-anchor="middle" font-size="11" fill="#1a1a2e">Drunks</text>
+      <line x1="120" y1="78" x2="120" y2="130" stroke="#aaa" stroke-width="1.3"/>
+      <text x="120" y="144" text-anchor="middle" font-size="11" fill="#1a1a2e">would</text>
+      <!-- VP → V + AdvP + PP -->
+      <line x1="210" y1="78" x2="152" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="210" y1="78" x2="210" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="210" y1="78" x2="262" y2="108" stroke="#aaa" stroke-width="1.3"/>
+      <text x="152" y="122" text-anchor="middle" font-size="11" fill="#666">V</text>
+      <text x="210" y="122" text-anchor="middle" font-size="11" font-weight="bold" fill="#2962b0">AdvP</text>
+      <text x="262" y="122" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a7a4a">PP</text>
+      <line x1="152" y1="126" x2="152" y2="140" stroke="#aaa" stroke-width="1.3"/>
+      <text x="152" y="154" text-anchor="middle" font-size="11" fill="#1a1a2e">get</text>
+      <line x1="210" y1="126" x2="210" y2="140" stroke="#aaa" stroke-width="1.3"/>
+      <text x="210" y="154" text-anchor="middle" font-size="11" fill="#2962b0" font-weight="bold">slowly</text>
+      <line x1="262" y1="126" x2="248" y2="148" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="262" y1="126" x2="276" y2="148" stroke="#aaa" stroke-width="1.3"/>
+      <line x1="248" y1="148" x2="276" y2="148" stroke="#aaa" stroke-width="1.3"/>
+      <text x="262" y="164" text-anchor="middle" font-size="10" fill="#1a1a2e">off the bus</text>
+      <!-- VP 범위 표시 -->
+      <text x="210" y="190" text-anchor="middle" font-size="10" fill="#2962b0">← VP node에 부착 →</text>
+    </svg>
+    <div class="tree-note"><strong>VP-adverb</strong>: VP node에 부착<br>VP 내부에만 위치 가능</div>
+  </div>
+</div>
+
+<!-- ── 트리 3: Words as Phrases ── -->
+<h3 style="font-size:15px;font-weight:700;color:var(--primary);margin:32px 0 12px;">③ Words used as Phrases (§2.7)</h3>
+
+<p class="body-text" style="margin-bottom:16px;">
+  단어 하나도 완전한 phrase가 될 수 있습니다.
+  <em>Most people can't stand hypocrisy</em>에서 <em>hypocrisy</em>는 단어 하나지만
+  전치·fragment·coordination 테스트를 통과하므로 완전한 NP입니다.
+</p>
+
+<div class="tree-block">
+  <div class="tree-label">Most people can't stand hypocrisy. → hypocrisy = NP</div>
+  <svg width="100%" viewBox="0 0 480 240" style="max-width:480px;display:block;margin:0 auto;">
+    <text x="240" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">S</text>
+    <line x1="240" y1="27" x2="80" y2="68" stroke="#aaa" stroke-width="1.3"/>
+    <line x1="240" y1="27" x2="220" y2="68" stroke="#aaa" stroke-width="1.3"/>
+    <line x1="240" y1="27" x2="360" y2="68" stroke="#aaa" stroke-width="1.3"/>
+    <text x="80" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">NP</text>
+    <text x="220" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">M</text>
+    <text x="360" y="82" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">VP</text>
+    <!-- NP → D + N -->
+    <line x1="80" y1="86" x2="54" y2="110" stroke="#aaa" stroke-width="1.3"/>
+    <line x1="80" y1="86" x2="106" y2="110" stroke="#aaa" stroke-width="1.3"/>
+    <text x="54" y="124" text-anchor="middle" font-size="11" fill="#666">D</text>
+    <text x="106" y="124" text-anchor="middle" font-size="11" fill="#666">N</text>
+    <line x1="54" y1="128" x2="54" y2="142" stroke="#aaa" stroke-width="1.3"/>
+    <line x1="106" y1="128" x2="106" y2="142" stroke="#aaa" stroke-width="1.3"/>
+    <text x="54" y="156" text-anchor="middle" font-size="11" fill="#1a1a2e">Most</text>
+    <text x="106" y="156" text-anchor="middle" font-size="11" fill="#1a1a2e">people</text>
+    <!-- M → can't -->
+    <line x1="220" y1="86" x2="220" y2="142" stroke="#aaa" stroke-width="1.3"/>
+    <text x="220" y="156" text-anchor="middle" font-size="11" fill="#1a1a2e">can't</text>
+    <!-- VP → V + NP -->
+    <line x1="360" y1="86" x2="310" y2="116" stroke="#aaa" stroke-width="1.3"/>
+    <line x1="360" y1="86" x2="410" y2="116" stroke="#aaa" stroke-width="1.3"/>
+    <text x="310" y="130" text-anchor="middle" font-size="11" fill="#666">V</text>
+    <text x="410" y="130" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a7a4a">NP</text>
+    <line x1="310" y1="134" x2="310" y2="148" stroke="#aaa" stroke-width="1.3"/>
+    <text x="310" y="162" text-anchor="middle" font-size="11" fill="#1a1a2e">stand</text>
+    <!-- NP → N (단어 하나 = NP) -->
+    <line x1="410" y1="134" x2="410" y2="148" stroke="#aaa" stroke-width="1.3"/>
+    <text x="410" y="162" text-anchor="middle" font-size="11" fill="#666">N</text>
+    <line x1="410" y1="166" x2="410" y2="180" stroke="#aaa" stroke-width="1.3"/>
+    <text x="410" y="194" text-anchor="middle" font-size="11" fill="#1a1a2e">hypocrisy</text>
+    <!-- NP 강조 -->
+    <rect x="388" y="120" width="48" height="82" rx="4" fill="none" stroke="#1a7a4a" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="410" y="215" text-anchor="middle" font-size="10" fill="#1a7a4a">단어 1개 = NP</text>
+  </svg>
+  <p class="tree-note">
+    hypocrisy는 N이면서 동시에 <strong>NP</strong><br>
+    전치 가능(Hypocrisy, most people can't stand.) ✓<br>
+    Sentence fragment 가능(A: What? B: Hypocrisy.) ✓
+  </p>
+</div>
+
 </div><!-- .wrap -->
 
 <script>
