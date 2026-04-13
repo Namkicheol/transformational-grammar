@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.2 Structure — 예문 O/X 퀴즈 | TG Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#2d2d6b;--pri-l:#f0f0fa;--acc:#e8533a;
+  --grn:#1a6e42;--grn-bg:#eaf6f0;--grn-bd:#90d0b0;
+  --red-bg:#fdf0ed;--red-bd:#e0a090;
+  --bdr:#e4e4f0;--gray:#f7f7f9;
+  --txt:#1a1a2e;--mut:#777;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
+
+/* hero */
+.hero{background:#1e1e4a;color:#fff;padding:44px 24px 36px;text-align:center}
+.hero-tag{font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.45);margin-bottom:12px;font-family:var(--mono);text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:24px;margin-bottom:10px;line-height:1.35}
+.hero h1 span{color:#ffd166}
+.hero p{font-size:13px;color:rgba(255,255,255,.55);max-width:460px;margin:0 auto 18px}
+.hero-stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}
+.stat-n{font-family:var(--mono);font-size:20px;font-weight:600;color:#ffd166}
+.stat-l{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+
+/* score bar */
+.sbar{position:sticky;top:0;z-index:99;background:#fff;border-bottom:1px solid var(--bdr);
+  padding:9px 20px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.sbar-lbl{font-size:12px;color:var(--mut)}
+.sbar-num{font-family:var(--mono);font-size:16px;font-weight:600;color:var(--pri)}
+.prog-wrap{flex:1;max-width:160px;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--pri);border-radius:3px;transition:width .4s}
+.rbtn{margin-left:auto;padding:5px 12px;border:1px solid var(--bdr);border-radius:6px;
+  font-size:12px;color:var(--mut);cursor:pointer;font-family:var(--sans);background:#fff;transition:all .15s}
+.rbtn:hover{border-color:var(--pri);color:var(--pri)}
+
+/* wrap */
+.wrap{max-width:740px;margin:0 auto;padding:28px 20px 60px}
+
+/* section header */
+.sec-hd{margin:40px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--pri)}
+.sec-tag{font-family:var(--mono);font-size:10px;color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.sec-title{font-family:var(--serif);font-size:18px;color:var(--pri)}
+.sec-ref{font-size:12px;color:var(--mut);margin-top:3px}
+
+/* question card */
+.qcard{background:#fff;border:1.5px solid var(--bdr);border-radius:12px;padding:18px 20px;
+  margin-bottom:12px;transition:border-color .2s}
+.qcard.ok{border-color:#6dbf9a}
+.qcard.ng{border-color:#e8a090}
+
+.qmeta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.qnum{font-family:var(--mono);font-size:11px;color:var(--mut)}
+.qsec-tag{font-size:11px;padding:2px 8px;border-radius:10px;background:var(--pri-l);color:var(--pri);font-family:var(--mono)}
+
+/* 예문 */
+.qeng{font-family:var(--mono);font-size:14px;color:#1a1a2e;background:var(--gray);
+  border-left:3px solid var(--pri);padding:10px 14px;border-radius:0 8px 8px 0;
+  display:block;margin-bottom:10px;line-height:1.7;white-space:pre-line}
+.qask{font-size:13.5px;color:var(--mut);margin-bottom:12px}
+
+/* OX 버튼 */
+.ox-row{display:flex;gap:12px}
+.ox-btn{flex:1;padding:13px;font-size:22px;border:1.5px solid var(--bdr);border-radius:10px;
+  background:#fff;cursor:pointer;transition:all .18s;font-family:var(--sans);
+  display:flex;align-items:center;justify-content:center;gap:8px}
+.ox-btn:hover:not([disabled]){border-color:var(--pri);background:var(--pri-l)}
+.ox-btn .ox-text{font-size:13px;font-family:var(--sans);color:var(--mut)}
+.ox-btn.ok2{border-color:var(--grn)!important;background:var(--grn-bg)!important}
+.ox-btn.ng2{border-color:var(--acc)!important;background:var(--red-bg)!important}
+
+/* feedback */
+.fb{display:none;margin-top:12px;padding:12px 16px;border-radius:9px;
+  font-size:13.5px;line-height:1.8}
+.fb.ok{background:var(--grn-bg);border:1px solid var(--grn-bd);color:#145535}
+.fb.ng{background:var(--red-bg);border:1px solid var(--red-bd);color:#8a2010}
+.fb-head{font-weight:700;font-size:14px;margin-bottom:4px}
+.fb-reason{font-size:13px;line-height:1.75}
+.fb-key{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:11px;
+  padding:2px 8px;border-radius:6px;background:rgba(0,0,0,.07)}
+
+/* result */
+.rbox{display:none;margin-top:36px;padding:28px 24px;background:var(--pri-l);
+  border:1.5px solid #c0c0e8;border-radius:16px;text-align:center}
+.r-icon{font-size:36px;margin-bottom:10px}
+.r-score{font-family:var(--serif);font-size:24px;color:var(--pri);font-weight:700;margin-bottom:6px}
+.r-msg{font-size:13px;color:var(--mut);margin-bottom:16px}
+.r-btn{padding:9px 24px;background:var(--pri);color:#fff;border:none;border-radius:8px;
+  font-size:13px;cursor:pointer;font-family:var(--sans)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Transformational Grammar · Andrew Radford · Ch.2</div>
+  <h1>Structure<br><span>예문 O/X 퀴즈</span> — 랜덤</h1>
+  <p>교재 원문 예문 기반 · 문법적이면 O, 비문이면 X</p>
+  <div class="hero-stats">
+    <div><div class="stat-n">9</div><div class="stat-l">섹션</div></div>
+    <div><div class="stat-n">43</div><div class="stat-l">문제</div></div>
+    <div><div class="stat-n">O / X</div><div class="stat-l">유형</div></div>
+  </div>
+</div>
+
+<div class="sbar">
+  <span class="sbar-lbl">맞은 문제</span>
+  <span class="sbar-num"><span id="sc">0</span>&thinsp;/&thinsp;<span id="st">43</span></span>
+  <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  <button class="rbtn" onclick="reset()">↺ 다시 풀기</button>
+</div>
+
+<div class="wrap">
+  <div id="qw"></div>
+  <div class="rbox" id="rb">
+    <div class="r-icon" id="ri"></div>
+    <div class="r-score" id="rs"></div>
+    <div class="r-msg" id="rm"></div>
+    <button class="r-btn" onclick="reset()">↺ 다시 풀기</button>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  // §2.5 Preposing
+  {sec:'§2.5 Preposing',
+   eng:'[Your elder sister], I can\'t stand.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'NP 전체 [your elder sister]가 prepose되었습니다.',
+   key:'Only whole phrases can undergo Preposing'},
+
+  {sec:'§2.5 Preposing',
+   eng:'[Your elder], I can\'t stand sister.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'NP의 일부(your elder)만 이동했습니다. Preposing은 whole phrase 전체만 가능합니다.',
+   key:'Partial phrase movement → 비문'},
+
+  {sec:'§2.5 Preposing',
+   eng:'[Elder sister], I can\'t stand your.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'NP의 일부만 이동했습니다. your가 제자리에 남아있어 비문입니다.',
+   key:'Partial phrase movement → 비문'},
+
+  {sec:'§2.5 Preposing',
+   eng:'[That kind of behaviour], I simply will not tolerate.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'NP 전체 [that kind of behaviour]가 prepose된 문법적인 문장입니다.',
+   key:'NP preposing ✓'},
+
+  {sec:'§2.5 Preposing',
+   eng:'[Down the hill] John ran, as fast as he could.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'PP 전체 [down the hill]이 prepose된 문법적인 문장입니다.',
+   key:'PP preposing ✓'},
+
+  {sec:'§2.5 Preposing',
+   eng:'[Give in to blackmail], I never will.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'VP 전체 [give in to blackmail]이 prepose된 문법적인 문장입니다.',
+   key:'VP preposing ✓'},
+
+  {sec:'§2.5 Preposing',
+   eng:'[Up his mother], John rang.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'ring up은 Phrasal Verb입니다. up his mother는 constituent가 아니므로 prepose 불가합니다.',
+   key:'Phrasal V particle → nonconstituent → 전치 불가'},
+
+  // §2.5 Postposing
+  {sec:'§2.5 Postposing',
+   eng:'He explained to her [all the terrible problems that he had encountered].',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'무거운 NP 전체가 postpose되어 문장 뒤로 이동했습니다. Whole phrase이므로 가능합니다.',
+   key:'Heavy NP postposing ✓'},
+
+  {sec:'§2.5 Postposing',
+   eng:'He explained all the to her terrible problems that he had encountered.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'NP의 일부(all the)만 남기고 이동했습니다. Whole phrase 전체가 함께 이동해야 합니다.',
+   key:'Partial phrase → 비문'},
+
+  // §2.5 Sentence Fragment
+  {sec:'§2.5 Sentence Fragment',
+   eng:'A: Where did he go?\nB: Up the hill.',
+   ask:'B의 답변은 sentence fragment로 적절하다.',
+   ans:true,
+   why:'[up the hill]은 완전한 PP constituent입니다. 완전한 phrase는 sentence fragment로 사용 가능합니다.',
+   key:'PP constituent → fragment ✓'},
+
+  {sec:'§2.5 Sentence Fragment',
+   eng:'A: Who were you ringing up?\nB: Up my elder sister.',
+   ask:'B의 답변은 sentence fragment로 적절하다.',
+   ans:false,
+   why:'ring up = Phrasal Verb. "up my elder sister"는 constituent가 아니므로 sentence fragment로 사용 불가합니다.',
+   key:'Nonconstituent → fragment 불가'},
+
+  {sec:'§2.5 Sentence Fragment',
+   eng:'A: Where are you going to?\nB: The cinema.',
+   ask:'B의 답변은 sentence fragment로 적절하다.',
+   ans:true,
+   why:'"the cinema"는 PP(to the cinema)의 일부처럼 보이지만, 그 자체로 완전한 NP constituent입니다.',
+   key:'NP constituent → fragment ✓'},
+
+  // §2.5 S/VP-adverb
+  {sec:'§2.5 S-adverb / VP-adverb',
+   eng:'Certainly, the team can rely on my support.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'certainly(S-adverb)가 S 앞에 위치했습니다. S-adverb는 S node에 부착되므로 문장 앞 위치 가능합니다.',
+   key:'S-adverb → 문장 앞 ✓'},
+
+  {sec:'§2.5 S-adverb / VP-adverb',
+   eng:'The certainly team can rely on my support.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'certainly(S-adverb)가 NP 내부에 끼어들었습니다. S-adverb는 NP node에 부착될 수 없습니다.',
+   key:'S-adverb → NP 내부 불가'},
+
+  {sec:'§2.5 S-adverb / VP-adverb',
+   eng:'The team certainly can rely on my support.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'certainly(S-adverb)가 NP와 M 사이에 위치했습니다. S node에 부착되는 적절한 위치입니다.',
+   key:'S-adverb → NP와 M 사이 ✓'},
+
+  {sec:'§2.5 S-adverb / VP-adverb',
+   eng:'The team can certainly rely on my support.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'certainly(S-adverb)가 M과 VP 사이에 위치했습니다. S node에 부착되는 적절한 위치입니다.',
+   key:'S-adverb → M과 VP 사이 ✓'},
+
+  {sec:'§2.5 S-adverb / VP-adverb',
+   eng:'The team can rely certainly on my support.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'certainly(S-adverb)가 VP 내부에 위치했습니다. S-adverb는 VP node에 부착될 수 없습니다.',
+   key:'S-adverb → VP 내부 불가'},
+
+  {sec:'§2.5 S-adverb / VP-adverb',
+   eng:'The team can rely completely on my support.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'completely(VP-adverb)가 VP 내부에 위치했습니다. VP-adverb는 VP node에 부착되므로 적절합니다.',
+   key:'VP-adverb → VP 내부 ✓'},
+
+  {sec:'§2.5 S-adverb / VP-adverb',
+   eng:'Completely, the team can rely on my support.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'completely(VP-adverb)가 문장 앞 S 위치에 왔습니다. VP-adverb는 S node에 부착될 수 없습니다.',
+   key:'VP-adverb → 문장 앞 불가'},
+
+  // §2.6 Coordination
+  {sec:'§2.6 Coordination',
+   eng:'John rang up his mother and up his sister.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'ring up = Phrasal Verb. "up his sister"는 constituent가 아니므로 등위접속 불가합니다.',
+   key:'Nonconstituent → coordination 불가'},
+
+  {sec:'§2.6 Coordination',
+   eng:'John wrote to Mary and to Fred.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'PP(to Mary)와 PP(to Fred)로 같은 범주끼리 등위접속했습니다.',
+   key:'PP and PP → ✓'},
+
+  {sec:'§2.6 Coordination',
+   eng:'John wrote a letter and to Fred.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'NP(a letter)와 PP(to Fred)로 서로 다른 범주를 등위접속했습니다.',
+   key:'NP and PP → 범주 불일치 → 비문'},
+
+  {sec:'§2.6 Coordination',
+   eng:'John walked (and Mary ran) [up the hill].',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'[up the hill]은 완전한 PP constituent로 Shared Constituent Coordination이 성립합니다.',
+   key:'Shared Constituent Coordination ✓'},
+
+  {sec:'§2.6 Coordination',
+   eng:'John rang (and Harry picked) up Mary\'s sister.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'ring up / pick up = Phrasal Verb. "up Mary\'s sister"는 constituent가 아니어서 공유 불가합니다.',
+   key:'Phrasal V → nonconstituent → Shared Coordination 불가'},
+
+  // §2.6 Proform
+  {sec:'§2.6 Proform',
+   eng:'A: Have you ever been to Paris?\nB: No, I have never been there.',
+   ask:'"there"는 Pro-NP로 Paris를 대치한다.',
+   ans:false,
+   why:'there는 Pro-PP입니다. been 동사는 PP를 요구하므로 there가 PP 위치를 채웁니다.',
+   key:'there = Pro-PP (not Pro-NP)'},
+
+  {sec:'§2.6 Proform',
+   eng:'I hope it.\n(it = that you will come)',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'it은 syntactically NP position에만 올 수 있습니다. hope는 S complement를 취하는데 그 자리에 it이 올 수 없습니다.',
+   key:'it = Pro-NP → S position 불가'},
+
+  {sec:'§2.6 Proform',
+   eng:'I don\'t believe it.\n(it = Mary has finished her assignment)',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'it은 syntactically NP position에 위치하며, semantically S(절 전체)가 antecedent가 될 수 있습니다.',
+   key:'it: syntax=NP position, semantics=S antecedent 가능'},
+
+  {sec:'§2.6 Proform',
+   eng:'John might go home, and so might Bill.',
+   ask:'"so"는 Pro-VP이다.',
+   ans:true,
+   why:'so는 앞서 나온 VP [go home]을 대치하는 Pro-VP입니다.',
+   key:'so = Pro-VP ✓'},
+
+  {sec:'§2.6 Proform',
+   eng:'Many people consider John extremely rude,\nbut I\'ve never found him so.',
+   ask:'"so"는 Pro-AP이다.',
+   ans:true,
+   why:'so는 AP [extremely rude]를 대치하는 Pro-AP입니다.',
+   key:'so = Pro-AP ✓'},
+
+  // §2.6 VP Ellipsis
+  {sec:'§2.6 VP Ellipsis',
+   eng:'John won\'t help me with the dishes, but his brother will.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'VP [help me with the dishes] 전체가 생략되었습니다. Only VPs can undergo Ellipsis.',
+   key:'VP ellipsis ✓'},
+
+  {sec:'§2.6 VP Ellipsis',
+   eng:'John won\'t put the vodka into the drink,\nbut his brother will put.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'"put"만 남기고 목적어가 생략되었습니다. VP의 일부만 생략할 수 없습니다.',
+   key:'Partial VP ellipsis → 비문'},
+
+  {sec:'§2.6 VP Ellipsis',
+   eng:'He may come home early, but then again he may not.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'VP [come home early] 전체가 생략된 문법적인 문장입니다.',
+   key:'VP ellipsis ✓'},
+
+  // §2.8 Phrasal V vs Prep V — S/VP-adverb 위치
+  {sec:'§2.8 Phrasal V vs Prep V',
+   eng:'Drunks certainly would get off the bus.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'certainly(S-adverb)가 NP와 M 사이에 위치했습니다. S node에 부착되는 적절한 위치입니다.',
+   key:'S-adverb → NP와 M 사이 ✓'},
+
+  {sec:'§2.8 Phrasal V vs Prep V',
+   eng:'Drunks would get certainly off the bus.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'certainly(S-adverb)가 VP 내부, P(off) 앞에 위치했습니다. S-adverb는 VP 내부에 올 수 없습니다.',
+   key:'S-adverb → VP 내부 불가'},
+
+  {sec:'§2.8 Phrasal V vs Prep V',
+   eng:'Drunks would get off certainly the bus.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'certainly(S-adverb)가 PP 내부에 위치했습니다. S-adverb는 PP/NP 내부에 올 수 없습니다.',
+   key:'S-adverb → PP 내부 불가'},
+
+  {sec:'§2.8 Phrasal V vs Prep V',
+   eng:'Drunks would get [off the bus] and [on the train].',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'[off the bus]와 [on the train]은 모두 PP constituent입니다. PP and PP 등위접속이 성립합니다.',
+   key:'get off/get on = Prep V → PP and PP ✓'},
+
+  {sec:'§2.8 Phrasal V vs Prep V',
+   eng:'Drunks would put off the customers and off the waitresses.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'put off = Phrasal Verb. "off the waitresses"는 constituent가 아니므로 등위접속 불가합니다.',
+   key:'Phrasal V → nonconstituent → coordination 불가'},
+
+  {sec:'§2.8 Phrasal V vs Prep V',
+   eng:'Drunks would get — and junkies would fall — off the bus.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'[off the bus]는 PP constituent이므로 Shared Constituent Coordination이 성립합니다.',
+   key:'get off = Prep V → PP constituent → Shared Coordination ✓'},
+
+  {sec:'§2.8 Phrasal V vs Prep V',
+   eng:'Drunks would put — and junkies would also put — off the customers.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'put off = Phrasal Verb. "off the customers"는 constituent가 아니므로 공유 불가합니다.',
+   key:'Phrasal V → nonconstituent → Shared Coordination 불가'},
+
+  // §2.8 Strict Adjacency Principle
+  {sec:'§2.8 Strict Adjacency Principle',
+   eng:'John will completely finish the assignment.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'completely(VP-adverb)가 VP 앞에 위치했습니다. V와 NP 사이에 끼어들지 않아 문법적입니다.',
+   key:'VP-adverb → VP 앞 ✓'},
+
+  {sec:'§2.8 Strict Adjacency Principle',
+   eng:'John will finish completely the assignment.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'completely가 V(finish)와 NP(the assignment) 사이에 끼어들었습니다. Strict Adjacency Principle 위반입니다.',
+   key:'V와 NP 사이 부사 삽입 → 비문'},
+
+  {sec:'§2.8 Strict Adjacency Principle',
+   eng:'John argued about every point with the tax-man.',
+   ask:'이 문장은 문법적이다.',
+   ans:true,
+   why:'PP complement(about every point)가 동사 뒤에, 또 다른 PP(with the tax-man)가 그 뒤에 위치했습니다. PP는 순서를 바꿔도 됩니다.',
+   key:'PP complement → 위치 유연 ✓'},
+
+  {sec:'§2.8 Strict Adjacency Principle',
+   eng:'John argued with the tax-man every point.',
+   ask:'이 문장은 문법적이다.',
+   ans:false,
+   why:'NP complement(every point)가 다른 PP(with the tax-man) 뒤에 위치했습니다. NP complement는 반드시 V 바로 뒤에 와야 합니다.',
+   key:'NP complement는 V 바로 뒤 → Strict Adjacency Principle'}
+];
+
+let ANS, COR, SHUFFLED;
+
+function getOrder(shuffle) {
+  const idx = DATA.map((_,i) => i);
+  if (shuffle) {
+    for (let i = idx.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [idx[i], idx[j]] = [idx[j], idx[i]];
+    }
+  }
+  return idx;
+}
+
+function build(shuffle) {
+  SHUFFLED = getOrder(shuffle);
+  ANS = new Array(DATA.length).fill(false);
+  COR = 0;
+  document.getElementById('sc').textContent = 0;
+  document.getElementById('st').textContent = DATA.length;
+  document.getElementById('prog').style.width = '0%';
+  document.getElementById('rb').style.display = 'none';
+
+  const wrap = document.getElementById('qw');
+  wrap.innerHTML = '';
+  let lastSec = '';
+
+  SHUFFLED.forEach((di, qi) => {
+    const q = DATA[di];
+    if (!shuffle && q.sec !== lastSec) {
+      lastSec = q.sec;
+      const sh = document.createElement('div');
+      sh.className = 'sec-hd';
+      sh.innerHTML = `<div class="sec-tag">섹션</div>
+        <div class="sec-title">${q.sec}</div>`;
+      wrap.appendChild(sh);
+    }
+
+    const card = document.createElement('div');
+    card.className = 'qcard'; card.id = 'qc' + qi;
+
+    card.innerHTML = `
+      <div class="qmeta">
+        <span class="qnum">Q${qi + 1}</span>
+        <span class="qsec-tag">${q.sec}</span>
+      </div>
+      <span class="qeng">${q.eng}</span>
+      <div class="qask">${q.ask}</div>
+      <div class="ox-row">
+        <button class="ox-btn" id="bo${qi}" onclick="doOX(${qi},${di},true)">
+          O <span class="ox-text">문법적이다</span>
+        </button>
+        <button class="ox-btn" id="bx${qi}" onclick="doOX(${qi},${di},false)">
+          X <span class="ox-text">비문이다</span>
+        </button>
+      </div>
+      <div class="fb" id="fb${qi}"></div>`;
+    wrap.appendChild(card);
+  });
+}
+
+function doOX(qi, di, v) {
+  if (ANS[qi]) return;
+  ANS[qi] = true;
+  const q = DATA[di];
+  const ok = v === q.ans;
+  if (ok) COR++;
+
+  const done = ANS.filter(Boolean).length;
+  document.getElementById('sc').textContent = COR;
+  document.getElementById('prog').style.width = (done / DATA.length * 100) + '%';
+
+  const ob = document.getElementById('bo' + qi);
+  const xb = document.getElementById('bx' + qi);
+  ob.disabled = xb.disabled = true;
+
+  if (v)  { ob.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) xb.classList.add('ok2'); }
+  else    { xb.classList.add(ok ? 'ok2' : 'ng2'); if (!ok) ob.classList.add('ok2'); }
+
+  const fb = document.getElementById('fb' + qi);
+  fb.style.display = 'block';
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  fb.innerHTML = `<div class="fb-head">${ok ? '✓ 정답' : '✗ 오답'} — 정답: ${q.ans ? 'O (문법적)' : 'X (비문)'}</div>
+    <div class="fb-reason">${q.why}</div>
+    <span class="fb-key">${q.key}</span>`;
+
+  document.getElementById('qc' + qi).classList.add(ok ? 'ok' : 'ng');
+
+  if (ANS.every(a => a)) showResult();
+}
+
+function showResult() {
+  const pct = Math.round(COR / DATA.length * 100);
+  const tiers = [
+    {min:90, icon:'🎯', msg:'완벽합니다! Ch.2 예문 마스터!'},
+    {min:70, icon:'👏', msg:'잘 했어요! 틀린 문제 해설을 다시 확인해보세요.'},
+    {min:50, icon:'📚', msg:'조금 더! Phrasal V / S-adverb 위주로 복습하세요.'},
+    {min:0,  icon:'💪', msg:'개념 정리부터 다시 읽어보세요.'}
+  ];
+  const t = tiers.find(x => pct >= x.min);
+  const rb = document.getElementById('rb');
+  rb.style.display = 'block';
+  document.getElementById('ri').textContent = t.icon;
+  document.getElementById('rs').textContent = `${COR} / ${DATA.length}점 (${pct}%)`;
+  document.getElementById('rm').textContent = t.msg;
+  rb.scrollIntoView({behavior:'smooth'});
+}
+
+function reset() {
+  build(true);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+build(true);
+</script>
+</body>
+</html>
