@@ -78,11 +78,13 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
 .analysis li{margin-bottom:3px}
 .analysis .key{font-family:var(--mono);font-size:12px;
   background:rgba(26,110,66,.12);padding:1px 7px;border-radius:4px}
+  .next-btn { font-weight: 600; }
   .ch-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 0 8px;
+    gap: 8px;
+    padding: 20px 0 8px;
     border-top: 1px solid var(--border, #e0dbd2);
     margin-top: 24px;
     max-width: 780px;
@@ -91,7 +93,7 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
   }
   .nav-btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 9px 16px;
     border: 1px solid var(--border, #e0dbd2);
     border-radius: 8px;
     text-decoration: none;
@@ -99,9 +101,17 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
     color: var(--accent2, #4a7c2f);
     background: var(--surface, #fff);
     transition: background 0.15s;
+    white-space: nowrap;
   }
   .nav-btn:hover { background: var(--surface2, #f4f1ec); }
-  .next-btn { font-weight: 600; }
+  .nav-btn.next-btn { font-weight: 600; }
+  .nav-btn.blog-btn {
+    background: var(--accent, #2d5016);
+    color: #fff;
+    border-color: var(--accent, #2d5016);
+    font-weight: 600;
+  }
+  .nav-btn.blog-btn:hover { background: var(--accent2, #4a7c2f); }
 </style>
 </head>
 <body>
@@ -470,8 +480,10 @@ function reveal(n) {
 }
 </script>
 
+
 <div class="ch-nav">
   <a href="Ch2_ox_random.html" class="nav-btn">← Ch.2 OX 랜덤</a>
+  <a href="https://obangti.tistory.com/25" class="nav-btn blog-btn" target="_blank">📝 포스팅 보기</a>
   <a href="ch3_concepts.html" class="nav-btn next-btn">Ch.3 개념정리 →</a>
 </div>
 </body>
