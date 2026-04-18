@@ -347,11 +347,11 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
   <div class="q-instruction">다음 두 문장의 Phrase Structure Tree를 각각 그리고,<br>
     preposing이 가능한 것과 불가능한 것을 구분하시오.
   </div>
-  <div class="q-sentence">(a) [His former colleague], I simply can't trust.<br>(b) [His former], I simply can't trust colleague.</div>
+  <div class="q-sentence">(a) [Your elder sister], I can't stand.<br>(b) *[Your elder], I can't stand sister.</div>
   <button class="hint-btn" onclick="toggleHint(5)">💡 힌트 보기</button>
   <div class="hint-box" id="hint5">
     💡 <strong>힌트</strong>: Only whole phrases can undergo Preposing.<br>
-    (a)는 NP 전체가, (b)는 NP의 일부만 이동했습니다.
+    (a)는 NP [your elder sister] 전체가, (b)는 NP의 일부만 이동했습니다.
   </div>
   <button class="reveal-btn" id="btn5" onclick="reveal(5)">▼ 정답 보기</button>
   <div class="answer" id="ans5">
@@ -371,7 +371,7 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
       <line x1="100" y1="115" x2="74" y2="145" stroke="#aaa" stroke-width="1.5"/>
       <line x1="100" y1="115" x2="126" y2="145" stroke="#aaa" stroke-width="1.5"/>
       <line x1="74" y1="145" x2="126" y2="145" stroke="#aaa" stroke-width="1.5"/>
-      <text x="100" y="162" text-anchor="middle" font-size="13" fill="#1a1a2e">his former colleague</text>
+      <text x="100" y="162" text-anchor="middle" font-size="13" fill="#1a1a2e">your elder sister</text>
       <!-- S' → NP + VP -->
       <line x1="300" y1="100" x2="240" y2="140" stroke="#aaa" stroke-width="1.5"/>
       <line x1="300" y1="100" x2="360" y2="140" stroke="#aaa" stroke-width="1.5"/>
@@ -382,7 +382,7 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
       <line x1="360" y1="162" x2="334" y2="182" stroke="#aaa" stroke-width="1.5"/>
       <line x1="360" y1="162" x2="386" y2="182" stroke="#aaa" stroke-width="1.5"/>
       <line x1="334" y1="182" x2="386" y2="182" stroke="#aaa" stroke-width="1.5"/>
-      <text x="360" y="198" text-anchor="middle" font-size="13" fill="#1a1a2e">simply can't trust ___</text>
+      <text x="360" y="198" text-anchor="middle" font-size="13" fill="#1a1a2e">can't stand ___</text>
     </svg>
 
     <p style="font-size:13px;color:#e8533a;font-weight:500;margin:16px 0 8px;">(b) 비문 ✗ — NP 일부만 이동</p>
@@ -392,12 +392,12 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
       <line x1="260" y1="34" x2="340" y2="78" stroke="#aaa" stroke-width="1.5"/>
       <!-- 이동한 부분 (일부만) -->
       <text x="100" y="95" text-anchor="middle" font-size="14" fill="#e8533a">??</text>
-      <text x="100" y="112" text-anchor="middle" font-size="11" fill="#e8533a">his former</text>
+      <text x="100" y="112" text-anchor="middle" font-size="11" fill="#e8533a">your elder</text>
       <text x="100" y="128" text-anchor="middle" font-size="10" fill="#e8533a">(NP의 일부만)</text>
       <!-- 나머지 -->
       <text x="340" y="95" text-anchor="middle" font-size="14" fill="#aaa">... sister 남음</text>
       <!-- 설명 -->
-      <text x="260" y="170" text-anchor="middle" font-size="13" fill="#e8533a">NP [his former colleague] 전체가 이동해야 함</text>
+      <text x="260" y="170" text-anchor="middle" font-size="13" fill="#e8533a">NP [your elder sister] 전체가 이동해야 함</text>
       <text x="260" y="188" text-anchor="middle" font-size="12" fill="#e8533a">→ 일부만 이동하면 비문</text>
     </svg>
 
@@ -405,8 +405,8 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
       <div class="analysis-title">핵심 분석 — Preposing</div>
       <ul>
         <li><span class="key">Only whole phrases can undergo Preposing</span></li>
-        <li>(a): NP [his former colleague] 전체 이동 → 문법적 ✓</li>
-        <li>(b): NP의 일부(his former)만 이동, colleague 제자리 → 비문 ✗</li>
+        <li>(a): NP [your elder sister] 전체 이동 → 문법적 ✓</li>
+        <li>(b): NP의 일부(your elder)만 이동, sister 제자리 → 비문 ✗</li>
         <li>Preposing은 phrase의 constituent 지위를 증명하는 테스트</li>
       </ul>
     </div>
