@@ -78,6 +78,30 @@ svg text{font-family:'Noto Serif KR',Georgia,serif}
 .analysis li{margin-bottom:3px}
 .analysis .key{font-family:var(--mono);font-size:12px;
   background:rgba(26,110,66,.12);padding:1px 7px;border-radius:4px}
+  .ch-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0 8px;
+    border-top: 1px solid var(--border, #e0dbd2);
+    margin-top: 24px;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nav-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--border, #e0dbd2);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    color: var(--accent2, #4a7c2f);
+    background: var(--surface, #fff);
+    transition: background 0.15s;
+  }
+  .nav-btn:hover { background: var(--surface2, #f4f1ec); }
+  .next-btn { font-weight: 600; }
 </style>
 </head>
 <body>
@@ -445,5 +469,10 @@ function reveal(n) {
   }
 }
 </script>
+
+<div class="ch-nav">
+  <a href="Ch2_ox_random.html" class="nav-btn">← Ch.2 OX 랜덤</a>
+  <a href="ch3_concepts.html" class="nav-btn next-btn">Ch.3 개념정리 →</a>
+</div>
 </body>
 </html>
