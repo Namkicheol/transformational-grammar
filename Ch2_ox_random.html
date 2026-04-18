@@ -151,28 +151,28 @@ const DATA = [
    key:'Partial phrase movement → 비문'},
 
   {sec:'§2.5 Preposing',
-   eng:'[That kind of behaviour], I simply will not tolerate.',
+   eng:'[That kind of behaviour], I simply will not accept.',
    ask:'이 문장은 문법적이다.',
    ans:true,
    why:'NP 전체 [that kind of behaviour]가 prepose된 문법적인 문장입니다.',
    key:'NP preposing ✓'},
 
   {sec:'§2.5 Preposing',
-   eng:'[Down the hill] John ran, as fast as he could.',
+   eng:'[Down the hill] Mary ran, as fast as she could.',
    ask:'이 문장은 문법적이다.',
    ans:true,
    why:'PP 전체 [down the hill]이 prepose된 문법적인 문장입니다.',
    key:'PP preposing ✓'},
 
   {sec:'§2.5 Preposing',
-   eng:'[Give in to blackmail], I never will!',
+   eng:'[Give in to threats], I never will!',
    ask:'이 문장은 문법적이다.',
    ans:true,
    why:'VP 전체 [give in to blackmail]이 prepose된 문법적인 문장입니다.',
    key:'VP preposing ✓'},
 
   {sec:'§2.5 Preposing',
-   eng:'[Up his mother], John rang.',
+   eng:'[Up his sister], John rang.',
    ask:'이 문장은 문법적이다.',
    ans:false,
    why:'ring up은 Phrasal Verb입니다. up his mother는 constituent가 아니므로 prepose 불가합니다.',
@@ -180,14 +180,14 @@ const DATA = [
 
   // §2.5 Postposing
   {sec:'§2.5 Postposing',
-   eng:'She described to him [all the complicated issues that had arisen].',
+   eng:'He explained to her [all the terrible problems that had arisen].',
    ask:'이 문장은 문법적이다.',
    ans:true,
    why:'무거운 NP 전체가 postpose되어 문장 뒤로 이동했습니다. Whole phrase이므로 가능합니다.',
    key:'Heavy NP postposing ✓'},
 
   {sec:'§2.5 Postposing',
-   eng:'She described all the to him complicated issues that had arisen.',
+   eng:'He explained all the to her terrible problems that had arisen.',
    ask:'이 문장은 문법적이다.',
    ans:false,
    why:'NP의 일부(all the)만 남기고 이동했습니다. Whole phrase 전체가 함께 이동해야 합니다.',
@@ -202,14 +202,14 @@ const DATA = [
    key:'PP constituent → fragment ✓'},
 
   {sec:'§2.5 Sentence Fragment',
-   eng:'A: Who were you ringing up?\nB: Up my elder sister.',
+   eng:'A: Who were you ringing up?\nB: Up my old sister.',
    ask:'B의 답변은 sentence fragment로 적절하다.',
    ans:false,
    why:'ring up = Phrasal Verb. "up my elder sister"는 constituent가 아니므로 sentence fragment로 사용 불가합니다.',
    key:'Nonconstituent → fragment 불가'},
 
   {sec:'§2.5 Sentence Fragment',
-   eng:'A: Where did he go?\nB: The cinema.',
+   eng:'A: Where did he go?\nB: The park.',
    ask:'B의 답변은 sentence fragment로 적절하다.',
    ans:true,
    why:'"the cinema"는 PP(to the cinema)의 일부처럼 보이지만, 그 자체로 완전한 NP constituent입니다.',
@@ -217,7 +217,7 @@ const DATA = [
 
   // §2.5 S/VP-adverb
   {sec:'§2.5 S-adverb / VP-adverb',
-   eng:'Certainly, the team can rely on my support.',
+   eng:'Certainly, the team can rely on her support.',
    ask:'이 문장은 문법적이다.',
    ans:true,
    why:'certainly(S-adverb)가 S 앞에 위치했습니다. S-adverb는 S node에 부착되므로 문장 앞 위치 가능합니다.',
@@ -259,7 +259,7 @@ const DATA = [
    key:'VP-adverb → VP 내부 ✓'},
 
   {sec:'§2.5 S-adverb / VP-adverb',
-   eng:'Completely, the team can rely on my support.',
+   eng:'Completely, the team can rely on her support.',
    ask:'이 문장은 문법적이다.',
    ans:false,
    why:'completely(VP-adverb)가 문장 앞 S 위치에 왔습니다. VP-adverb는 S node에 부착될 수 없습니다.',
@@ -267,21 +267,21 @@ const DATA = [
 
   // §2.6 Coordination
   {sec:'§2.6 Coordination',
-   eng:'John rang up his mother and up his sister.',
+   eng:'John rang up his friend and up his sister.',
    ask:'이 문장은 문법적이다.',
    ans:false,
    why:'ring up = Phrasal Verb. "up his sister"는 constituent가 아니므로 등위접속 불가합니다.',
    key:'Nonconstituent → coordination 불가'},
 
   {sec:'§2.6 Coordination',
-   eng:'John wrote a letter to Mary and to Fred.',
+   eng:'John wrote a letter to Jane and to Fred.',
    ask:'이 문장은 문법적이다.',
    ans:true,
    why:'PP(to Mary)와 PP(to Fred)로 같은 범주끼리 등위접속했습니다.',
    key:'PP and PP → ✓'},
 
   {sec:'§2.6 Coordination',
-   eng:'John wrote a letter and to Fred.',
+   eng:'John wrote a note and to Fred.',
    ask:'이 문장은 문법적이다.',
    ans:false,
    why:'NP(a letter)와 PP(to Fred)로 서로 다른 범주를 등위접속했습니다.',
@@ -295,7 +295,7 @@ const DATA = [
    key:'Shared Constituent Coordination ✓'},
 
   {sec:'§2.6 Coordination',
-   eng:'John rang (and Mary picked) up their colleague.',
+   eng:'John rang (and Bill picked) up their colleague.',
    ask:'이 문장은 문법적이다.',
    ans:false,
    why:'ring up / pick up = Phrasal Verb. "up Mary\'s sister"는 constituent가 아니어서 공유 불가합니다.',
@@ -303,14 +303,14 @@ const DATA = [
 
   // §2.6 Proform
   {sec:'§2.6 Proform',
-   eng:'A: Have you ever been to Paris?\nB: No, I have never been there.',
+   eng:'A: Have you ever been to Rome?\nB: No, I have never been there.',
    ask:'"there"는 Pro-NP로 London을 대치한다.',
    ans:false,
    why:'there는 Pro-PP입니다. been 동사는 PP를 요구하므로 there가 PP 위치를 채웁니다.',
    key:'there = Pro-PP (not Pro-NP)'},
 
   {sec:'§2.6 Proform',
-   eng:'I hope it.\n(it = that the President will retire)',
+   eng:'I hope it.\n(it = that the Chairman will retire)',
    ask:'이 문장은 문법적이다.',
    ans:false,
    why:'it은 syntactically NP position에만 올 수 있습니다. hope는 S complement를 취하는데 그 자리에 it이 올 수 없습니다.',
@@ -324,7 +324,7 @@ const DATA = [
    key:'it: syntax=NP position, semantics=S antecedent 가능'},
 
   {sec:'§2.6 Proform',
-   eng:'John might [go home], and so might Bill.',
+   eng:'John might [leave early], and so might Bill.',
    ask:'"so"는 Pro-VP이다.',
    ans:true,
    why:'so는 앞서 나온 VP [go home]을 대치하는 Pro-VP입니다.',
@@ -346,7 +346,7 @@ const DATA = [
    key:'VP ellipsis ✓'},
 
   {sec:'§2.6 VP Ellipsis',
-   eng:'John will put the vodka into the drink,\nbut he won\'t put the tonic into it.',
+   eng:'John will put the juice into the glass,\nbut he won\'t put the tonic into it.',
    ask:'이 문장은 문법적이다.',
    ans:false,
    why:'"put"만 남기고 목적어가 생략되었습니다. VP의 일부만 생략할 수 없습니다.',
