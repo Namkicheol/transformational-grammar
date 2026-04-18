@@ -94,6 +94,30 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .r-msg{font-size:13px;color:var(--mut);margin-bottom:16px}
 .r-btn{padding:9px 24px;background:var(--pri);color:#fff;border:none;border-radius:8px;
   font-size:13px;cursor:pointer;font-family:var(--sans)}
+  .ch-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0 8px;
+    border-top: 1px solid var(--border, #e0dbd2);
+    margin-top: 24px;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nav-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--border, #e0dbd2);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    color: var(--accent2, #4a7c2f);
+    background: var(--surface, #fff);
+    transition: background 0.15s;
+  }
+  .nav-btn:hover { background: var(--surface2, #f4f1ec); }
+  .next-btn { font-weight: 600; }
 </style>
 </head>
 <body>
@@ -553,5 +577,10 @@ function reset() {
 
 build(false);
 </script>
+
+<div class="ch-nav">
+  <a href="ch2_exercises.html" class="nav-btn">← Ch.2 연습문제</a>
+  <a href="Ch2_ox_random.html" class="nav-btn next-btn">Ch.2 OX 랜덤 →</a>
+</div>
 </body>
 </html>
