@@ -432,14 +432,6 @@
   .explanation strong { color: var(--accent); }
 
   /* NAV FOOTER */
-  .ch-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 0;
-    border-top: 1px solid var(--border);
-    margin-top: 16px;
-  }
   .ch-nav a {
     display: flex;
     align-items: center;
@@ -467,6 +459,31 @@
     .stat { padding: 12px 20px; }
     .hero h1 { font-size: 1.8rem; }
   }
+  .ch-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 8px;
+    border-top: 1px solid var(--border, #e0dbd2);
+    margin-top: 24px;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .nav-btn {
+    display: inline-block;
+    padding: 9px 18px;
+    border: 1px solid var(--border, #e0dbd2);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    color: var(--accent2, #4a7c2f);
+    background: var(--surface, #fff);
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { background: var(--surface2, #f4f1ec); }
+  .nav-btn.next-btn { font-weight: 600; }
 </style>
 </head>
 <body>
@@ -1178,9 +1195,10 @@ function checkAns(btn, result) {
 </script>
 
 
+
 <div class="ch-nav">
-  <a href="Ch2_tree.html" class="nav-btn">← Ch.2 Tree</a>
-  <a href="ch3_exercises.html" class="nav-btn next-btn">Ch.3 연습문제 →</a>
+  <a href="https://obangti.tistory.com/25" class="nav-btn" target="_blank">← Ch.2 Tree</a>
+  <a href="https://obangti.tistory.com/35" class="nav-btn next-btn" target="_blank">Ch.3 연습문제 →</a>
 </div>
 </body>
 </html>
