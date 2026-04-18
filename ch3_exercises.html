@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.3 Phrase-markers — 실전 연습문제 | TG Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --surface: #ffffff;
+    --surface2: #f4f1ec;
+    --accent: #2d5016;
+    --accent2: #4a7c2f;
+    --accent3: #8fbc5a;
+    --text: #1a1a1a;
+    --text2: #4a4a4a;
+    --muted: #8a8a8a;
+    --border: #e0dbd2;
+    --red: #c0392b;
+    --green: #27ae60;
+    --gold: #b8860b;
+    --blue: #1a4a7a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  nav {
+    background: var(--accent);
+    color: white;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  nav a:hover { color: white; }
+  nav .sep { color: rgba(255,255,255,0.3); }
+  nav .current { color: white; font-weight: 600; }
+
+  .hero {
+    background: linear-gradient(135deg, #1a3a0a 0%, var(--accent2) 100%);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .hero .chapter-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  .hero h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .hero .subtitle { font-size: 14px; opacity: 0.8; }
+
+  /* SCORE BAR */
+  .score-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: sticky;
+    top: 44px;
+    z-index: 90;
+  }
+  .score-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .score-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .score-label { font-size: 12px; color: var(--muted); }
+  .progress-wrap { flex: 1; max-width: 300px; }
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent2);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .reset-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  .reset-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  .main { max-width: 780px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* EXERCISE SECTION */
+  .ex-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin-bottom: 24px;
+    scroll-margin-top: 100px;
+  }
+  .ex-section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--surface2);
+  }
+  .ex-section-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--accent3);
+    line-height: 1;
+    min-width: 32px;
+  }
+  .ex-section-info h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.35rem;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .ex-section-info .ex-sub { font-size: 12px; color: var(--muted); }
+
+  /* QUESTION CARD */
+  .q-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .q-card.answered { border-color: var(--border); }
+
+  .q-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--surface2);
+    color: var(--muted);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .q-type {
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .q-stem {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .q-stem em { font-style: italic; color: var(--blue); }
+  .q-stem strong { color: var(--text); }
+
+  /* 예문 블록 */
+  .q-examples {
+    background: var(--surface2);
+    border-radius: 7px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+  }
+  .q-examples .ok { color: var(--green); }
+  .q-examples .bad { color: var(--red); }
+
+  /* OX */
+  .ox-wrap { display: flex; gap: 10px; margin-bottom: 10px; }
+  .ox-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  .ox-btn:hover { border-color: var(--accent2); }
+  .ox-btn.correct { background: #e8f5e2; border-color: var(--green); }
+  .ox-btn.wrong { background: #fde8e8; border-color: var(--red); }
+  .ox-btn.show-ans { background: #e8f5e2; border-color: var(--green); opacity: 0.5; }
+
+  /* MC */
+  .mc-options { display: flex; flex-direction: column; gap: 7px; margin-bottom: 10px; }
+  .mc-opt {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text2);
+    text-align: left;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  .mc-opt:hover { border-color: var(--accent2); color: var(--accent); }
+  .mc-opt.correct { background: #e8f5e2; border-color: var(--green); color: var(--green); }
+  .mc-opt.wrong { background: #fde8e8; border-color: var(--red); color: var(--red); }
+  .mc-opt.show-ans { background: #e8f5e2; border-color: var(--green); color: var(--green); opacity: 0.6; }
+
+  /* BLANK */
+  .blank-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .blank-input {
+    border: 2px solid var(--border);
+    border-radius: 7px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    min-width: 180px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .blank-input:focus { border-color: var(--accent2); }
+  .blank-input.correct { border-color: var(--green); background: #e8f5e2; }
+  .blank-input.wrong { border-color: var(--red); background: #fde8e8; }
+  .blank-submit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 9px 18px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: background 0.15s;
+  }
+  .blank-submit:hover { background: var(--accent2); }
+
+  /* EXPLANATION */
+  .explanation {
+    display: none;
+    background: #f8fdf4;
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 7px 7px 0;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-top: 10px;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { color: var(--accent); }
+  .explanation .ans-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .explanation code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--surface2);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+
+  /* CH NAV */
+  .ch-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 16px;
+  }
+  .ch-nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent2);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .ch-nav a:hover { background: var(--surface2); border-color: var(--accent2); }
+  .ch-nav .next-btn {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  .ch-nav .next-btn:hover { background: var(--accent2); }
+
+  @media (max-width: 600px) {
+    .ex-section { padding: 20px 16px; }
+    .score-bar { flex-wrap: wrap; top: 44px; }
+    .progress-wrap { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">TG Study</a>
+  <span class="sep">›</span>
+  <a href="ch3_concepts.html">Ch.3</a>
+  <span class="sep">›</span>
+  <span class="current">실전 연습문제</span>
+</nav>
+
+<div class="hero">
+  <div class="chapter-num">Chapter 03 · Phrase-markers</div>
+  <h1>실전 연습문제</h1>
+  <div class="subtitle">Exercise 3 · 4 · 7 원문 변형 · OX · 객관식 · 빈칸</div>
+</div>
+
+<!-- SCORE BAR -->
+<div class="score-bar">
+  <div class="score-info">
+    <div>
+      <span class="score-num" id="scoreNum">0</span>
+      <span class="score-label"> / <span id="totalNum">24</span> 맞음</span>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <button class="reset-btn" onclick="resetAll()">↺ 다시 풀기</button>
+</div>
+
+<main class="main">
+
+<!-- ===== EXERCISE 3: C-COMMAND & ANAPHOR ===== -->
+<section class="ex-section" id="ex3">
+  <div class="ex-section-header">
+    <div class="ex-section-num">3</div>
+    <div class="ex-section-info">
+      <h2>C-command &amp; Anaphor Binding</h2>
+      <div class="ex-sub">§3.4 — Binding Principle A · 문법성 판단 및 이유 설명</div>
+    </div>
+  </div>
+
+  <!-- Q1 OX -->
+  <div class="q-card" id="q1">
+    <div class="q-meta">
+      <span class="q-num">Q01</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>The generals will shoot the missiles at each other.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','X','q1')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','X','q1')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q1">
+      <div class="ans-label">정답: ⭕ 정문 (단, 중의적)</div>
+      <strong>'each other'의 antecedent가 두 가지로 해석 가능</strong>합니다.<br>
+      해석 1: each other = the generals → 장군들이 서로를 향해 미사일을 쏠 것이다<br>
+      해석 2: each other = the missiles → 미사일들이 서로를 향하게 쏠 것이다<br>
+      두 NP 모두 c-command 조건을 만족하므로 <strong>구조적 중의성(structural ambiguity)</strong>이 있는 정문.
+    </div>
+  </div>
+
+  <!-- Q2 OX -->
+  <div class="q-card" id="q2">
+    <div class="q-meta">
+      <span class="q-num">Q02</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>The doctor's behaviour might embarrass herself.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','X','q2')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q2')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q2">
+      <div class="ans-label">정답: ❌ 비문</div>
+      <strong>The doctor's</strong>는 behaviour의 소유격(genitive)으로 NP 내부에 위치합니다.<br>
+      트리에서 'the doctor's'는 herself를 <strong>c-command하지 못합니다</strong> (precede ✓ / c-command ✗).<br>
+      Binding Principle A: anaphor는 binding domain 안에서 c-command하는 antecedent가 필요.<br>
+      → c-command 조건 불성립 → 비문
+    </div>
+  </div>
+
+  <!-- Q3 OX -->
+  <div class="q-card" id="q3">
+    <div class="q-meta">
+      <span class="q-num">Q03</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>Susan considers herself to be the best candidate.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','O','q3')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q3')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q3">
+      <div class="ans-label">정답: ⭕ 정문</div>
+      <strong>consider</strong>는 Subject-to-Object Raising(SOR)을 허용하는 동사입니다.<br>
+      원래 herself는 [herself to be the best candidate] 절의 주어였지만,<br>
+      consider가 Raising을 허용하므로 herself가 절 boundary 밖으로 나옵니다.<br>
+      이때 herself는 새로운 binding domain 안에서 Susan을 antecedent로 취할 수 있습니다.<br>
+      → c-command ✓, co-indexing ✓, binding domain ✓ → 정문
+    </div>
+  </div>
+
+  <!-- Q4 OX -->
+  <div class="q-card" id="q4">
+    <div class="q-meta">
+      <span class="q-num">Q04</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>They believe each other to be innocent.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','O','q4')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q4')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q4">
+      <div class="ans-label">정답: ⭕ 정문</div>
+      believe는 Exceptional Clause(SOR)를 허용하는 동사입니다.<br>
+      [each other to be innocent]에서 each other가 believe의 목적어 자리로 Raising됩니다.<br>
+      새로운 binding domain 안에서 <strong>they</strong>가 each other의 antecedent가 됩니다.<br>
+      they(복수) ↔ each other(복수) → number 일치 ✓ → 정문
+    </div>
+  </div>
+
+  <!-- Q5 MC -->
+  <div class="q-card" id="q5">
+    <div class="q-meta">
+      <span class="q-num">Q05</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem">다음 중 비문인 것을 모두 고른 것은?</div>
+    <div class="q-examples">
+      ㄱ. Each other are always arguing.<br>
+      ㄴ. I want James and Claire to help each other.<br>
+      ㄷ. Themselves are very happy.<br>
+      ㄹ. The children despise each other.
+    </div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q5')">① ㄱ만</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q5')">② ㄱ, ㄹ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q5')">③ ㄱ, ㄷ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q5')">④ ㄴ, ㄷ, ㄹ</button>
+    </div>
+    <div class="explanation" id="exp-q5">
+      <div class="ans-label">정답: ③ ㄱ, ㄷ</div>
+      ㄱ. <em>*Each other are always arguing.</em><br>
+      → each other의 antecedent가 문장 내에 없음 → Binding Principle A 위반 → 비문<br><br>
+      ㄷ. <em>*Themselves are very happy.</em><br>
+      → themselves의 antecedent가 문장 내에 없음 → Binding Principle A 위반 → 비문<br><br>
+      ㄴ. 정문: [James and Claire]가 each other의 antecedent, c-command ✓<br>
+      ㄹ. 정문: [the children]이 each other의 antecedent, c-command ✓
+    </div>
+  </div>
+
+  <!-- Q6 MC -->
+  <div class="q-card" id="q6">
+    <div class="q-meta">
+      <span class="q-num">Q06</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem"><em>Mary said that pictures of herself were embarrassing.</em><br>
+    이 문장에서 herself의 antecedent와 그 이유로 옳은 것은?</div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q6')">① pictures — binding domain 안에서 가장 가까운 NP이므로</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q6')">② Mary — that절 안에 antecedent 없어 domain이 상위절로 확장되므로</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q6')">③ 비문 — anaphor는 같은 절 안에 antecedent가 있어야 하므로</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q6')">④ pictures와 Mary 둘 다 가능</button>
+    </div>
+    <div class="explanation" id="exp-q6">
+      <div class="ans-label">정답: ②</div>
+      herself의 binding domain = that절(smallest clause containing potential antecedent)<br>
+      that절 안에는 herself의 antecedent가 될 만한 NP가 없습니다.<br>
+      (pictures는 복수이고, 성별 불일치)<br>
+      → <strong>binding domain이 상위 절로 확장</strong>됩니다.<br>
+      → 문장 전체가 binding domain → <strong>Mary</strong>가 antecedent ✓
+    </div>
+  </div>
+
+  <!-- Q7 빈칸 -->
+  <div class="q-card" id="q7">
+    <div class="q-meta">
+      <span class="q-num">Q07</span>
+      <span class="q-type">빈칸</span>
+    </div>
+    <div class="q-stem">다음 빈칸에 들어갈 알맞은 용어를 쓰시오.<br><br>
+    Binding Principle A에 따르면, anaphor는 binding domain 안에서 antecedent에 의해 c-command되고 ________ 되어야 한다.</div>
+    <div class="blank-wrap">
+      <input type="text" class="blank-input" id="blank-q7" placeholder="영어로 입력">
+      <button class="blank-submit" onclick="blankCheck('q7', ['co-indexed','co-indexing','coindexed'])">확인</button>
+    </div>
+    <div class="explanation" id="exp-q7">
+      <div class="ans-label">정답: co-indexed</div>
+      Binding Principle A의 세 조건:<br>
+      1. antecedent가 anaphor를 <strong>c-command</strong>해야 함<br>
+      2. antecedent와 anaphor가 <strong>co-indexed</strong>(같은 index를 공유)해야 함<br>
+      3. binding domain(최소 절) 안에 있어야 함 (<strong>locality constraint</strong>)
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXERCISE 4: NPI 'EVER' ===== -->
+<section class="ex-section" id="ex4">
+  <div class="ex-section-header">
+    <div class="ex-section-num">4</div>
+    <div class="ex-section-info">
+      <h2>NPI 'ever' &amp; C-command</h2>
+      <div class="ex-sub">§3.5 — Negative Polarity Item 문법성 판단</div>
+    </div>
+  </div>
+
+  <!-- Q8 OX -->
+  <div class="q-card" id="q8">
+    <div class="q-meta">
+      <span class="q-num">Q08</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>No student will ever cheat on the exam.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','O','q8')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q8')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q8">
+      <div class="ans-label">정답: ⭕ 정문</div>
+      <strong>No student</strong>는 negative determiner 'no'를 immediate constituent로 포함하는 NP입니다.<br>
+      No student → ever를 <strong>precede ✓</strong>, <strong>c-command ✓</strong><br>
+      → NPI 'ever'의 두 조건 모두 충족 → 정문
+    </div>
+  </div>
+
+  <!-- Q9 OX -->
+  <div class="q-card" id="q9">
+    <div class="q-meta">
+      <span class="q-num">Q09</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>A professor who didn't like the student would ever pass him.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','X','q9')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q9')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q9">
+      <div class="ans-label">정답: ❌ 비문</div>
+      <em>didn't</em>는 관계절 [who didn't like the student] 내부에 있습니다.<br>
+      트리에서 관계절은 주어 NP 내부의 성분이므로, didn't는 ever를<br>
+      <strong>precede ✓</strong>하지만 <strong>c-command ✗</strong>합니다.<br>
+      → NPI 'ever'의 c-command 조건 불충족 → 비문<br>
+      cf. <em>precede와 c-command를 혼동하지 말 것</em>
+    </div>
+  </div>
+
+  <!-- Q10 OX -->
+  <div class="q-card" id="q10">
+    <div class="q-meta">
+      <span class="q-num">Q10</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>I won't ever lend money to strangers.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','O','q10')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q10')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q10">
+      <div class="ans-label">정답: ⭕ 정문</div>
+      <strong>won't</strong>는 negative modal로, ever를 precede ✓, c-command ✓합니다.<br>
+      → NPI 'ever'의 두 조건 모두 충족 → 정문<br>
+      NPI의 negative constituent: ① negative modal (won't, can't, didn't)<br>
+      ② NP containing negative Det 'no' (nobody, no one, no student 등)
+    </div>
+  </div>
+
+  <!-- Q11 MC -->
+  <div class="q-card" id="q11">
+    <div class="q-meta">
+      <span class="q-num">Q11</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem">다음 중 문법적인 문장을 모두 고른 것은?</div>
+    <div class="q-examples">
+      ㄱ. No teacher would ever ignore a struggling student.<br>
+      ㄴ. Some teacher ever wouldn't ignore a struggling student.<br>
+      ㄷ. No teacher would ignore a struggling student ever.<br>
+      ㄹ. Some teacher who doesn't care would ever pass a failing student.
+    </div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q11')">① ㄱ만</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q11')">② ㄱ, ㄷ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q11')">③ ㄱ, ㄴ, ㄷ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q11')">④ ㄱ, ㄷ, ㄹ</button>
+    </div>
+    <div class="explanation" id="exp-q11">
+      <div class="ans-label">정답: ② ㄱ, ㄷ</div>
+      ㄱ. ✓ No teacher → ever를 precede ✓, c-command ✓<br>
+      ㄷ. ✓ No teacher → ever(문장 끝)를 precede ✓, c-command ✓<br><br>
+      ㄴ. ✗ <em>Some teacher ever wouldn't</em> — negative item(wouldn't)이 ever 뒤에 위치 → precede ✗<br>
+      ㄹ. ✗ <em>who doesn't care</em>의 doesn't는 관계절 내부 → ever를 c-command ✗
+    </div>
+  </div>
+
+  <!-- Q12 MC -->
+  <div class="q-card" id="q12">
+    <div class="q-meta">
+      <span class="q-num">Q12</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem">NPI 'ever'가 사용될 수 있는 조건에 대한 설명으로 가장 옳은 것은?</div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q12')">① 부정어가 ever보다 앞에만 나오면 된다</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q12')">② ever는 의문문과 부정문 모두에서 자유롭게 사용 가능하다</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q12')">③ 부정 요소가 ever를 선행(precede)하고 동시에 c-command해야 한다</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q12')">④ 부정어가 포함된 절이 있으면 어디든 ever를 쓸 수 있다</button>
+    </div>
+    <div class="explanation" id="exp-q12">
+      <div class="ans-label">정답: ③</div>
+      Ever is an Adverbial expression which occurs as an immediate constituent of S.<br>
+      부정문에서 ever는 반드시 negative constituent에 의해<br>
+      <strong>preceded AND c-commanded</strong> 되어야 합니다.<br>
+      Precede만으로는 부족 → 구조적 관계인 c-command가 반드시 필요합니다.
+    </div>
+  </div>
+
+  <!-- Q13 빈칸 -->
+  <div class="q-card" id="q13">
+    <div class="q-meta">
+      <span class="q-num">Q13</span>
+      <span class="q-type">빈칸</span>
+    </div>
+    <div class="q-stem">다음 빈칸에 알맞은 말을 쓰시오.<br><br>
+    <em>*I will ever forgive nobody for that.</em>이 비문인 이유:<br>
+    nobody는 ever를 ________ 하지 못하기 때문이다. (영어로)</div>
+    <div class="blank-wrap">
+      <input type="text" class="blank-input" id="blank-q13" placeholder="영어로 입력">
+      <button class="blank-submit" onclick="blankCheck('q13', ['c-command','c command','ccommand'])">확인</button>
+    </div>
+    <div class="explanation" id="exp-q13">
+      <div class="ans-label">정답: c-command</div>
+      <em>*I will ever forgive nobody for that.</em><br>
+      nobody는 ever보다 <strong>뒤에 위치 → precede ✗</strong><br>
+      트리에서도 nobody(VP 내 목적어)는 ever(S의 immediate constituent)를 <strong>c-command ✗</strong><br>
+      → precede도, c-command도 모두 실패 → 비문
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXERCISE 7: ADJ vs ADV ===== -->
+<section class="ex-section" id="ex7">
+  <div class="ex-section-header">
+    <div class="ex-section-num">7</div>
+    <div class="ex-section-info">
+      <h2>Adjective vs Determiner / -ing 판별</h2>
+      <div class="ex-sub">§3.6-3.8 — 범주 판별 · 문법성 판단</div>
+    </div>
+  </div>
+
+  <!-- Q14 OX -->
+  <div class="q-card" id="q14">
+    <div class="q-meta">
+      <span class="q-num">Q14</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>My and patient teacher waited for everyone.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','X','q14')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q14')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q14">
+      <div class="ans-label">정답: ❌ 비문</div>
+      <strong>My</strong>는 Determiner, <strong>patient</strong>는 Adjective입니다.<br>
+      Determiners cannot be coordinated with adjectives.<br>
+      → <em>*my and patient</em>는 서로 다른 범주(Det + Adj)의 coordination → 비문<br>
+      cf. <em>a patient and dedicated teacher</em> → Adj + Adj coordination ✓
+    </div>
+  </div>
+
+  <!-- Q15 OX -->
+  <div class="q-card" id="q15">
+    <div class="q-meta">
+      <span class="q-num">Q15</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>It was in the library that I found the book.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','O','q15')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q15')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q15">
+      <div class="ans-label">정답: ⭕ 정문</div>
+      Cleft sentence에서 focus position에는 <strong>NP와 PP</strong>만 올 수 있습니다.<br>
+      <em>in the library</em>는 PP → focus position ✓ → 정문<br>
+      cf. <em>*It is very tall that he is.</em> → AP: focus position ✗<br>
+      cf. <em>*It is go home that I will.</em> → VP: focus position ✗
+    </div>
+  </div>
+
+  <!-- Q16 MC -->
+  <div class="q-card" id="q16">
+    <div class="q-meta">
+      <span class="q-num">Q16</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem">밑줄 친 -ing 형태가 <strong>동사(Verb)</strong>로 쓰인 것만을 고른 것은?</div>
+    <div class="q-examples">
+      ㄱ. The scientist gave a very <u>convincing</u> argument.<br>
+      ㄴ. The coach is <u>training</u> the athletes hard.<br>
+      ㄷ. His speech was extremely <u>inspiring</u>.<br>
+      ㄹ. The chef is <u>preparing</u> a complicated dish.
+    </div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q16')">① ㄱ, ㄷ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q16')">② ㄴ, ㄹ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q16')">③ ㄱ, ㄴ, ㄹ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q16')">④ ㄷ, ㄹ</button>
+    </div>
+    <div class="explanation" id="exp-q16">
+      <div class="ans-label">정답: ② ㄴ, ㄹ</div>
+      판별 기준: <strong>very 수식 가능 → 형용사 / 목적어 동반 → 동사</strong><br><br>
+      ㄴ. <em>training the athletes</em> → 목적어(the athletes) 동반 + *very training → <strong>동사</strong><br>
+      ㄹ. <em>preparing a complicated dish</em> → 목적어 동반 + *very preparing → <strong>동사</strong><br><br>
+      ㄱ. <em>very convincing argument</em> → very 수식 가능 → <strong>형용사</strong><br>
+      ㄷ. <em>extremely inspiring</em> → extremely(=very) 수식 가능 → <strong>형용사</strong>
+    </div>
+  </div>
+
+  <!-- Q17 MC -->
+  <div class="q-card" id="q17">
+    <div class="q-meta">
+      <span class="q-num">Q17</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem">다음 중 Gerund와 Nominalization의 해석 차이가 잘 드러난 대조 쌍으로 옳은 것은?</div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q17')">① The professor enjoyed lecturing. / The professor enjoyed a lecture. — 둘 다 같은 의미</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q17')">② Alex enjoyed cooking dinner. / Alex enjoyed a cooking of dinner. — Gerund는 Alex가 직접 요리, Nominalization은 누군가의 요리를 즐김</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q17')">③ Running is good exercise. / A running is good exercise. — 문법성 차이만 있음</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q17')">④ 둘은 항상 같은 해석을 가지므로 구분이 불필요하다</button>
+    </div>
+    <div class="explanation" id="exp-q17">
+      <div class="ans-label">정답: ②</div>
+      <strong>Gerund</strong>: <em>Alex enjoyed cooking dinner.</em><br>
+      → factive interpretation: Alex 본인이 직접 저녁을 요리하는 행위 자체를 즐김<br><br>
+      <strong>Nominalization</strong>: <em>Alex enjoyed a cooking of dinner.</em><br>
+      → manner interpretation: 누군가(다른 사람)가 요리하는 것을 보거나 듣는 방식을 즐김<br><br>
+      The missing subject of gerunds is co-referential with another NP in the sentence;<br>
+      the missing subject of nominalizations refers to some other participant.
+    </div>
+  </div>
+
+  <!-- Q18 빈칸 -->
+  <div class="q-card" id="q18">
+    <div class="q-meta">
+      <span class="q-num">Q18</span>
+      <span class="q-type">빈칸</span>
+    </div>
+    <div class="q-stem">다음 빈칸에 알맞은 용어를 영어로 쓰시오.<br><br>
+    -ing form이 형용사인지 동사인지 판별하는 핵심 기준:<br>
+    'very'의 수식이 가능하면 ________, 불가능하면 동사이다.</div>
+    <div class="blank-wrap">
+      <input type="text" class="blank-input" id="blank-q18" placeholder="영어로 입력">
+      <button class="blank-submit" onclick="blankCheck('q18', ['adjective','adj'])">확인</button>
+    </div>
+    <div class="explanation" id="exp-q18">
+      <div class="ans-label">정답: adjective</div>
+      gee 답안 핵심 원칙: <strong>very의 수식이 가능하면 형용사 / 불가능하면 동사</strong><br>
+      예: <em>very charming smile</em> → charming = <strong>adjective</strong> ✓<br>
+      예: <em>*very charming a snake</em> → charming = <strong>verb</strong> (목적어 동반, very 수식 불가)<br>
+      추가 판별: 목적어 동반 여부, by-phrase 동반 가능 여부
+    </div>
+  </div>
+
+  <!-- Q19 OX -->
+  <div class="q-card" id="q19">
+    <div class="q-meta">
+      <span class="q-num">Q19</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>The audience was very moved by the performance.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','O','q19')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q19')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q19">
+      <div class="ans-label">정답: ⭕ 정문</div>
+      일반적으로 <em>very + -ed participle + by-phrase</em>는 비문이지만,<br>
+      <strong>예외</strong>: by-phrase의 NP가 <em>사람이 아닌 원인/이유(cause or reason)</em>를 나타낼 때는 허용됩니다.<br>
+      <em>the performance</em>는 사람이 아닌 원인/이유를 나타내는 NP → <strong>정문</strong><br>
+      cf. The man was very offended by the policeman. ✓ (by the policeman = cause)<br>
+      We were very pleased by his behavior. ✓ (by his behavior = cause)
+    </div>
+  </div>
+
+  <!-- Q20 MC -->
+  <div class="q-card" id="q20">
+    <div class="q-meta">
+      <span class="q-num">Q20</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem"><em>The hunting of the foxes was controversial.</em>의 중의성을 설명한 것으로 옳은 것은?</div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q20')">① foxes가 주어/목적어 둘 다 될 수 있어서</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q20')">② hunting이 자동사/타동사 두 가지로 쓰여서</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q20')">③ hunting이 Gerund(factive)와 Nominalization(manner) 두 가지로 해석 가능해서</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q20')">④ controversial의 의미가 모호해서</button>
+    </div>
+    <div class="explanation" id="exp-q20">
+      <div class="ans-label">정답: ③</div>
+      <em>The hunting of the foxes was controversial.</em><br>
+      해석 1: <strong>Gerund(factive)</strong> — 여우를 사냥했다는 사실 자체가 논란이 됐다<br>
+      해석 2: <strong>Nominalization(manner)</strong> — 여우를 사냥하는 방식이 논란이 됐다<br><br>
+      cf. 유명한 원문: <em>The shooting of the hunters was awful.</em> (gee 답안)
+    </div>
+  </div>
+
+  <!-- Q21 MC -->
+  <div class="q-card" id="q21">
+    <div class="q-meta">
+      <span class="q-num">Q21</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem">다음 중 Determiner의 특성으로 옳은 것을 모두 고른 것은?<br><br>
+    ㄱ. 명사 앞에서 Adjective보다 먼저 위치한다<br>
+    ㄴ. 형용사와 등위접속(coordination)이 가능하다<br>
+    ㄷ. Cleft sentence의 focus position에 올 수 없다<br>
+    ㄹ. very의 수식을 받을 수 없다</div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q21')">① ㄱ, ㄴ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q21')">② ㄱ, ㄷ, ㄹ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q21')">③ ㄴ, ㄷ</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q21')">④ ㄱ, ㄴ, ㄷ, ㄹ</button>
+    </div>
+    <div class="explanation" id="exp-q21">
+      <div class="ans-label">정답: ② ㄱ, ㄷ, ㄹ</div>
+      ㄱ. ✓ Determiner는 항상 Adjective보다 앞에 위치 (the big bang ✓ / *big the bang ✗)<br>
+      ㄷ. ✓ Cleft sentence focus에는 NP, PP만 가능 — Determiner 단독 불가<br>
+      ㄹ. ✓ very는 Adjective만 수식 (*very this, *very the ✗)<br><br>
+      ㄴ. ✗ Determiners cannot be coordinated with adjectives<br>
+      (*my and lazy son ✗ / *silly and these ideas ✗)
+    </div>
+  </div>
+
+  <!-- Q22 빈칸 -->
+  <div class="q-card" id="q22">
+    <div class="q-meta">
+      <span class="q-num">Q22</span>
+      <span class="q-type">빈칸</span>
+    </div>
+    <div class="q-stem">다음 빈칸에 알맞은 말을 영어로 쓰시오.<br><br>
+    Nominalization은 행위의 ________ 을 나타내는 경향이 있고,<br>
+    Gerund는 행위 자체(factive)를 나타내는 경향이 있다.</div>
+    <div class="blank-wrap">
+      <input type="text" class="blank-input" id="blank-q22" placeholder="영어로 입력">
+      <button class="blank-submit" onclick="blankCheck('q22', ['manner','manner interpretation'])">확인</button>
+    </div>
+    <div class="explanation" id="exp-q22">
+      <div class="ans-label">정답: manner</div>
+      <strong>Gerund</strong> → factive interpretation (행위 자체가 일어났다는 사실)<br>
+      <strong>Nominalization</strong> → manner interpretation (행위가 어떻게 일어났는지 방식)<br><br>
+      예: <em>I detest loud singing.</em> (Nominalization) — 타인이 크게 노래 부르는 방식<br>
+      예: <em>I detest singing loudly.</em> (Gerund) — 내가 크게 노래하는 행위 자체
+    </div>
+  </div>
+
+  <!-- Q23 OX -->
+  <div class="q-card" id="q23">
+    <div class="q-meta">
+      <span class="q-num">Q23</span>
+      <span class="q-type">O / X</span>
+    </div>
+    <div class="q-stem">다음 문장의 문법성을 판단하시오.<br>
+    <em>Bright and those stars shine in the dark sky.</em></div>
+    <div class="ox-wrap">
+      <button class="ox-btn" onclick="oxCheck(this,'O','X','q23')">⭕ 정문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','O','q23')">❌ 비문</button>
+    </div>
+    <div class="explanation" id="exp-q23">
+      <div class="ans-label">정답: ❌ 비문</div>
+      <strong>bright</strong>는 Adjective, <strong>those</strong>는 Determiner입니다.<br>
+      Determiners cannot be coordinated with adjectives.<br>
+      → <em>*bright and those</em> = Adj + Det coordination → 비문<br>
+      cf. <em>bright and distant stars</em> → Adj + Adj ✓<br>
+      cf. <em>those bright stars</em> → Det + Adj + N 올바른 순서 ✓
+    </div>
+  </div>
+
+  <!-- Q24 MC -->
+  <div class="q-card" id="q24">
+    <div class="q-meta">
+      <span class="q-num">Q24</span>
+      <span class="q-type">객관식</span>
+    </div>
+    <div class="q-stem">다음 중 Adjective와 Determiner를 구분하는 기준으로 <strong>옳지 않은</strong> 것은?</div>
+    <div class="mc-options">
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q24')">① Adjective는 very의 수식을 받을 수 있지만 Determiner는 받을 수 없다</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q24')">② Determiner는 Adjective보다 명사에 더 가까이 위치한다</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q24')">③ Adjective는 다른 Adjective와도 Determiner와도 coordination이 가능하다</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q24')">④ Adjective는 비교급·최상급 형성이 가능하지만 Determiner는 불가능하다</button>
+    </div>
+    <div class="explanation" id="exp-q24">
+      <div class="ans-label">정답: ②가 아닌 ③ (틀린 설명)</div>
+      ③이 옳지 않습니다.<br>
+      Adjective는 <strong>다른 Adjective와만</strong> coordination이 가능합니다.<br>
+      Determiner와의 coordination은 불가합니다.<br>
+      → <em>tall and slim</em> (Adj+Adj) ✓ / <em>*my and tall</em> (Det+Adj) ✗<br><br>
+      ② Determiner는 항상 Adjective <strong>앞</strong>에 위치합니다 (명사에서 더 멀리).<br>
+      순서: Det → Adj → N (the big bang ✓ / *big the bang ✗)
+    </div>
+  </div>
+
+</section>
+
+<!-- CH NAV -->
+<div class="ch-nav">
+  <a href="ch3_concepts.html">← Ch.3 개념 정리</a>
+  <a href="index.html" class="next-btn">목차로 →</a>
+</div>
+
+</main>
+
+<script>
+let score = 0;
+let answered = 0;
+const total = 24;
+
+function updateScore() {
+  document.getElementById('scoreNum').textContent = score;
+  document.getElementById('progressFill').style.width = (answered / total * 100) + '%';
+}
+
+function oxCheck(btn, chosen, correct, qid) {
+  const card = document.getElementById(qid);
+  if (card.classList.contains('answered')) return;
+  card.classList.add('answered');
+
+  const btns = btn.closest('.ox-wrap').querySelectorAll('.ox-btn');
+  btns.forEach(b => b.disabled = true);
+
+  answered++;
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    btns.forEach(b => {
+      if (b !== btn) b.classList.add('show-ans');
+    });
+  }
+  document.getElementById('exp-' + qid).classList.add('show');
+  updateScore();
+}
+
+function mcCheck(btn, result, qid) {
+  const card = document.getElementById(qid);
+  if (card.classList.contains('answered')) return;
+  card.classList.add('answered');
+
+  const opts = btn.closest('.mc-options').querySelectorAll('.mc-opt');
+  opts.forEach(o => o.disabled = true);
+
+  answered++;
+  if (result === 'correct') {
+    btn.classList.add('correct');
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    opts.forEach(o => {
+      if (o.getAttribute('onclick').includes("'correct'")) o.classList.add('show-ans');
+    });
+  }
+  document.getElementById('exp-' + qid).classList.add('show');
+  updateScore();
+}
+
+function blankCheck(qid, answers) {
+  const input = document.getElementById('blank-' + qid);
+  const card = document.getElementById(qid);
+  if (card.classList.contains('answered')) return;
+
+  const val = input.value.trim().toLowerCase();
+  const isCorrect = answers.some(a => val === a.toLowerCase());
+
+  card.classList.add('answered');
+  input.disabled = true;
+  answered++;
+
+  if (isCorrect) {
+    input.classList.add('correct');
+    score++;
+  } else {
+    input.classList.add('wrong');
+  }
+  document.getElementById('exp-' + qid).classList.add('show');
+  updateScore();
+}
+
+function resetAll() {
+  score = 0;
+  answered = 0;
+  updateScore();
+
+  document.querySelectorAll('.q-card').forEach(c => c.classList.remove('answered'));
+  document.querySelectorAll('.ox-btn, .mc-opt').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct', 'wrong', 'show-ans');
+  });
+  document.querySelectorAll('.blank-input').forEach(i => {
+    i.disabled = false;
+    i.value = '';
+    i.classList.remove('correct', 'wrong');
+  });
+  document.querySelectorAll('.explanation').forEach(e => e.classList.remove('show'));
+}
+</script>
+</body>
+</html>
