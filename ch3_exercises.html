@@ -76,11 +76,15 @@
   .explanation strong { color: var(--accent); }
   .explanation .ans-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green); font-weight: 700; margin-bottom: 6px; }
   .explanation code { font-family: 'JetBrains Mono', monospace; background: var(--surface2); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
-  .ch-nav a { display: flex; align-items: center; gap: 8px; color: var(--accent2); text-decoration: none; font-size: 13.5px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; transition: all 0.15s; }
-  .ch-nav a:hover { background: var(--surface2); border-color: var(--accent2); }
-  .ch-nav .next-btn { background: var(--accent); color: white; border-color: var(--accent); }
-  .ch-nav .next-btn:hover { background: var(--accent2); }
+
+
+
+
   @media (max-width: 600px) { .ex-section { padding: 20px 16px; } .score-bar { flex-wrap: wrap; top: 44px; } .progress-wrap { display: none; } }
+
+
+
+
   .ch-nav {
     display: flex;
     justify-content: space-between;
@@ -718,6 +722,7 @@ function resetAll() {
   document.querySelectorAll('.explanation').forEach(e => e.classList.remove('show'));
 }
 </script>
+
 
 
 
