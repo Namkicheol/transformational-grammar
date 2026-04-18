@@ -337,11 +337,13 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
   border: 1px solid #e0a090;
   color: #8a2010;
 }
+  .next-btn { font-weight: 600; }
   .ch-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 0 8px;
+    gap: 8px;
+    padding: 20px 0 8px;
     border-top: 1px solid var(--border, #e0dbd2);
     margin-top: 24px;
     max-width: 780px;
@@ -350,7 +352,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
   }
   .nav-btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 9px 16px;
     border: 1px solid var(--border, #e0dbd2);
     border-radius: 8px;
     text-decoration: none;
@@ -358,9 +360,17 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
     color: var(--accent2, #4a7c2f);
     background: var(--surface, #fff);
     transition: background 0.15s;
+    white-space: nowrap;
   }
   .nav-btn:hover { background: var(--surface2, #f4f1ec); }
-  .next-btn { font-weight: 600; }
+  .nav-btn.next-btn { font-weight: 600; }
+  .nav-btn.blog-btn {
+    background: var(--accent, #2d5016);
+    color: #fff;
+    border-color: var(--accent, #2d5016);
+    font-weight: 600;
+  }
+  .nav-btn.blog-btn:hover { background: var(--accent2, #4a7c2f); }
 </style>
 </head>
 <body>
@@ -1111,8 +1121,10 @@ function qz(btn, correct) {
 }
 </script>
 
+
 <div class="ch-nav">
   <span></span>
+  <a href="https://obangti.tistory.com/18" class="nav-btn blog-btn" target="_blank">📝 포스팅 보기</a>
   <a href="ch2_exercises.html" class="nav-btn next-btn">Ch.2 연습문제 →</a>
 </div>
 </body>
