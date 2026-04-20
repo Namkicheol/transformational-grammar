@@ -889,10 +889,174 @@
   </div>
 </section>
 
+<!-- ===== SECTION 4: No Crossing Branches ===== -->
+<section class="section" id="s4-ncb">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title-wrap">
+      <h2>No Crossing Branches Constraint</h2>
+      <div class="section-sub">§3.4 — VP-adverb · 비연속 구성소 금지</div>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3 class="card-title">📌 핵심 규칙</h3>
+    <div class="rule-box">
+      If node A precedes node B, then A and <em>all descendants of A</em> must precede B and all descendants of B.
+      <br><span style="font-size:13px;color:#666;">→ 수형도에서 두 가지(branch)는 서로 교차할 수 없다.</span>
+    </div>
+    <ul class="concept-list">
+      <li><strong>비연속 구성소(noncontinuous constituent)</strong>는 존재할 수 없다.</li>
+      <li><strong>VP-adverb</strong>(<em>completely, entirely</em> 등)는 VP의 immediate constituent여야 하므로, Phrasal Verb의 Particle 앞에 끼어들 수 없다.</li>
+      <li><strong>S-adverb</strong>(<em>certainly, probably</em> 등)는 S의 immediate constituent.</li>
+    </ul>
+  </div>
+
+  <div class="concept-card">
+    <h3 class="card-title">📎 예문 분석 — VP-adverb 위치</h3>
+    <table class="ex-table">
+      <thead><tr><th>예문</th><th>판정</th><th>이유</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">*Drunks would put completely off the customers.</td>
+          <td class="badge-x">✗</td>
+          <td><em>completely</em>가 V[put]과 P[off] 사이에 위치 → V의 자손 off가 ADVP보다 뒤에 → Crossing 위반</td>
+        </tr>
+        <tr>
+          <td class="mono">Drunks would put the customers off completely.</td>
+          <td class="badge-o">✓</td>
+          <td><em>completely</em>가 VP 끝에 위치 → 교차 없음</td>
+        </tr>
+        <tr>
+          <td class="mono">Drunks would completely put off the customers.</td>
+          <td class="badge-o">✓</td>
+          <td><em>completely</em>가 V 앞에 위치 → 교차 없음</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      💡 <strong>핵심 판단법</strong>: Phrasal Verb의 Particle과 NP 사이 / V와 Particle 사이에 VP-adverb가 끼어들면 → Crossing Branches 위반.
+    </div>
+  </div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-title">✏️ 미니 퀴즈</div>
+    <div class="quiz-item">
+      <div class="quiz-q">다음 중 No Crossing Branches Constraint를 <strong>위반하는</strong> 문장은?</div>
+      <div class="quiz-opts">
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">① Drunks would completely put off the customers.</button>
+        <button onclick="checkAns(this,'correct')" class="quiz-btn">② *Drunks would put completely off the customers.</button>
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">③ Drunks would put the customers off completely.</button>
+      </div>
+      <div class="quiz-exp">
+        <strong>정답: ②</strong> — <em>completely</em>가 V[put]과 P[off] 사이에 끼어 branch가 교차한다. ①③은 교차 없음.
+      </div>
+    </div>
+    <div class="quiz-item">
+      <div class="quiz-q">VP-adverb <em>completely</em>는 어느 노드의 immediate constituent인가?</div>
+      <div class="quiz-opts">
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">① S</button>
+        <button onclick="checkAns(this,'correct')" class="quiz-btn">② VP</button>
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">③ V</button>
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">④ NP</button>
+      </div>
+      <div class="quiz-exp">
+        <strong>정답: ② VP</strong> — VP-adverb는 VP에, S-adverb(certainly 등)는 S에 붙는다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: Particle / Preposition / Conjunction ===== -->
+<section class="section" id="s5-cat">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title-wrap">
+      <h2>Particle · Preposition · Conjunction</h2>
+      <div class="section-sub">§3.6 — 범주 구분 기준 · 임용 빈출</div>
+    </div>
+  </div>
+
+  <div class="concept-card">
+    <h3 class="card-title">📌 Particle vs Preposition</h3>
+    <ul class="concept-list">
+      <li><strong>Particle</strong>: Phrasal Verb의 구성 요소. V와 함께 복합동사처럼 기능하며, NP complement를 취해 PP를 구성하지 않는다.</li>
+      <li><strong>Preposition</strong>: NP complement를 취해 PP를 형성.</li>
+    </ul>
+    <table class="ex-table">
+      <thead><tr><th>예문</th><th>분류</th><th>근거</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">John rang <u>up</u> his mother.</td>
+          <td><strong>Particle</strong></td>
+          <td>[rang up] = Phrasal Verb. <em>up</em>은 PP 형성 안 함</td>
+        </tr>
+        <tr>
+          <td class="mono">John walked <u>up</u> the stairs.</td>
+          <td><strong>Preposition</strong></td>
+          <td><em>up the stairs</em> = PP (NP complement 있음)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="concept-card">
+    <h3 class="card-title">📌 Preposition vs Conjunction</h3>
+    <ul class="concept-list">
+      <li><strong>Preposition</strong>: NP complement 또는 Clause complement를 취함.</li>
+      <li><strong>Conjunction(접속사)</strong>: Clause만 complement로 취함 — NP 불가.</li>
+      <li><em>after, before, since, until</em>: Preposition · Conjunction 두 범주 모두 가능.</li>
+      <li><em>during, despite, alongside</em>: Preposition 전용 — NP complement만 허용.</li>
+    </ul>
+    <table class="ex-table">
+      <thead><tr><th>예문</th><th>판정</th><th>분석</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">He waited until her departure.</td><td class="badge-o">✓</td><td>Preposition + NP</td></tr>
+        <tr><td class="mono">He waited until she arrived.</td><td class="badge-o">✓</td><td>Conjunction + Clause</td></tr>
+        <tr><td class="mono">*He waited until.</td><td class="badge-x">✗</td><td>complement 필수 — 없으면 비문</td></tr>
+        <tr><td class="mono">He left during the party.</td><td class="badge-o">✓</td><td>Preposition + NP</td></tr>
+        <tr><td class="mono">*He left during the party was going on.</td><td class="badge-x">✗</td><td><em>during</em>은 Clause complement 불가</td></tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      💡 <strong>시험 판단법</strong>: NP·Clause 둘 다 취하면 Preposition 가능성. Clause만 취하면 Conjunction 가능성. NP만 취하면 Preposition 전용.
+    </div>
+  </div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-title">✏️ 미니 퀴즈</div>
+    <div class="quiz-item">
+      <div class="quiz-q"><em>John rang up his mother.</em>에서 <em>up</em>의 범주는?</div>
+      <div class="quiz-opts">
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">① Preposition</button>
+        <button onclick="checkAns(this,'correct')" class="quiz-btn">② Particle</button>
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">③ Adverb</button>
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">④ Conjunction</button>
+      </div>
+      <div class="quiz-exp">
+        <strong>정답: ② Particle</strong> — [rang up]은 Phrasal Verb. <em>up</em>은 V와 함께 constituent를 이루며 PP를 형성하지 않는다.
+      </div>
+    </div>
+    <div class="quiz-item">
+      <div class="quiz-q">다음 중 비문인 것은?</div>
+      <div class="quiz-opts">
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">① He left after the party ended.</button>
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">② He waited until she arrived.</button>
+        <button onclick="checkAns(this,'correct')" class="quiz-btn">③ *He left during the party was still going on.</button>
+        <button onclick="checkAns(this,'wrong')" class="quiz-btn">④ He left before noon.</button>
+      </div>
+      <div class="quiz-exp">
+        <strong>정답: ③</strong> — <em>during</em>은 NP complement 전용. Clause complement는 불가.
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ===== SECTION 4: ADJ vs DET ===== -->
 <section class="section" id="s4">
   <div class="section-header">
-    <div class="section-num">04</div>
+    <div class="section-num">06</div>
     <div class="section-title-wrap">
       <h2>Adjective vs Determiner</h2>
       <div class="section-sub">§3.6 — 임용 빈출 — 두 범주의 구분 기준</div>
@@ -1007,7 +1171,7 @@
 <!-- ===== SECTION 5: GERUND vs PARTICIPLE ===== -->
 <section class="section" id="s5">
   <div class="section-header">
-    <div class="section-num">05</div>
+    <div class="section-num">07</div>
     <div class="section-title-wrap">
       <h2>Gerund vs Participle (Adjective/Verb)</h2>
       <div class="section-sub">§3.7-3.8 — -ing form의 정체 파악법</div>
