@@ -124,6 +124,35 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   }
   .nav-btn:hover { background: var(--surface2, #f4f1ec); }
   .nav-btn.next-btn { font-weight: 600; }
+
+/* ── 점프바 ── */
+.jump-bar{background:#f0f0fa;border-bottom:1px solid var(--bdr);
+  padding:8px 16px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  position:sticky;top:48px;z-index:98}
+.jump-bar-lbl{font-size:11px;color:var(--mut);font-family:var(--mono);
+  letter-spacing:1px;white-space:nowrap;margin-right:2px}
+.jump-btn{padding:4px 10px;border:1px solid var(--bdr);border-radius:20px;
+  font-size:11px;color:var(--pri);background:#fff;cursor:pointer;
+  font-family:var(--sans);transition:all .15s;white-space:nowrap}
+.jump-btn:hover{background:var(--pri);color:#fff;border-color:var(--pri)}
+.jump-btn.done{background:#eaf6f0;border-color:#90d0b0;color:#1a6e42}
+
+/* ── 팝업 ── */
+.pop-overlay{position:fixed;inset:0;z-index:999;display:flex;
+  align-items:center;justify-content:center;background:rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;transition:opacity .2s}
+.pop-overlay.show{opacity:1;pointer-events:all}
+.pop-box{background:#fff;border-radius:20px;padding:28px 36px;text-align:center;
+  box-shadow:0 12px 40px rgba(0,0,0,.18);transform:scale(.85);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.pop-overlay.show .pop-box{transform:scale(1)}
+.pop-icon{font-size:48px;line-height:1;margin-bottom:8px}
+.pop-label{font-size:12px;font-family:var(--mono);color:var(--mut);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.pop-msg{font-size:20px;font-weight:700;color:var(--txt);margin-bottom:3px}
+.pop-sub{font-size:12px;color:var(--mut);max-width:260px;margin:0 auto}
+.pop-box.correct-pop{border-top:5px solid #1a6e42}
+.pop-box.wrong-pop{border-top:5px solid #c0392b}
 </style>
 </head>
 <body>
@@ -139,11 +168,34 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   </div>
 </div>
 
+
+<div class="pop-overlay" id="pop-overlay" onclick="closePop()">
+  <div class="pop-box" id="pop-box">
+    <div class="pop-icon"  id="pop-icon">🎉</div>
+    <div class="pop-label" id="pop-label">CORRECT</div>
+    <div class="pop-msg"   id="pop-msg">정답!</div>
+    <div class="pop-sub"   id="pop-sub"></div>
+  </div>
+</div>
+
 <div class="sbar">
   <span class="sbar-lbl">맞은 문제</span>
   <span class="sbar-num"><span id="sc">0</span>&thinsp;/&thinsp;<span id="st">43</span></span>
   <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
   <button class="rbtn" onclick="reset()">↺ 다시 풀기</button>
+</div>
+
+<div class="jump-bar">
+  <span class="jump-bar-lbl">바로가기 ▸</span>
+  <button class="jump-btn" id="jb0" onclick="jumpTo('sec0')">Preposing</button>
+  <button class="jump-btn" id="jb1" onclick="jumpTo('sec1')">Postposing</button>
+  <button class="jump-btn" id="jb2" onclick="jumpTo('sec2')">Fragment</button>
+  <button class="jump-btn" id="jb3" onclick="jumpTo('sec3')">S/VP-adverb</button>
+  <button class="jump-btn" id="jb4" onclick="jumpTo('sec4')">Coordination</button>
+  <button class="jump-btn" id="jb5" onclick="jumpTo('sec5')">Proform</button>
+  <button class="jump-btn" id="jb6" onclick="jumpTo('sec6')">VP Ellipsis</button>
+  <button class="jump-btn" id="jb7" onclick="jumpTo('sec7')">Phrasal V</button>
+  <button class="jump-btn" id="jb8" onclick="jumpTo('sec8')">Strict Adj</button>
 </div>
 
 <div class="wrap">
@@ -157,6 +209,64 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script>
+
+/* ── Web Audio 효과음 ── */
+const AC = new (window.AudioContext || window.webkitAudioContext)();
+function beep(type) {
+  const osc = AC.createOscillator(), gain = AC.createGain();
+  osc.connect(gain); gain.connect(AC.destination);
+  if (type === 'correct') {
+    osc.frequency.setValueAtTime(523, AC.currentTime);
+    osc.frequency.setValueAtTime(659, AC.currentTime+.1);
+    osc.frequency.setValueAtTime(784, AC.currentTime+.2);
+    gain.gain.setValueAtTime(.2, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime+.5);
+    osc.start(); osc.stop(AC.currentTime+.5);
+  } else {
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(200, AC.currentTime);
+    gain.gain.setValueAtTime(.16, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime+.35);
+    osc.start(); osc.stop(AC.currentTime+.35);
+  }
+}
+let _popT = null;
+function showPop(ok, txt) {
+  if (AC.state === 'suspended') AC.resume();
+  beep(ok ? 'correct' : 'wrong');
+  document.getElementById('pop-icon').textContent  = ok ? '🎉' : '❌';
+  document.getElementById('pop-label').textContent = ok ? 'CORRECT' : 'WRONG';
+  document.getElementById('pop-msg').textContent   = ok ? '정답!' : '오답';
+  document.getElementById('pop-sub').textContent   = txt ? txt.replace(/^\*/,'').trim() : '';
+  const box = document.getElementById('pop-box');
+  box.className = 'pop-box ' + (ok ? 'correct-pop' : 'wrong-pop');
+  document.getElementById('pop-overlay').classList.add('show');
+  if (_popT) clearTimeout(_popT);
+  _popT = setTimeout(closePop, 1400);
+}
+function closePop() {
+  document.getElementById('pop-overlay').classList.remove('show');
+}
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* 섹션별 완료 표시 */
+const SEC_IDS = ['§2.5 Preposing','§2.5 Postposing','§2.5 Sentence Fragment',
+  '§2.5 S-adverb / VP-adverb','§2.6 Coordination','§2.6 Proform',
+  '§2.6 VP Ellipsis','§2.8 Phrasal V vs Prep V','§2.8 Strict Adjacency Principle'];
+function updateJumpBtns() {
+  SEC_IDS.forEach((sec, i) => {
+    const total = DATA.filter(q => q.sec === sec).length;
+    const done  = DATA.reduce((acc, q, di) => {
+      return acc + (q.sec === sec && ANS[SHUFFLED.indexOf(di)] ? 1 : 0);
+    }, 0);
+    const btn = document.getElementById('jb' + i);
+    if (btn) btn.classList.toggle('done', done === total && total > 0);
+  });
+}
+
 const DATA = [
   // §2.5 Preposing
   {sec:'§2.5 Preposing',
@@ -500,6 +610,7 @@ function build(shuffle) {
     if (!shuffle && q.sec !== lastSec) {
       lastSec = q.sec;
       const sh = document.createElement('div');
+      sh.id = 'sec' + SEC_IDS.indexOf(q.sec);
       sh.className = 'sec-hd';
       sh.innerHTML = `<div class="sec-tag">섹션</div>
         <div class="sec-title">${q.sec}</div>`;
@@ -534,6 +645,7 @@ function doOX(qi, di, v) {
   ANS[qi] = true;
   const q = DATA[di];
   const ok = v === q.ans;
+  showPop(ok, q.eng);
   if (ok) COR++;
 
   const done = ANS.filter(Boolean).length;
@@ -559,6 +671,7 @@ function doOX(qi, di, v) {
   if (ANS.every(a => a)) showResult();
 }
 
+function _showResult_wrap() { updateJumpBtns(); }
 function showResult() {
   const pct = Math.round(COR / DATA.length * 100);
   const tiers = [
