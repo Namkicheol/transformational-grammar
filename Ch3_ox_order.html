@@ -106,6 +106,37 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .nav-btn:hover{border-color:var(--pri);background:var(--pri-l)}
 .nav-btn .arr{font-size:16px}
 .nav-center{font-family:var(--mono);font-size:11px;color:var(--mut)}
+
+/* ── 섹션 점프 바 ── */
+.jump-bar{background:#f0f0fa;border-bottom:1px solid var(--bdr);
+  padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  position:sticky;top:48px;z-index:98}
+.jump-bar-lbl{font-size:11px;color:var(--mut);font-family:var(--mono);
+  letter-spacing:1px;white-space:nowrap}
+.jump-btn{padding:4px 11px;border:1px solid var(--bdr);border-radius:20px;
+  font-size:11px;color:var(--pri);background:#fff;cursor:pointer;
+  font-family:var(--sans);transition:all .15s;white-space:nowrap}
+.jump-btn:hover{background:var(--pri);color:#fff;border-color:var(--pri)}
+.jump-btn.done{background:#eaf6f0;border-color:#90d0b0;color:#1a6e42}
+
+/* ── 팝업 오버레이 ── */
+.pop-overlay{position:fixed;inset:0;z-index:999;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s}
+.pop-overlay.show{opacity:1;pointer-events:all}
+.pop-box{background:#fff;border-radius:20px;padding:32px 40px;text-align:center;
+  box-shadow:0 12px 40px rgba(0,0,0,.18);transform:scale(.85);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.pop-overlay.show .pop-box{transform:scale(1)}
+.pop-icon{font-size:52px;line-height:1;margin-bottom:10px}
+.pop-label{font-size:13px;font-family:var(--mono);color:var(--mut);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.pop-msg{font-size:20px;font-weight:700;font-family:var(--serif);color:var(--txt);
+  margin-bottom:4px}
+.pop-sub{font-size:13px;color:var(--mut)}
+.pop-box.correct-pop{border-top:5px solid #1a6e42}
+.pop-box.wrong-pop{border-top:5px solid #c0392b}
+
 </style>
 </head>
 <body>
@@ -121,6 +152,17 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   </div>
 </div>
 
+
+<!-- 팝업 오버레이 -->
+<div class="pop-overlay" id="pop-overlay" onclick="closePop()">
+  <div class="pop-box" id="pop-box">
+    <div class="pop-icon" id="pop-icon">✅</div>
+    <div class="pop-label" id="pop-label">CORRECT</div>
+    <div class="pop-msg"  id="pop-msg">정답!</div>
+    <div class="pop-sub"  id="pop-sub"></div>
+  </div>
+</div>
+
 <div class="sbar">
   <span class="sbar-lbl">진행</span>
   <span class="sbar-num"><span id="sb-ans">0</span>/30</span>
@@ -128,10 +170,18 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   <button class="rbtn" onclick="resetAll()">↺ 다시</button>
 </div>
 
+<div class="jump-bar">
+  <span class="jump-bar-lbl">바로가기 ▸</span>
+  <button class="jump-btn" id="jb1" onclick="jumpTo('sec1')">① C-command</button>
+  <button class="jump-btn" id="jb2" onclick="jumpTo('sec2')">② No Crossing</button>
+  <button class="jump-btn" id="jb3" onclick="jumpTo('sec3')">③ NPI ever</button>
+  <button class="jump-btn" id="jb4" onclick="jumpTo('sec4')">④ Categories</button>
+</div>
+
 <div class="wrap">
 
 <!-- ===== 섹션 1: C-command & Anaphors ===== -->
-<div class="sec-hd">
+<div class="sec-hd" id="sec1">
   <div class="sec-tag">Section 3.3</div>
   <div class="sec-title">C-command &amp; Anaphors</div>
   <div class="sec-ref">TG pp.113–120 · Ex III</div>
@@ -298,7 +348,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <!-- ===== 섹션 2: No Crossing Branches ===== -->
-<div class="sec-hd">
+<div class="sec-hd" id="sec2">
   <div class="sec-tag">Section 3.4</div>
   <div class="sec-title">No Crossing Branches Constraint</div>
   <div class="sec-ref">TG pp.120–122</div>
@@ -337,7 +387,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <!-- ===== 섹션 3: NPI 'ever' ===== -->
-<div class="sec-hd">
+<div class="sec-hd" id="sec3">
   <div class="sec-tag">Section 3.3 / Ex IV</div>
   <div class="sec-title">NPI <em style="font-family:var(--mono);font-size:16px;">'ever'</em> &amp; C-command</div>
   <div class="sec-ref">TG pp.158–160 · Ex IV</div>
@@ -536,7 +586,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <!-- ===== 섹션 4: Categories ===== -->
-<div class="sec-hd">
+<div class="sec-hd" id="sec4">
   <div class="sec-tag">Section 3.6–3.8</div>
   <div class="sec-title">Categories: Particle · Adjective · Determiner</div>
   <div class="sec-ref">TG pp.132–156</div>
@@ -658,6 +708,72 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 
 <script>
 const TOTAL = 30;
+
+/* ── Web Audio 효과음 ── */
+const AC = new (window.AudioContext || window.webkitAudioContext)();
+
+function beep(type) {
+  const osc = AC.createOscillator();
+  const gain = AC.createGain();
+  osc.connect(gain); gain.connect(AC.destination);
+  if (type === 'correct') {
+    osc.frequency.setValueAtTime(523, AC.currentTime);       // C5
+    osc.frequency.setValueAtTime(659, AC.currentTime + .1);  // E5
+    osc.frequency.setValueAtTime(784, AC.currentTime + .2);  // G5
+    gain.gain.setValueAtTime(.22, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime + .5);
+    osc.start(); osc.stop(AC.currentTime + .5);
+  } else {
+    osc.frequency.setValueAtTime(200, AC.currentTime);
+    osc.type = 'sawtooth';
+    gain.gain.setValueAtTime(.18, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime + .35);
+    osc.start(); osc.stop(AC.currentTime + .35);
+  }
+}
+
+/* ── 팝업 ── */
+let popTimer = null;
+function showPop(correct, sentText) {
+  if (AC.state === 'suspended') AC.resume();
+  beep(correct ? 'correct' : 'wrong');
+
+  const overlay = document.getElementById('pop-overlay');
+  const box     = document.getElementById('pop-box');
+  document.getElementById('pop-icon').textContent  = correct ? '🎉' : '❌';
+  document.getElementById('pop-label').textContent = correct ? 'CORRECT' : 'WRONG';
+  document.getElementById('pop-msg').textContent   = correct ? '정답!' : '오답';
+  document.getElementById('pop-sub').textContent   = sentText ? sentText.replace(/^\*/,'') : '';
+  box.className = 'pop-box ' + (correct ? 'correct-pop' : 'wrong-pop');
+  overlay.classList.add('show');
+
+  if (popTimer) clearTimeout(popTimer);
+  popTimer = setTimeout(closePop, 1400);
+}
+function closePop() {
+  document.getElementById('pop-overlay').classList.remove('show');
+}
+
+/* ── 섹션 점프 ── */
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ── 점프 버튼 완료 표시 ── */
+const SEC_RANGE = {1:[1,10], 2:[11,12], 3:[13,24], 4:[25,30]};
+function updateJumpBtns() {
+  for (let s = 1; s <= 4; s++) {
+    const [from, to] = SEC_RANGE[s];
+    let allDone = true;
+    for (let i = from; i <= to; i++) {
+      if (!state[i]) { allDone = false; break; }
+    }
+    const btn = document.getElementById('jb' + s);
+    if (btn) btn.classList.toggle('done', allDone);
+  }
+}
+
 let state = {};
 
 function check(n, chosen, answer) {
@@ -669,6 +785,8 @@ function check(n, chosen, answer) {
   const oBtn = card.querySelector('.obtn');
   const xBtn = card.querySelector('.xbtn');
   const correct = chosen === answer;
+  const sentText = card.querySelector('.sent') ? card.querySelector('.sent').textContent.trim() : '';
+  showPop(correct, sentText);
 
   if (chosen === 'O') {
     oBtn.classList.add(correct ? 'correct' : 'wrong');
@@ -701,6 +819,7 @@ function updateStats() {
   document.getElementById('prog').style.width       = (answered / TOTAL * 100) + '%';
 
   if (answered === TOTAL) showResult(correct);
+  updateJumpBtns();
 }
 
 function showResult(score) {
