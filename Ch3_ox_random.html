@@ -97,6 +97,37 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .nav-btn:hover{border-color:var(--pri);background:var(--pri-l)}
 .nav-btn .arr{font-size:16px}
 .nav-center{font-family:var(--mono);font-size:11px;color:var(--mut)}
+
+/* ── 섹션 점프 바 ── */
+.jump-bar{background:#f0f0fa;border-bottom:1px solid var(--bdr);
+  padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  position:sticky;top:48px;z-index:98}
+.jump-bar-lbl{font-size:11px;color:var(--mut);font-family:var(--mono);
+  letter-spacing:1px;white-space:nowrap}
+.jump-btn{padding:4px 11px;border:1px solid var(--bdr);border-radius:20px;
+  font-size:11px;color:var(--pri);background:#fff;cursor:pointer;
+  font-family:var(--sans);transition:all .15s;white-space:nowrap}
+.jump-btn:hover{background:var(--pri);color:#fff;border-color:var(--pri)}
+.jump-btn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+
+/* ── 팝업 오버레이 ── */
+.pop-overlay{position:fixed;inset:0;z-index:999;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s}
+.pop-overlay.show{opacity:1;pointer-events:all}
+.pop-box{background:#fff;border-radius:20px;padding:32px 40px;text-align:center;
+  box-shadow:0 12px 40px rgba(0,0,0,.18);transform:scale(.85);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.pop-overlay.show .pop-box{transform:scale(1)}
+.pop-icon{font-size:52px;line-height:1;margin-bottom:10px}
+.pop-label{font-size:13px;font-family:var(--mono);color:var(--mut);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.pop-msg{font-size:20px;font-weight:700;font-family:var(--serif);color:var(--txt);
+  margin-bottom:4px}
+.pop-sub{font-size:13px;color:var(--mut)}
+.pop-box.correct-pop{border-top:5px solid #1a6e42}
+.pop-box.wrong-pop{border-top:5px solid #c0392b}
+
 </style>
 </head>
 <body>
@@ -112,11 +143,31 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   </div>
 </div>
 
+
+<!-- 팝업 오버레이 -->
+<div class="pop-overlay" id="pop-overlay" onclick="closePop()">
+  <div class="pop-box" id="pop-box">
+    <div class="pop-icon" id="pop-icon">✅</div>
+    <div class="pop-label" id="pop-label">CORRECT</div>
+    <div class="pop-msg"  id="pop-msg">정답!</div>
+    <div class="pop-sub"  id="pop-sub"></div>
+  </div>
+</div>
+
 <div class="sbar">
   <span class="sbar-lbl">진행</span>
   <span class="sbar-num"><span id="sb-ans">0</span>/30</span>
   <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
   <button class="rbtn" onclick="resetAll()">↺ 다시 (새 순서)</button>
+</div>
+
+<div class="jump-bar">
+  <span class="jump-bar-lbl">섹션 ▸</span>
+  <button class="jump-btn" onclick="filterSec('all')">전체</button>
+  <button class="jump-btn" onclick="filterSec('3.3 C-command')">① C-command</button>
+  <button class="jump-btn" onclick="filterSec('3.4 No Crossing')">② No Crossing</button>
+  <button class="jump-btn" onclick="filterSec('NPI ever')">③ NPI ever</button>
+  <button class="jump-btn" onclick="filterSec('3.6')">④ Categories</button>
 </div>
 
 <div class="wrap">
@@ -139,6 +190,62 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script>
+/* ── Web Audio 효과음 ── */
+const AC = new (window.AudioContext || window.webkitAudioContext)();
+
+function beep(type) {
+  const osc = AC.createOscillator();
+  const gain = AC.createGain();
+  osc.connect(gain); gain.connect(AC.destination);
+  if (type === 'correct') {
+    osc.frequency.setValueAtTime(523, AC.currentTime);
+    osc.frequency.setValueAtTime(659, AC.currentTime + .1);
+    osc.frequency.setValueAtTime(784, AC.currentTime + .2);
+    gain.gain.setValueAtTime(.22, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime + .5);
+    osc.start(); osc.stop(AC.currentTime + .5);
+  } else {
+    osc.frequency.setValueAtTime(200, AC.currentTime);
+    osc.type = 'sawtooth';
+    gain.gain.setValueAtTime(.18, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime + .35);
+    osc.start(); osc.stop(AC.currentTime + .35);
+  }
+}
+
+/* ── 팝업 ── */
+let popTimer = null;
+function showPop(correct, sentText) {
+  if (AC.state === 'suspended') AC.resume();
+  beep(correct ? 'correct' : 'wrong');
+  const overlay = document.getElementById('pop-overlay');
+  const box     = document.getElementById('pop-box');
+  document.getElementById('pop-icon').textContent  = correct ? '🎉' : '❌';
+  document.getElementById('pop-label').textContent = correct ? 'CORRECT' : 'WRONG';
+  document.getElementById('pop-msg').textContent   = correct ? '정답!' : '오답';
+  document.getElementById('pop-sub').textContent   = sentText ? sentText.replace(/^\*/,'') : '';
+  box.className = 'pop-box ' + (correct ? 'correct-pop' : 'wrong-pop');
+  overlay.classList.add('show');
+  if (popTimer) clearTimeout(popTimer);
+  popTimer = setTimeout(closePop, 1400);
+}
+function closePop() {
+  document.getElementById('pop-overlay').classList.remove('show');
+}
+
+/* ── 섹션 필터 (랜덤 퀴즈용) ── */
+function filterSec(sec) {
+  const cards = document.querySelectorAll('.qcard');
+  cards.forEach(card => {
+    const secEl = card.querySelector('.qsec');
+    if (!secEl) return;
+    const show = sec === 'all' || secEl.textContent.includes(sec);
+    card.style.display = show ? '' : 'none';
+  });
+  document.querySelectorAll('.jump-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
 const ALL_Q = [
   {sec:'3.3 C-command', sent:'John and Mary think everyone despises them.', ans:'O',
    exp:'<strong>✓ 정문.</strong> <em>them</em>은 대명사로, [John and Mary]를 가리킬 수도 있고 문장 밖 다른 사람을 가리킬 수도 있다. 자유 지시(free reference)가 가능하므로 정문.'},
@@ -244,6 +351,8 @@ function check(pos, qi, chosen) {
   const answer = ALL_Q[qi].ans;
   const correct = chosen === answer;
   state[pos] = { correct };
+  const sentText = ALL_Q[qi].sent || '';
+  showPop(correct, sentText);
 
   const card = document.getElementById('qc' + pos);
   const exp  = document.getElementById('exp' + pos);
