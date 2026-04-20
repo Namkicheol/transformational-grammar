@@ -107,6 +107,16 @@
   `← 이전 챕터 concepts` | `같은 챕터 exercises →`
 - Ch.2는 티스토리 URL 방식, Ch.3~는 `.html` 내부 링크 방식 (기능상 동일)
 
+### OX 퀴즈 필수 기능 (Ch.4~도 동일 적용)
+- **섹션 점프바**: order는 `jumpTo()`, random은 `filterSec()` 방식
+- **정오 팝업**: `showPop(ok, txt)` 함수 — 팝업 HTML + CSS 포함
+- **효과음**: `/home/claude/beep_js.txt` 내용 그대로 복붙
+  ```js
+  // beep_js.txt 표준 패턴
+  const _SND={correct:'data:audio/wav;base64,...', wrong:'data:audio/wav;base64,...'};
+  function beep(type){try{const a=new Audio(_SND[type]);a.volume=0.7;a.play().catch(()=>{});}catch(e){}}
+  ```
+
 ### 점검 원칙 (파일 완성 후 필수)
 - 문항 수·정답 인덱스·섹션 커버리지 자동 점검
 - SVG marker 정의 누락 확인
@@ -170,6 +180,22 @@ def upload_file(filename, html_content, commit_msg):
 | Ch.3 | `Ch3_ox_random.html` | ✅ 완료 | 30문항 랜덤 |
 | Ch.3 | `Ch3_tree.html` | ✅ 완료 | SVG 5개 · marker 수정 완료 |
 | Ch.4~ | — | ⏳ 미시작 | |
+
+---
+
+## OX 퀴즈 공통 기능 (Ch.2·3 적용 완료)
+
+| 기능 | 설명 |
+|------|------|
+| 🔼 **섹션 점프바** | 상단 sticky 바 — order: 클릭 시 해당 섹션으로 스크롤 / random: 섹션 필터 |
+| 💬 **정오 팝업** | 답 클릭 시 🎉/❌ 팝업 + 예문 표시, 1.4초 자동 닫힘 |
+| 🔊 **효과음** | 정답 도·미·솔↑ / 오답 버즈 — base64 WAV `new Audio()` 방식 (iOS 무음모드 대응) |
+
+> ⚠️ **효과음 주의사항**:
+> - Web Audio API(OscillatorNode) 사용 금지 → iOS에서 작동 안 함
+> - 반드시 **base64 WAV + `new Audio()`** 방식 사용
+> - `/home/claude/beep_js.txt` 에 표준 beep 코드 저장됨 (Ch.4~에 재사용)
+> - beep 코드는 `_SND` 객체 + `function beep(type)` 단 2개로 구성
 
 ---
 
