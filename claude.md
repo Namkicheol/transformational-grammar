@@ -58,8 +58,6 @@
 > ⚠️ **원칙**: 예문은 반드시 TG.md 원문 그대로. 규칙 정의도 TG.md 기준.  
 > 나머지 md는 해설 보조·임용 출제 포인트 파악용으로만 사용.
 
-5. **참고 블로그** — `obangti.tistory.com` Ch.2 스타일·디자인 유지
-
 ---
 
 ## 매 챕터 작업 순서
@@ -89,7 +87,7 @@
 
 ### 예문 처리
 - 예문은 **Radford 원문(TG.md) 그대로** 사용
-- 저작권 보호를 위해 고유명사(John→Tom 등) 또는 명사(car→bike 등) **딱 1개만** 변형
+- 저작권 보호를 위해 고유명사(John→Tom 등) 또는 명사(car→bike 등) **딱 1개만** 변형 (전체 예문 중 1~2문장)
 - **구조·문법 포인트 변경 금지**
 - gee 핵심 예문도 변형한 예문 사용 (변형 기준: 위 원칙 동일)
 
@@ -98,9 +96,21 @@
 - **gee 해설 문구 직접 사용 금지**
 - 한국어 설명은 **독자적으로 재작성**
 
+### concepts.html 내용 원칙
+- TG.md 원서 챕터 구성을 기준으로 섹션 구성
+- 각 섹션: 핵심 규칙 → 예문 분석 → 미니퀴즈 순서
+- 임용 출제 포인트(시험 포인트) 명시
+- **누락 섹션 없이** TG 해당 챕터 전 범위 커버
+
 ### 네비게이션
 - 챕터 하단 네비게이션:  
   `← 이전 챕터 concepts` | `같은 챕터 exercises →`
+- Ch.2는 티스토리 URL 방식, Ch.3~는 `.html` 내부 링크 방식 (기능상 동일)
+
+### 점검 원칙 (파일 완성 후 필수)
+- 문항 수·정답 인덱스·섹션 커버리지 자동 점검
+- SVG marker 정의 누락 확인
+- concepts 섹션이 TG 챕터 전 범위 커버하는지 확인
 
 ---
 
@@ -122,12 +132,11 @@ HEADERS = {
 }
 
 def upload_file(filename, html_content, commit_msg):
-    # 기존 SHA 가져오기
     r = requests.get(
         f"https://api.github.com/repos/{REPO}/contents/{filename}",
         headers=HEADERS
     )
-    sha = r.json().get("sha", "")   # 신규 파일이면 sha 없음
+    sha = r.json().get("sha", "")
 
     payload = {
         "message": commit_msg,
@@ -148,19 +157,19 @@ def upload_file(filename, html_content, commit_msg):
 
 ## 현재 작업 진행 현황
 
-| 챕터 | 파일 | 상태 |
-|------|------|------|
-| Ch.2 | `ch2_concepts.html` | ✅ 완료 |
-| Ch.2 | `ch2_exercises.html` | ✅ 완료 |
-| Ch.2 | `Ch2_ox_order.html` | ✅ 완료 |
-| Ch.2 | `Ch2_ox_random.html` | ✅ 완료 |
-| Ch.2 | `Ch2_tree.html` | ✅ 완료 |
-| Ch.3 | `ch3_concepts.html` | ✅ 완료 (§3.4·§3.6 섹션 추가됨) |
-| Ch.3 | `ch3_exercises.html` | ✅ 완료 |
-| Ch.3 | `Ch3_ox_order.html` | ✅ 완료 |
-| Ch.3 | `Ch3_ox_random.html` | ✅ 완료 |
-| Ch.3 | `Ch3_tree.html` | ✅ 완료 |
-| Ch.4~ | — | ⏳ 미시작 |
+| 챕터 | 파일 | 상태 | 비고 |
+|------|------|------|------|
+| Ch.2 | `ch2_concepts.html` | ✅ 완료 | §2.3~2.4 Ambiguity 섹션 추가됨 |
+| Ch.2 | `ch2_exercises.html` | ✅ 완료 | MC 15 · OX 1 · FI 1 (21문항) |
+| Ch.2 | `Ch2_ox_order.html` | ✅ 완료 | 43문항 (정문23·비문20) |
+| Ch.2 | `Ch2_ox_random.html` | ✅ 완료 | 43문항 랜덤 |
+| Ch.2 | `Ch2_tree.html` | ✅ 완료 | SVG 6개 |
+| Ch.3 | `ch3_concepts.html` | ✅ 완료 | §3.4 No Crossing·§3.6 Particle 섹션 추가됨 |
+| Ch.3 | `ch3_exercises.html` | ✅ 완료 | 24문항 |
+| Ch.3 | `Ch3_ox_order.html` | ✅ 완료 | 30문항 (정문17·비문13) |
+| Ch.3 | `Ch3_ox_random.html` | ✅ 완료 | 30문항 랜덤 |
+| Ch.3 | `Ch3_tree.html` | ✅ 완료 | SVG 5개 · marker 수정 완료 |
+| Ch.4~ | — | ⏳ 미시작 | |
 
 ---
 
@@ -168,7 +177,7 @@ def upload_file(filename, html_content, commit_msg):
 
 - 챕터 완료 시 해당 카드 `disabled` 제거 → 링크 연결
 - 진행바·상태 텍스트·포스팅 수 자동 업데이트
-- Ch.2처럼 챕터당 최대 5개 카드 (개념, 실전, OX순서, OX랜덤, 수형도)
+- 챕터당 최대 5개 카드 (개념, 실전, OX순서, OX랜덤, 수형도)
 
 ---
 
@@ -177,7 +186,7 @@ def upload_file(filename, html_content, commit_msg):
 ```
 트포 HTML 작업 이어서 진행
 
-현재까지 완료: Ch.2 (5개), Ch.3 (2개) — index.html 반영 완료
+현재까지 완료: Ch.2 (5개), Ch.3 (5개) — index.html 반영 완료
 GitHub 자동 업로드 설정 완료 (토큰·레포 지침에 있음)
 
 지금 할 작업: [챕터 번호 + 파일 종류 기재]
@@ -194,3 +203,5 @@ Radford 텍스트: TG.md (프로젝트 지식)
 - `raw.githubusercontent.com` URL은 캐시 딜레이 있음 → API로 직접 SHA 확인
 - 블로그 삽입 방식은 **iframe** → GitHub 파일 수정하면 블로그 자동 반영 (재업로드 불필요)
 - 새 대화에서도 이 claude.md + 프로젝트 지식 파일로 컨텍스트 자동 복원됨
+- **네비게이션**: Ch.2는 티스토리 URL, Ch.3~는 .html 내부 링크 — 기능상 동일하므로 수정 불필요
+- **concepts 누락 섹션**: 점검 시 TG 원서 챕터 목차와 대조 필수
