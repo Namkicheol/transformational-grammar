@@ -208,37 +208,33 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 
 <script>
 
-let _AC = null;
-function getAC() {
-  if (!_AC) _AC = new (window.AudioContext || window.webkitAudioContext)();
-  return _AC;
-}
+/* ── 효과음 (클릭 시 즉시 AudioContext 생성) ── */
 function beep(type) {
   try {
-    const ac = getAC();
-    const resume = ac.state === 'suspended' ? ac.resume() : Promise.resolve();
-    resume.then(() => {
-      const osc = ac.createOscillator();
-      const gain = ac.createGain();
-      osc.connect(gain); gain.connect(ac.destination);
-      if (type === 'correct') {
-        osc.frequency.setValueAtTime(523, ac.currentTime);
-        osc.frequency.setValueAtTime(659, ac.currentTime + .12);
-        osc.frequency.setValueAtTime(784, ac.currentTime + .24);
-        gain.gain.setValueAtTime(.25, ac.currentTime);
-        gain.gain.exponentialRampToValueAtTime(.001, ac.currentTime + .55);
-        osc.start(ac.currentTime);
-        osc.stop(ac.currentTime + .55);
-      } else {
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(180, ac.currentTime);
-        gain.gain.setValueAtTime(.2, ac.currentTime);
-        gain.gain.exponentialRampToValueAtTime(.001, ac.currentTime + .3);
-        osc.start(ac.currentTime);
-        osc.stop(ac.currentTime + .3);
-      }
-    });
-  } catch(e) { console.warn('beep error:', e); }
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    const osc  = ac.createOscillator();
+    const gain = ac.createGain();
+    osc.connect(gain);
+    gain.connect(ac.destination);
+    if (type === 'correct') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523, ac.currentTime);
+      osc.frequency.setValueAtTime(659, ac.currentTime + .12);
+      osc.frequency.setValueAtTime(784, ac.currentTime + .25);
+      gain.gain.setValueAtTime(.3, ac.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.0001, ac.currentTime + .6);
+      osc.start(ac.currentTime);
+      osc.stop(ac.currentTime + .6);
+    } else {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(160, ac.currentTime);
+      gain.gain.setValueAtTime(.25, ac.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.0001, ac.currentTime + .25);
+      osc.start(ac.currentTime);
+      osc.stop(ac.currentTime + .25);
+    }
+    osc.onended = () => ac.close();
+  } catch(e) {}
 } else {
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(200, AC.currentTime);
@@ -249,8 +245,7 @@ function beep(type) {
 }
 let _popT = null;
 function showPop(ok, txt) {
-  const _play = () => beep(ok ? 'correct' : 'wrong');
-  _play();
+  beep(ok ? 'correct' : 'wrong');
   document.getElementById('pop-icon').textContent  = ok ? '🎉' : '❌';
   document.getElementById('pop-label').textContent = ok ? 'CORRECT' : 'WRONG';
   document.getElementById('pop-msg').textContent   = ok ? '정답!' : '오답';
