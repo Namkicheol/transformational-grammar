@@ -229,8 +229,8 @@ function beep(type) {
 }
 let _popT = null;
 function showPop(ok, txt) {
-  if (AC.state === 'suspended') AC.resume();
-  beep(ok ? 'correct' : 'wrong');
+  const _play = () => beep(ok ? 'correct' : 'wrong');
+  if (AC.state === 'suspended') { AC.resume().then(_play); } else { _play(); }
   document.getElementById('pop-icon').textContent  = ok ? '🎉' : '❌';
   document.getElementById('pop-label').textContent = ok ? 'CORRECT' : 'WRONG';
   document.getElementById('pop-msg').textContent   = ok ? '정답!' : '오답';
