@@ -39,6 +39,16 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   font-size:12px;color:var(--mut);cursor:pointer;font-family:var(--sans);background:#fff;transition:all .15s}
 .rbtn:hover{border-color:var(--pri);color:var(--pri)}
 
+/* 점프바 */
+.jump-bar{background:#f0f0fa;border-bottom:1px solid var(--bdr);
+  padding:8px 16px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  position:sticky;top:48px;z-index:98}
+.jump-bar-lbl{font-size:11px;color:var(--mut);font-family:var(--mono);letter-spacing:1px;white-space:nowrap}
+.jump-btn{padding:4px 11px;border:1px solid var(--bdr);border-radius:20px;
+  font-size:11px;color:var(--pri);background:#fff;cursor:pointer;
+  font-family:var(--sans);transition:all .15s;white-space:nowrap}
+.jump-btn:hover,.jump-btn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+
 .wrap{max-width:740px;margin:0 auto;padding:28px 20px 60px}
 
 .shuffle-notice{background:var(--pri-l);border:1px solid var(--bdr);border-radius:10px;
@@ -50,8 +60,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .qcard.ng{border-color:#e8a090}
 
 .qmeta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.qnum{font-family:var(--mono);font-size:11px;color:var(--mut);background:var(--gray);
-  padding:2px 8px;border-radius:4px}
+.qnum{font-family:var(--mono);font-size:11px;color:var(--mut);background:var(--gray);padding:2px 8px;border-radius:4px}
 .qsec{font-size:10px;color:var(--mut);background:var(--gray);padding:2px 8px;border-radius:4px}
 
 .sent{font-family:var(--mono);font-size:14px;line-height:1.7;padding:10px 14px;
@@ -59,8 +68,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 
 .btn-row{display:flex;gap:8px}
 .obtn,.xbtn{flex:1;padding:9px 0;border:1.5px solid var(--bdr);border-radius:8px;
-  font-size:15px;font-weight:700;cursor:pointer;background:#fff;transition:all .15s;
-  font-family:var(--sans)}
+  font-size:15px;font-weight:700;cursor:pointer;background:#fff;transition:all .15s;font-family:var(--sans)}
 .obtn{color:#1a6e42}.xbtn{color:#c0392b}
 .obtn:hover{background:#eaf6f0;border-color:#6dbf9a}
 .xbtn:hover{background:#fdf0ed;border-color:#e8a090}
@@ -81,13 +89,27 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .result-score{font-family:var(--mono);font-size:48px;font-weight:700;color:#ffd166;line-height:1}
 .result-total{font-size:14px;color:rgba(255,255,255,.5);margin-top:4px}
 .result-msg{font-size:16px;margin-top:16px;font-family:var(--serif)}
-.result-bar{margin:20px auto;max-width:300px;height:8px;background:rgba(255,255,255,.15);
-  border-radius:4px;overflow:hidden}
+.result-bar{margin:20px auto;max-width:300px;height:8px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden}
 .result-fill{height:100%;background:#ffd166;border-radius:4px}
 .restart-btn{margin-top:24px;padding:10px 28px;border:1.5px solid rgba(255,255,255,.3);
   border-radius:8px;color:#fff;background:transparent;cursor:pointer;font-size:14px;
   font-family:var(--sans);transition:all .2s}
 .restart-btn:hover{background:rgba(255,255,255,.1)}
+
+/* 팝업 */
+.pop-overlay{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s}
+.pop-overlay.show{opacity:1;pointer-events:all}
+.pop-box{background:#fff;border-radius:20px;padding:28px 36px;text-align:center;
+  box-shadow:0 12px 40px rgba(0,0,0,.18);transform:scale(.85);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.pop-overlay.show .pop-box{transform:scale(1)}
+.pop-icon{font-size:48px;line-height:1;margin-bottom:8px}
+.pop-label{font-size:12px;font-family:var(--mono);color:var(--mut);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.pop-msg{font-size:20px;font-weight:700;color:var(--txt);margin-bottom:3px}
+.pop-sub{font-size:12px;color:var(--mut);max-width:260px;margin:0 auto}
+.pop-box.correct-pop{border-top:5px solid #1a6e42}
+.pop-box.wrong-pop{border-top:5px solid #c0392b}
 
 .nav-row{display:flex;justify-content:space-between;align-items:center;
   margin-top:48px;padding-top:24px;border-top:1px solid var(--bdr);flex-wrap:wrap;gap:12px}
@@ -97,40 +119,19 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .nav-btn:hover{border-color:var(--pri);background:var(--pri-l)}
 .nav-btn .arr{font-size:16px}
 .nav-center{font-family:var(--mono);font-size:11px;color:var(--mut)}
-
-/* ── 섹션 점프 바 ── */
-.jump-bar{background:#f0f0fa;border-bottom:1px solid var(--bdr);
-  padding:8px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-  position:sticky;top:48px;z-index:98}
-.jump-bar-lbl{font-size:11px;color:var(--mut);font-family:var(--mono);
-  letter-spacing:1px;white-space:nowrap}
-.jump-btn{padding:4px 11px;border:1px solid var(--bdr);border-radius:20px;
-  font-size:11px;color:var(--pri);background:#fff;cursor:pointer;
-  font-family:var(--sans);transition:all .15s;white-space:nowrap}
-.jump-btn:hover{background:var(--pri);color:#fff;border-color:var(--pri)}
-.jump-btn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
-
-/* ── 팝업 오버레이 ── */
-.pop-overlay{position:fixed;inset:0;z-index:999;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s}
-.pop-overlay.show{opacity:1;pointer-events:all}
-.pop-box{background:#fff;border-radius:20px;padding:32px 40px;text-align:center;
-  box-shadow:0 12px 40px rgba(0,0,0,.18);transform:scale(.85);
-  transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
-.pop-overlay.show .pop-box{transform:scale(1)}
-.pop-icon{font-size:52px;line-height:1;margin-bottom:10px}
-.pop-label{font-size:13px;font-family:var(--mono);color:var(--mut);
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
-.pop-msg{font-size:20px;font-weight:700;font-family:var(--serif);color:var(--txt);
-  margin-bottom:4px}
-.pop-sub{font-size:13px;color:var(--mut)}
-.pop-box.correct-pop{border-top:5px solid #1a6e42}
-.pop-box.wrong-pop{border-top:5px solid #c0392b}
-
 </style>
 </head>
 <body>
+
+<!-- 팝업 -->
+<div class="pop-overlay" id="pop-overlay" onclick="closePop()">
+  <div class="pop-box" id="pop-box">
+    <div class="pop-icon"  id="pop-icon">🎉</div>
+    <div class="pop-label" id="pop-label">CORRECT</div>
+    <div class="pop-msg"   id="pop-msg">정답!</div>
+    <div class="pop-sub"   id="pop-sub"></div>
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-tag">Transformational Grammar · Ch.3</div>
@@ -140,17 +141,6 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <div><div class="stat-n">30</div><div class="stat-l">전체 문항</div></div>
     <div><div class="stat-n" id="answered-n">0</div><div class="stat-l">풀이 완료</div></div>
     <div><div class="stat-n" id="correct-n">0</div><div class="stat-l">정답</div></div>
-  </div>
-</div>
-
-
-<!-- 팝업 오버레이 -->
-<div class="pop-overlay" id="pop-overlay" onclick="closePop()">
-  <div class="pop-box" id="pop-box">
-    <div class="pop-icon" id="pop-icon">✅</div>
-    <div class="pop-label" id="pop-label">CORRECT</div>
-    <div class="pop-msg"  id="pop-msg">정답!</div>
-    <div class="pop-sub"  id="pop-sub"></div>
   </div>
 </div>
 
@@ -164,14 +154,14 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 <div class="jump-bar">
   <span class="jump-bar-lbl">섹션 ▸</span>
   <button class="jump-btn" onclick="filterSec('all')">전체</button>
-  <button class="jump-btn" onclick="filterSec('3.3 C-command')">① C-command</button>
-  <button class="jump-btn" onclick="filterSec('3.4 No Crossing')">② No Crossing</button>
-  <button class="jump-btn" onclick="filterSec('NPI ever')">③ NPI ever</button>
+  <button class="jump-btn" onclick="filterSec('3.3')">① C-command</button>
+  <button class="jump-btn" onclick="filterSec('3.4')">② No Crossing</button>
+  <button class="jump-btn" onclick="filterSec('NPI')">③ NPI ever</button>
   <button class="jump-btn" onclick="filterSec('3.6')">④ Categories</button>
 </div>
 
 <div class="wrap">
-  <div class="shuffle-notice">🔀 페이지를 새로고침하거나 '다시' 버튼을 누르면 문제 순서가 바뀝니다.</div>
+  <div class="shuffle-notice">🔀 '다시' 버튼을 누르면 문제 순서가 바뀝니다.</div>
   <div id="quiz-container"></div>
 
   <div class="result-box" id="result-box">
@@ -190,7 +180,74 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script>
-/* ── Web Audio 효과음 ── */
+const ALL_Q = [
+  {sec:'3.3 C-command', sent:'John and Mary think everyone despises them.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> <em>them</em>은 대명사로, [John and Mary]를 가리킬 수도 있고 문장 밖 다른 사람을 가리킬 수도 있다. 자유 지시(free reference)가 가능하므로 정문.'},
+  {sec:'3.3 C-command', sent:'John and Mary despise themselves.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> <em>themselves</em>는 anaphor(재귀사). [John and Mary]가 c-commanding antecedent로 기능하며 복수 선행사이므로 appropriateness 조건도 충족.'},
+  {sec:'3.3 C-command', sent:'John and Mary despise each other.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> <em>each other</em>는 anaphor(상호사). [John and Mary]는 두 개체를 지시하므로 appropriateness 조건 충족, c-command도 만족.'},
+  {sec:'3.3 C-command', sent:'*John despises each other.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> <em>each other</em>는 두 개체 이상을 지시하는 선행사가 필요한데, <em>John</em>은 단수. 적절한 antecedent가 없으므로 anaphor 해석 불가.'},
+  {sec:'3.3 C-command', sent:'*I despise himself.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> <em>himself</em>는 3인칭 단수 anaphor이고, <em>I</em>는 1인칭. Person 불일치로 appropriateness 조건 위반.'},
+  {sec:'3.3 C-command', sent:'*Each other are always arguing.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> <em>each other</em>는 anaphor이지만 문장 내에 어떤 potential antecedent도 존재하지 않아 해석 불가.'},
+  {sec:'3.3 C-command', sent:'The soldiers might disgrace themselves.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> NP [the soldiers]가 <em>themselves</em>를 c-command한다. 복수 선행사이므로 appropriateness 조건도 만족.'},
+  {sec:'3.3 C-command', sent:"*The soldiers' behaviour might disgrace themselves.", ans:'X',
+   exp:"<strong>✗ 비문.</strong> [the soldiers']는 NP [the soldiers' behaviour] 내부에 포함되어 있어 <em>themselves</em>를 c-command하지 못한다. C-command 조건 위반."},
+  {sec:'3.3 C-command', sent:'The men will shoot the arrows at each other.', ans:'O',
+   exp:'<strong>✓ 정문 (구조적 중의성).</strong> <em>each other</em>의 선행사로 [the men]도 가능하고 [the arrows]도 가능하다.'},
+  {sec:'3.3 C-command', sent:'Tom will buy himself another bike.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> <em>himself</em>는 anaphor. <em>Tom</em>이 c-commanding antecedent로 기능한다. [원문 변형: John→Tom, car→bike]'},
+  {sec:'3.4 No Crossing', sent:'*Drunks would put completely off the customers.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> VP-adverb <em>completely</em>는 VP의 immediate constituent여야 한다. 이 구조에서는 No Crossing Branches Constraint 위반이 불가피.'},
+  {sec:'3.4 No Crossing', sent:'Drunks would put the customers off completely.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> <em>completely</em>가 VP 전체의 right-adjunct로 붙어 No Crossing Branches를 위반하지 않는다.'},
+  {sec:'NPI ever', sent:'*I will ever forgive you for that.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> <em>ever</em>는 NPI로, 부정 표현이 선행하며 c-command해야 한다. 긍정문에는 사용 불가.'},
+  {sec:'NPI ever', sent:'Nobody will ever forgive you for that.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> 부정 NP <em>Nobody</em>가 <em>ever</em>를 선행하고 c-command한다. NPI 조건 충족.'},
+  {sec:'NPI ever', sent:"I won't ever forgive you for that.", ans:'O',
+   exp:"<strong>✓ 정문.</strong> 부정 Modal <em>won't</em>이 <em>ever</em>를 선행하고 c-command한다. NPI 조건 충족."},
+  {sec:'NPI ever', sent:'*I will ever forgive nobody for that.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> <em>nobody</em>는 <em>ever</em>를 선행하지 않는다(precede ✗). NPI는 부정 표현이 선행 AND c-command 두 조건 모두 필요.'},
+  {sec:'NPI ever', sent:"*Someone who didn't like you would ever forgive you for that.", ans:'X',
+   exp:"<strong>✗ 비문.</strong> 부정어 <em>didn't</em>은 관계절 내부에 있어 주절의 <em>ever</em>를 c-command하지 못한다(precede ✓, c-command ✗)."},
+  {sec:'NPI ever', sent:'No Frenchman ever would help an Englishman.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> 부정 Det <em>No</em>를 포함한 NP [No Frenchman]이 <em>ever</em>를 선행하고 c-command한다.'},
+  {sec:'NPI ever', sent:'No Frenchman would ever help an Englishman.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> NP [No Frenchman]이 <em>ever</em>를 선행하고 c-command. 위치가 달라져도 두 조건 모두 충족.'},
+  {sec:'NPI ever', sent:'No Frenchman would help an Englishman ever.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> <em>ever</em>가 문장 끝에 위치해도 NP [No Frenchman]이 선행 + c-command 조건을 충족한다.'},
+  {sec:'NPI ever', sent:"*Some Frenchmen ever wouldn't help an Englishman.", ans:'X',
+   exp:"<strong>✗ 비문.</strong> <em>ever</em>가 부정어 <em>wouldn't</em>보다 앞에 위치. 부정 표현이 NPI를 선행해야 하므로 precede 조건 위반."},
+  {sec:'NPI ever', sent:"Some Frenchmen wouldn't ever help an Englishman.", ans:'O',
+   exp:"<strong>✓ 정문.</strong> 부정 Modal <em>wouldn't</em>가 <em>ever</em>를 선행하고 c-command. 두 조건 모두 충족."},
+  {sec:'NPI ever', sent:'*Some Frenchmen ever would help no Englishman.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> <em>no Englishman</em>은 <em>ever</em>를 선행하지 않는다(precede ✗). NPI 조건 위반.'},
+  {sec:'NPI ever', sent:'*Some Frenchmen would ever help no Englishman.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> <em>no Englishman</em>이 VP 내에서 <em>ever</em>보다 뒤에 위치 — precede 조건 위반.'},
+  {sec:'3.6–3.8 Categories', sent:'John rang up his mother.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> <em>up</em>은 Particle로서 Phrasal Verb [rang up]을 형성한다.'},
+  {sec:'3.6–3.8 Categories', sent:'It was a car that she bought.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> cleft sentence의 focus 자리에는 NP 또는 PP만 올 수 있다. NP [a car]는 적합한 범주.'},
+  {sec:'3.6–3.8 Categories', sent:'*It is very pretty that she is.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> cleft sentence의 focus 자리에 AP [very pretty]는 올 수 없다. NP·PP만 허용.'},
+  {sec:'3.6–3.8 Categories', sent:'John is a banker and extremely rich.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> be 동사의 보어 위치에서 NP [a banker]와 AP [extremely rich]가 등위 접속 가능.'},
+  {sec:'3.6–3.8 Categories', sent:'She works very carefully.', ans:'O',
+   exp:'<strong>✓ 정문.</strong> <em>carefully</em>는 Adverb(ADV). TG에서 Adjective와 Adverb는 동일 범주의 위치적 변이형으로 분석된다.'},
+  {sec:'3.6–3.8 Categories', sent:'*It is go home that I will.', ans:'X',
+   exp:'<strong>✗ 비문.</strong> cleft sentence의 focus 자리에 VP [go home]은 올 수 없다. NP·PP만 허용.'},
+];
+
+const TOTAL = ALL_Q.length;
+let order = [];
+let state = {};
+
+/* 효과음 */
 function beep(type) {
   try {
     const ac = new (window.AudioContext || window.webkitAudioContext)();
@@ -219,16 +276,16 @@ function beep(type) {
   } catch(e) {}
 }
 
-function showPop(correct, sentText) {
+/* 팝업 */
+let popTimer = null;
+function showPop(correct, txt) {
   beep(correct ? 'correct' : 'wrong');
-  const overlay = document.getElementById('pop-overlay');
-  const box     = document.getElementById('pop-box');
   document.getElementById('pop-icon').textContent  = correct ? '🎉' : '❌';
   document.getElementById('pop-label').textContent = correct ? 'CORRECT' : 'WRONG';
   document.getElementById('pop-msg').textContent   = correct ? '정답!' : '오답';
-  document.getElementById('pop-sub').textContent   = sentText ? sentText.replace(/^\*/,'') : '';
-  box.className = 'pop-box ' + (correct ? 'correct-pop' : 'wrong-pop');
-  overlay.classList.add('show');
+  document.getElementById('pop-sub').textContent   = txt ? txt.replace(/^\*/,'').trim() : '';
+  document.getElementById('pop-box').className = 'pop-box ' + (correct ? 'correct-pop' : 'wrong-pop');
+  document.getElementById('pop-overlay').classList.add('show');
   if (popTimer) clearTimeout(popTimer);
   popTimer = setTimeout(closePop, 1400);
 }
@@ -236,86 +293,18 @@ function closePop() {
   document.getElementById('pop-overlay').classList.remove('show');
 }
 
-/* ── 섹션 필터 (랜덤 퀴즈용) ── */
+/* 섹션 필터 */
 function filterSec(sec) {
-  const cards = document.querySelectorAll('.qcard');
-  cards.forEach(card => {
-    const secEl = card.querySelector('.qsec');
-    if (!secEl) return;
-    const show = sec === 'all' || secEl.textContent.includes(sec);
-    card.style.display = show ? '' : 'none';
+  document.querySelectorAll('.qcard').forEach(card => {
+    const el = card.querySelector('.qsec');
+    if (!el) return;
+    card.style.display = (sec === 'all' || el.textContent.includes(sec)) ? '' : 'none';
   });
   document.querySelectorAll('.jump-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  event.currentTarget.classList.add('active');
 }
 
-const ALL_Q = [
-  {sec:'3.3 C-command', sent:'John and Mary think everyone despises them.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> <em>them</em>은 대명사로, [John and Mary]를 가리킬 수도 있고 문장 밖 다른 사람을 가리킬 수도 있다. 자유 지시(free reference)가 가능하므로 정문.'},
-  {sec:'3.3 C-command', sent:'John and Mary despise themselves.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> <em>themselves</em>는 anaphor(재귀사). [John and Mary]가 c-commanding antecedent로 기능하며 복수 선행사이므로 appropriateness 조건도 충족.'},
-  {sec:'3.3 C-command', sent:'John and Mary despise each other.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> <em>each other</em>는 anaphor(상호사). [John and Mary]는 두 개체를 지시하므로 appropriateness 조건 충족, c-command도 만족.'},
-  {sec:'3.3 C-command', sent:'*John despises each other.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> <em>each other</em>는 두 개체 이상을 지시하는 선행사가 필요한데, <em>John</em>은 단수. 적절한 antecedent가 없으므로 anaphor 해석 불가.'},
-  {sec:'3.3 C-command', sent:'*I despise himself.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> <em>himself</em>는 3인칭 단수 anaphor이고, <em>I</em>는 1인칭. Person 불일치로 appropriateness 조건 위반.'},
-  {sec:'3.3 C-command', sent:'*Each other are always arguing.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> <em>each other</em>는 anaphor이지만 문장 내에 어떤 potential antecedent도 존재하지 않아 해석 불가.'},
-  {sec:'3.3 C-command', sent:'The soldiers might disgrace themselves.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> NP [the soldiers]가 <em>themselves</em>를 c-command한다. 복수 선행사이므로 appropriateness 조건도 만족.'},
-  {sec:'3.3 C-command', sent:'*The soldiers\' behaviour might disgrace themselves.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> [the soldiers\']는 NP [the soldiers\' behaviour] 내부에 포함되어 있어 <em>themselves</em>를 c-command하지 못한다. C-command 조건 위반.'},
-  {sec:'3.3 C-command', sent:'The men will shoot the arrows at each other.', ans:'O',
-   exp:'<strong>✓ 정문 (구조적 중의성).</strong> <em>each other</em>의 선행사로 [the men]도 가능하고 [the arrows]도 가능하다 — 두 가지 해석 모두 성립.'},
-  {sec:'3.3 C-command', sent:'Tom will buy himself another bike.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> <em>himself</em>는 anaphor. <em>Tom</em>이 c-commanding antecedent로 기능한다. [원문 변형: John→Tom, car→bike]'},
-  {sec:'3.4 No Crossing', sent:'*Drunks would put completely off the customers.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> VP-adverb <em>completely</em>는 VP의 immediate constituent여야 한다. 이 구조에서는 No Crossing Branches Constraint 위반이 불가피.'},
-  {sec:'3.4 No Crossing', sent:'Drunks would put the customers off completely.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> <em>completely</em>가 VP 전체의 right-adjunct로 붙어 No Crossing Branches를 위반하지 않는다.'},
-  {sec:'NPI ever', sent:'*I will ever forgive you for that.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> <em>ever</em>는 NPI로, 부정 표현이 선행하며 c-command해야 한다. 긍정문에는 사용 불가.'},
-  {sec:'NPI ever', sent:'Nobody will ever forgive you for that.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> 부정 NP <em>Nobody</em>가 <em>ever</em>를 선행하고 c-command한다. NPI 조건 충족.'},
-  {sec:'NPI ever', sent:'I won\'t ever forgive you for that.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> 부정 Modal <em>won\'t</em>이 <em>ever</em>를 선행하고 c-command한다. NPI 조건 충족.'},
-  {sec:'NPI ever', sent:'*I will ever forgive nobody for that.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> <em>nobody</em>는 <em>ever</em>를 선행하지 않는다(precede ✗). NPI는 부정 표현이 선행 AND c-command 두 조건 모두 필요.'},
-  {sec:'NPI ever', sent:'*Someone who didn\'t like you would ever forgive you for that.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> 부정어 <em>didn\'t</em>은 관계절 내부에 있어 주절의 <em>ever</em>를 c-command하지 못한다(precede ✓, c-command ✗).'},
-  {sec:'NPI ever', sent:'No Frenchman ever would help an Englishman.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> 부정 Det <em>No</em>를 포함한 NP [No Frenchman]이 <em>ever</em>를 선행하고 c-command한다.'},
-  {sec:'NPI ever', sent:'No Frenchman would ever help an Englishman.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> NP [No Frenchman]이 <em>ever</em>를 선행하고 c-command. 위치가 달라져도 두 조건 모두 충족.'},
-  {sec:'NPI ever', sent:'No Frenchman would help an Englishman ever.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> <em>ever</em>가 문장 끝에 위치해도 NP [No Frenchman]이 선행 + c-command 조건을 충족한다.'},
-  {sec:'NPI ever', sent:'*Some Frenchmen ever wouldn\'t help an Englishman.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> <em>ever</em>가 부정어 <em>wouldn\'t</em>보다 앞에 위치. 부정 표현이 NPI를 선행해야 하므로 precede 조건 위반.'},
-  {sec:'NPI ever', sent:'Some Frenchmen wouldn\'t ever help an Englishman.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> 부정 Modal <em>wouldn\'t</em>가 <em>ever</em>를 선행하고 c-command. 두 조건 모두 충족.'},
-  {sec:'NPI ever', sent:'*Some Frenchmen ever would help no Englishman.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> <em>no Englishman</em>은 <em>ever</em>를 선행하지 않는다(precede ✗). NPI 조건 위반.'},
-  {sec:'NPI ever', sent:'*Some Frenchmen would ever help no Englishman.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> <em>no Englishman</em>이 VP 내에서 <em>ever</em>보다 뒤에 위치 — precede 조건 위반.'},
-  {sec:'3.6–3.8 Categories', sent:'John rang up his mother.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> <em>up</em>은 Particle(전치사의 일종)로서 Phrasal Verb [rang up]을 형성한다.'},
-  {sec:'3.6–3.8 Categories', sent:'It was a car that she bought.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> cleft sentence의 focus 자리에는 NP 또는 PP만 올 수 있다. NP [a car]는 적합한 범주.'},
-  {sec:'3.6–3.8 Categories', sent:'*It is very pretty that she is.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> cleft sentence의 focus 자리에 AP [very pretty]는 올 수 없다. NP·PP만 허용되는 범주 제약 위반.'},
-  {sec:'3.6–3.8 Categories', sent:'John is a banker and extremely rich.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> be 동사의 보어 위치에서 NP [a banker]와 AP [extremely rich]가 등위 접속 가능. Predicative 위치에서는 다양한 범주 허용.'},
-  {sec:'3.6–3.8 Categories', sent:'She works very carefully.', ans:'O',
-   exp:'<strong>✓ 정문.</strong> <em>carefully</em>는 Adverb(ADV). TG에서 Adjective와 Adverb는 동일 범주[+N,+V]의 위치적 변이형으로 분석된다.'},
-  {sec:'3.6–3.8 Categories', sent:'*It is go home that I will.', ans:'X',
-   exp:'<strong>✗ 비문.</strong> cleft sentence의 focus 자리에 VP [go home]은 올 수 없다. NP·PP만 허용(VP는 pseudo-cleft에서만 가능).'},
-];
-
-const TOTAL = ALL_Q.length;
-let order = [];
-let state = {};
-
+/* 셔플 */
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -324,6 +313,7 @@ function shuffle(arr) {
   return arr;
 }
 
+/* 퀴즈 생성 */
 function buildQuiz() {
   order = shuffle([...Array(TOTAL).keys()]);
   const container = document.getElementById('quiz-container');
@@ -333,12 +323,15 @@ function buildQuiz() {
     const div = document.createElement('div');
     div.className = 'qcard';
     div.id = 'qc' + pos;
+    const sentHtml = q.sent.startsWith('*')
+      ? '<span style="color:#c0392b">*</span>' + q.sent.slice(1)
+      : q.sent;
     div.innerHTML = `
       <div class="qmeta">
         <span class="qnum">${String(pos+1).padStart(2,'0')}</span>
         <span class="qsec">${q.sec}</span>
       </div>
-      <div class="sent">${q.sent.replace(/\*(.*)/,'<span style="color:#c0392b">*</span>$1').replace(/\*(.*)/,'$1')}</div>
+      <div class="sent">${sentHtml}</div>
       <div class="btn-row">
         <button class="obtn" onclick="check(${pos},${qi},'O')">⭕ 정문</button>
         <button class="xbtn" onclick="check(${pos},${qi},'X')">❌ 비문</button>
@@ -349,13 +342,13 @@ function buildQuiz() {
   });
 }
 
+/* 정답 체크 */
 function check(pos, qi, chosen) {
   if (state[pos]) return;
   const answer = ALL_Q[qi].ans;
   const correct = chosen === answer;
   state[pos] = { correct };
-  const sentText = ALL_Q[qi].sent || '';
-  showPop(correct, sentText);
+  showPop(correct, ALL_Q[qi].sent);
 
   const card = document.getElementById('qc' + pos);
   const exp  = document.getElementById('exp' + pos);
@@ -368,12 +361,10 @@ function check(pos, qi, chosen) {
     if (answer === 'O') oBtn.classList.add('correct');
     else xBtn.classList.add('correct');
   }
-
   exp.classList.add('show', correct ? 'correct' : 'wrong');
   card.classList.add(correct ? 'ok' : 'ng');
   oBtn.disabled = true;
   xBtn.disabled = true;
-
   updateStats();
 }
 
@@ -388,8 +379,7 @@ function updateStats() {
 }
 
 function showResult(score) {
-  const box = document.getElementById('result-box');
-  box.classList.add('show');
+  document.getElementById('result-box').classList.add('show');
   document.getElementById('r-score').textContent = score;
   document.getElementById('r-fill').style.width  = (score / TOTAL * 100) + '%';
   const pct = score / TOTAL;
@@ -400,7 +390,7 @@ function showResult(score) {
     [0.50,'📖 반복 학습으로 개념을 굳혀봐요.'],
     [0,   '💪 다시 한번! C-command 조건을 집중 복습해요.']
   ];
-  document.getElementById('r-msg').textContent = msgs.find(([t])=>pct>=t)[1];
+  document.getElementById('r-msg').textContent = msgs.find(([t]) => pct >= t)[1];
 }
 
 function resetAll() {
