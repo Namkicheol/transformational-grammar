@@ -198,17 +198,32 @@ function getAC() {
 }
 
 function beep(type) {
-  const osc = AC.createOscillator();
-  const gain = AC.createGain();
-  osc.connect(gain); gain.connect(AC.destination);
-  if (type === 'correct') {
-    osc.frequency.setValueAtTime(523, AC.currentTime);
-    osc.frequency.setValueAtTime(659, AC.currentTime + .1);
-    osc.frequency.setValueAtTime(784, AC.currentTime + .2);
-    gain.gain.setValueAtTime(.22, AC.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime + .5);
-    osc.start(); osc.stop(AC.currentTime + .5);
-  } else {
+  try {
+    const ac = getAC();
+    const resume = ac.state === 'suspended' ? ac.resume() : Promise.resolve();
+    resume.then(() => {
+      const osc = ac.createOscillator();
+      const gain = ac.createGain();
+      osc.connect(gain); gain.connect(ac.destination);
+      if (type === 'correct') {
+        osc.frequency.setValueAtTime(523, ac.currentTime);
+        osc.frequency.setValueAtTime(659, ac.currentTime + .12);
+        osc.frequency.setValueAtTime(784, ac.currentTime + .24);
+        gain.gain.setValueAtTime(.25, ac.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.001, ac.currentTime + .55);
+        osc.start(ac.currentTime);
+        osc.stop(ac.currentTime + .55);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, ac.currentTime);
+        gain.gain.setValueAtTime(.2, ac.currentTime);
+        gain.gain.exponentialRampToValueAtTime(.001, ac.currentTime + .3);
+        osc.start(ac.currentTime);
+        osc.stop(ac.currentTime + .3);
+      }
+    });
+  } catch(e) { console.warn('beep error:', e); }
+} else {
     osc.frequency.setValueAtTime(200, AC.currentTime);
     osc.type = 'sawtooth';
     gain.gain.setValueAtTime(.18, AC.currentTime);
