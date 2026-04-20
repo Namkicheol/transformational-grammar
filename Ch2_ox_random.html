@@ -124,6 +124,32 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   }
   .nav-btn:hover { background: var(--surface2, #f4f1ec); }
   .nav-btn.next-btn { font-weight: 600; }
+
+/* ── 점프바 ── */
+.jump-bar{background:#f0f0fa;border-bottom:1px solid var(--bdr);
+  padding:8px 16px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  position:sticky;top:48px;z-index:98}
+.jump-bar-lbl{font-size:11px;color:var(--mut);font-family:var(--mono);
+  letter-spacing:1px;white-space:nowrap;margin-right:2px}
+.jump-btn{padding:4px 10px;border:1px solid var(--bdr);border-radius:20px;
+  font-size:11px;color:var(--pri);background:#fff;cursor:pointer;
+  font-family:var(--sans);transition:all .15s;white-space:nowrap}
+.jump-btn:hover,.jump-btn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+.pop-overlay{position:fixed;inset:0;z-index:999;display:flex;
+  align-items:center;justify-content:center;background:rgba(0,0,0,.35);
+  opacity:0;pointer-events:none;transition:opacity .2s}
+.pop-overlay.show{opacity:1;pointer-events:all}
+.pop-box{background:#fff;border-radius:20px;padding:28px 36px;text-align:center;
+  box-shadow:0 12px 40px rgba(0,0,0,.18);transform:scale(.85);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.pop-overlay.show .pop-box{transform:scale(1)}
+.pop-icon{font-size:48px;line-height:1;margin-bottom:8px}
+.pop-label{font-size:12px;font-family:var(--mono);color:var(--mut);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.pop-msg{font-size:20px;font-weight:700;color:var(--txt);margin-bottom:3px}
+.pop-sub{font-size:12px;color:var(--mut);max-width:260px;margin:0 auto}
+.pop-box.correct-pop{border-top:5px solid #1a6e42}
+.pop-box.wrong-pop{border-top:5px solid #c0392b}
 </style>
 </head>
 <body>
@@ -139,11 +165,35 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
   </div>
 </div>
 
+
+<div class="pop-overlay" id="pop-overlay" onclick="closePop()">
+  <div class="pop-box" id="pop-box">
+    <div class="pop-icon"  id="pop-icon">🎉</div>
+    <div class="pop-label" id="pop-label">CORRECT</div>
+    <div class="pop-msg"   id="pop-msg">정답!</div>
+    <div class="pop-sub"   id="pop-sub"></div>
+  </div>
+</div>
+
 <div class="sbar">
   <span class="sbar-lbl">맞은 문제</span>
   <span class="sbar-num"><span id="sc">0</span>&thinsp;/&thinsp;<span id="st">43</span></span>
   <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
   <button class="rbtn" onclick="reset()">↺ 다시 풀기</button>
+</div>
+
+<div class="jump-bar">
+  <span class="jump-bar-lbl">섹션 ▸</span>
+  <button class="jump-btn" onclick="filterSec('all')">전체</button>
+  <button class="jump-btn" onclick="filterSec('Preposing')">Preposing</button>
+  <button class="jump-btn" onclick="filterSec('Postposing')">Postposing</button>
+  <button class="jump-btn" onclick="filterSec('Fragment')">Fragment</button>
+  <button class="jump-btn" onclick="filterSec('adverb')">S/VP-adverb</button>
+  <button class="jump-btn" onclick="filterSec('Coordination')">Coordination</button>
+  <button class="jump-btn" onclick="filterSec('Proform')">Proform</button>
+  <button class="jump-btn" onclick="filterSec('Ellipsis')">VP Ellipsis</button>
+  <button class="jump-btn" onclick="filterSec('Phrasal')">Phrasal V</button>
+  <button class="jump-btn" onclick="filterSec('Strict')">Strict Adj</button>
 </div>
 
 <div class="wrap">
@@ -157,6 +207,52 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 </div>
 
 <script>
+
+const AC = new (window.AudioContext || window.webkitAudioContext)();
+function beep(type) {
+  const osc = AC.createOscillator(), gain = AC.createGain();
+  osc.connect(gain); gain.connect(AC.destination);
+  if (type === 'correct') {
+    osc.frequency.setValueAtTime(523, AC.currentTime);
+    osc.frequency.setValueAtTime(659, AC.currentTime+.1);
+    osc.frequency.setValueAtTime(784, AC.currentTime+.2);
+    gain.gain.setValueAtTime(.2, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime+.5);
+    osc.start(); osc.stop(AC.currentTime+.5);
+  } else {
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(200, AC.currentTime);
+    gain.gain.setValueAtTime(.16, AC.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime+.35);
+    osc.start(); osc.stop(AC.currentTime+.35);
+  }
+}
+let _popT = null;
+function showPop(ok, txt) {
+  if (AC.state === 'suspended') AC.resume();
+  beep(ok ? 'correct' : 'wrong');
+  document.getElementById('pop-icon').textContent  = ok ? '🎉' : '❌';
+  document.getElementById('pop-label').textContent = ok ? 'CORRECT' : 'WRONG';
+  document.getElementById('pop-msg').textContent   = ok ? '정답!' : '오답';
+  document.getElementById('pop-sub').textContent   = txt ? txt.replace(/^\*/,'').trim() : '';
+  document.getElementById('pop-box').className = 'pop-box ' + (ok ? 'correct-pop' : 'wrong-pop');
+  document.getElementById('pop-overlay').classList.add('show');
+  if (_popT) clearTimeout(_popT);
+  _popT = setTimeout(closePop, 1400);
+}
+function closePop() {
+  document.getElementById('pop-overlay').classList.remove('show');
+}
+function filterSec(sec) {
+  document.querySelectorAll('.q-card').forEach(card => {
+    const secEl = card.querySelector('.q-sec');
+    if (!secEl) { card.style.display=''; return; }
+    card.style.display = (sec==='all' || secEl.textContent.includes(sec)) ? '' : 'none';
+  });
+  document.querySelectorAll('.jump-btn').forEach(b => b.classList.remove('active'));
+  if (event && event.target) event.target.classList.add('active');
+}
+
 const DATA = [
   // §2.5 Preposing
   {sec:'§2.5 Preposing',
@@ -534,6 +630,7 @@ function doOX(qi, di, v) {
   ANS[qi] = true;
   const q = DATA[di];
   const ok = v === q.ans;
+  showPop(ok, q.eng);
   if (ok) COR++;
 
   const done = ANS.filter(Boolean).length;
