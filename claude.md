@@ -19,10 +19,45 @@
 
 ## 참조 자료 우선순위
 
-1. **TG.md** — 프로젝트 지식 저장. 원서 전체 텍스트. 예문·개념 1순위 참조
-2. **Radford 원서 PDF** — 수형도(tree diagram) 그림이 필요할 때만 참조
-3. **gee 예상답안 PDF** (`합격자_트포_예상답안.pdf`) — 정답·출제 포인트 확인
-4. **예문정리 PDF** (`11__트포_정비문_판단_모음_예문정리트포_39p구매.pdf`, `정T_트포_예문_정리_답안_해설.pdf`) — 빈출 예문 패턴 보조 참조
+### 🥇 1순위 — 반드시 먼저 확인
+| 파일 | 용도 |
+|------|------|
+| **TG.md** | 원서 전체 텍스트. 예문 원문·규칙 정의 **무조건 여기서 찾기** |
+| **Radford 원서 PDF** (`transformational_grammar_OCR_compressed-*.pdf`) | TG.md에 그림·수형도 없을 때만 보조 참조 |
+
+### 🥈 2순위 — 해설·출제 포인트 보조
+| 파일 | 강점 챕터 |
+|------|----------|
+| `2__정T_트포_theory_단권화.md` | Ch2~3 규칙 요약 |
+| `합격자_트포_예상답안.pdf` (gee) | 정답·출제 포인트 전 챕터 |
+| `정T_트포_예문_정리_답안_해설.pdf` | 빈출 예문 정오 판정 |
+| `11__트포_정비문_판단_모음_예문정리트포_39p구매.pdf` | 정비문 패턴 |
+| `단숲_TG_정리.md` | Ch5 Negation |
+| `단숲_트포_정리.md` | Ch7 Raising/Control |
+| `트포_단권화__구매_.md` | Ch4~7 전반 보조 |
+| `윤영어학.md` | Ch5 Negation |
+| `최진호_영어학_중급_OCR.md` | Ch5·7 (OCR 일부 깨짐 주의) |
+| `1__트포_원서정리_87p_구입_.md` | 기출문제 형식 참조 |
+| `movement_단권화.md` | Ch6 Movement 전용 |
+| `Raising_And_Control_.md` | Ch7 Raising/Control 전용 |
+| `밍우_영어학분석.md` | 기출 출제 패턴 분류 |
+
+### ❌ 참조 불가
+| 파일 | 이유 |
+|------|------|
+| `메가쌤_기출분석.md` | PDF→OCR 변환 실패. 실제 내용 없음 |
+
+### 📋 Ch별 2순위 참조 우선순위
+| 챕터 | 참조 순서 |
+|------|---------|
+| Ch4 NP | 2__정T단권화 → 트포_단권화 → 윤영어학 → 최진호 |
+| Ch5 Negation | 단숲_TG_정리 → 윤영어학 → 최진호 → 트포_단권화 |
+| Ch6 Movement | movement_단권화 → 트포_단권화 → 윤영어학 → 밍우기출 |
+| Ch7 Raising/Control | Raising_And_Control_.md → 단숲_트포 → 최진호 → 트포_단권화 |
+
+> ⚠️ **원칙**: 예문은 반드시 TG.md 원문 그대로. 규칙 정의도 TG.md 기준.  
+> 나머지 md는 해설 보조·임용 출제 포인트 파악용으로만 사용.
+
 5. **참고 블로그** — `obangti.tistory.com` Ch.2 스타일·디자인 유지
 
 ---
@@ -120,8 +155,11 @@ def upload_file(filename, html_content, commit_msg):
 | Ch.2 | `Ch2_ox_order.html` | ✅ 완료 |
 | Ch.2 | `Ch2_ox_random.html` | ✅ 완료 |
 | Ch.2 | `Ch2_tree.html` | ✅ 완료 |
-| Ch.3 | `ch3_concepts.html` | ✅ 완료 |
-| Ch.3 | `ch3_exercises.html` | ✅ 완료 (예문 수정 이력 있음) |
+| Ch.3 | `ch3_concepts.html` | ✅ 완료 (§3.4·§3.6 섹션 추가됨) |
+| Ch.3 | `ch3_exercises.html` | ✅ 완료 |
+| Ch.3 | `Ch3_ox_order.html` | ✅ 완료 |
+| Ch.3 | `Ch3_ox_random.html` | ✅ 완료 |
+| Ch.3 | `Ch3_tree.html` | ✅ 완료 |
 | Ch.4~ | — | ⏳ 미시작 |
 
 ---
