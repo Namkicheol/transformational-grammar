@@ -191,7 +191,11 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 
 <script>
 /* ── Web Audio 효과음 ── */
-const AC = new (window.AudioContext || window.webkitAudioContext)();
+let _AC = null;
+function getAC() {
+  if (!_AC) _AC = new (window.AudioContext || window.webkitAudioContext)();
+  return _AC;
+}
 
 function beep(type) {
   const osc = AC.createOscillator();
@@ -217,7 +221,7 @@ function beep(type) {
 let popTimer = null;
 function showPop(correct, sentText) {
   const _play = () => beep(correct ? 'correct' : 'wrong');
-  if (AC.state === 'suspended') { AC.resume().then(_play); } else { _play(); }
+  _play();
   const overlay = document.getElementById('pop-overlay');
   const box     = document.getElementById('pop-box');
   document.getElementById('pop-icon').textContent  = correct ? '🎉' : '❌';
