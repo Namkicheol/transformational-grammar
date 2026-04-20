@@ -101,26 +101,53 @@
 - 각 섹션: 핵심 규칙 → 예문 분석 → 미니퀴즈 순서
 - 임용 출제 포인트(시험 포인트) 명시
 - **누락 섹션 없이** TG 해당 챕터 전 범위 커버
+- 점검 시 TG 원서 챕터 목차와 대조 필수
 
 ### 네비게이션
-- 챕터 하단 네비게이션:  
-  `← 이전 챕터 concepts` | `같은 챕터 exercises →`
-- Ch.2는 티스토리 URL 방식, Ch.3~는 `.html` 내부 링크 방식 (기능상 동일)
+- 챕터 하단: `← 이전 챕터 concepts` | `같은 챕터 exercises →`
+- Ch.2는 티스토리 URL 방식, Ch.3~는 `.html` 내부 링크 방식 (기능상 동일, 수정 불필요)
 
-### OX 퀴즈 필수 기능 (Ch.4~도 동일 적용)
-- **섹션 점프바**: order는 `jumpTo()`, random은 `filterSec()` 방식
-- **정오 팝업**: `showPop(ok, txt)` 함수 — 팝업 HTML + CSS 포함
-- **효과음**: `/home/claude/beep_js.txt` 내용 그대로 복붙
-  ```js
-  // beep_js.txt 표준 패턴
-  const _SND={correct:'data:audio/wav;base64,...', wrong:'data:audio/wav;base64,...'};
-  function beep(type){try{const a=new Audio(_SND[type]);a.volume=0.7;a.play().catch(()=>{});}catch(e){}}
-  ```
+### OX 퀴즈 필수 기능 (Ch.2·3 완료 / Ch.4~도 동일 적용)
+
+| 기능 | order 파일 | random 파일 |
+|------|-----------|-------------|
+| 🔼 **상단 바** | 섹션 점프 버튼 `jumpTo()` — 클릭 시 스크롤 | 섹션 필터 버튼 `filterSec()` — 클릭 시 해당 섹션만 표시 |
+| 💬 **정오 팝업** | `showPop(ok, txt)` — 🎉/❌ + 예문, 1.4초 자동 닫힘 | 동일 |
+| 🔊 **효과음** | base64 WAV `new Audio()` 방식 | 동일 |
+
+> ⚠️ **효과음 필수 규칙 — 반드시 준수**
+> - **Web Audio API (OscillatorNode, AudioContext) 절대 사용 금지** → iOS에서 소리 안 남
+> - 반드시 **base64 WAV + `new Audio()`** 방식만 사용
+> - 표준 코드는 `/home/claude/beep_js.txt` 에 저장 → 새 대화에서도 이 파일 읽어서 복붙
+> - `beep_js.txt` 없으면 아래 패턴으로 재생성:
+
+```python
+# beep_js.txt 재생성 코드
+import struct, math, base64
+
+def make_wav(freqs, dur=0.22, sr=11025, vol=0.3):
+    spt = int(sr * dur / len(freqs))
+    s = []
+    for f in freqs:
+        for i in range(spt):
+            fade = max(0, 1.0 - (i/spt)*1.5)
+            s.append(max(-32767,min(32767,int(vol*fade*math.sin(2*math.pi*f*(i/sr))*32767))))
+    data = struct.pack(f'<{len(s)}h', *s)
+    hdr  = struct.pack('<4sI4s4sIHHIIHH4sI',b'RIFF',36+len(data),b'WAVE',b'fmt ',16,1,1,sr,sr*2,2,16,b'data',len(data))
+    return base64.b64encode(hdr+data).decode()
+
+c64 = make_wav([523,659,784], dur=0.22, vol=0.3)
+w64 = make_wav([220,185],     dur=0.18, vol=0.3)
+js  = f'''const _SND={{correct:'data:audio/wav;base64,{c64}',wrong:'data:audio/wav;base64,{w64}'}};
+function beep(type){{try{{const a=new Audio(_SND[type]);a.volume=0.7;a.play().catch(()=>{{}});}}catch(e){{}}}}'''
+with open('/home/claude/beep_js.txt','w') as f: f.write(js)
+```
 
 ### 점검 원칙 (파일 완성 후 필수)
 - 문항 수·정답 인덱스·섹션 커버리지 자동 점검
-- SVG marker 정의 누락 확인
-- concepts 섹션이 TG 챕터 전 범위 커버하는지 확인
+- SVG marker 정의 누락 확인 (tree 파일)
+- OX 파일: JS 파싱 오류 `node --check` 로 확인
+- OX 파일: `createOscillator` / `AudioContext` 잔재 없는지 확인
 
 ---
 
@@ -131,35 +158,19 @@
 - 업로드 성공 확인: HTTP 200/201 응답 코드
 
 ```python
-# 업로드 기본 패턴
 import requests, base64, json
 
-TOKEN = "← 프로젝트 지침 맨 아래 토큰 참조 (보안상 여기 직접 기재 금지)"
+TOKEN = "← 프로젝트 지침 맨 아래 토큰 참조"
 REPO  = "Namkicheol/transformational-grammar"
-HEADERS = {
-    "Authorization": f"token {TOKEN}",
-    "Content-Type": "application/json"
-}
+HEADERS = {"Authorization": f"token {TOKEN}", "Content-Type": "application/json"}
 
 def upload_file(filename, html_content, commit_msg):
-    r = requests.get(
-        f"https://api.github.com/repos/{REPO}/contents/{filename}",
-        headers=HEADERS
-    )
+    r = requests.get(f"https://api.github.com/repos/{REPO}/contents/{filename}", headers=HEADERS)
     sha = r.json().get("sha", "")
-
-    payload = {
-        "message": commit_msg,
-        "content": base64.b64encode(html_content.encode()).decode(),
-    }
-    if sha:
-        payload["sha"] = sha
-
-    res = requests.put(
-        f"https://api.github.com/repos/{REPO}/contents/{filename}",
-        headers=HEADERS,
-        data=json.dumps(payload)
-    )
+    payload = {"message": commit_msg, "content": base64.b64encode(html_content.encode()).decode()}
+    if sha: payload["sha"] = sha
+    res = requests.put(f"https://api.github.com/repos/{REPO}/contents/{filename}",
+                       headers=HEADERS, data=json.dumps(payload))
     return res.status_code  # 200 or 201
 ```
 
@@ -170,32 +181,16 @@ def upload_file(filename, html_content, commit_msg):
 | 챕터 | 파일 | 상태 | 비고 |
 |------|------|------|------|
 | Ch.2 | `ch2_concepts.html` | ✅ 완료 | §2.3~2.4 Ambiguity 섹션 추가됨 |
-| Ch.2 | `ch2_exercises.html` | ✅ 완료 | MC 15 · OX 1 · FI 1 (21문항) |
-| Ch.2 | `Ch2_ox_order.html` | ✅ 완료 | 43문항 (정문23·비문20) |
-| Ch.2 | `Ch2_ox_random.html` | ✅ 완료 | 43문항 랜덤 |
+| Ch.2 | `ch2_exercises.html` | ✅ 완료 | MC 15·OX 1·FI 1 (21문항) |
+| Ch.2 | `Ch2_ox_order.html` | ✅ 완료 | 43문항·점프바·팝업·효과음 |
+| Ch.2 | `Ch2_ox_random.html` | ✅ 완료 | 43문항·필터바·팝업·효과음 |
 | Ch.2 | `Ch2_tree.html` | ✅ 완료 | SVG 6개 |
-| Ch.3 | `ch3_concepts.html` | ✅ 완료 | §3.4 No Crossing·§3.6 Particle 섹션 추가됨 |
+| Ch.3 | `ch3_concepts.html` | ✅ 완료 | §3.4 No Crossing·§3.6 Particle 추가됨 |
 | Ch.3 | `ch3_exercises.html` | ✅ 완료 | 24문항 |
-| Ch.3 | `Ch3_ox_order.html` | ✅ 완료 | 30문항 (정문17·비문13) |
-| Ch.3 | `Ch3_ox_random.html` | ✅ 완료 | 30문항 랜덤 |
-| Ch.3 | `Ch3_tree.html` | ✅ 완료 | SVG 5개 · marker 수정 완료 |
+| Ch.3 | `Ch3_ox_order.html` | ✅ 완료 | 30문항·점프바·팝업·효과음 |
+| Ch.3 | `Ch3_ox_random.html` | ✅ 완료 | 30문항·필터바·팝업·효과음 |
+| Ch.3 | `Ch3_tree.html` | ✅ 완료 | SVG 5개·marker 수정 완료 |
 | Ch.4~ | — | ⏳ 미시작 | |
-
----
-
-## OX 퀴즈 공통 기능 (Ch.2·3 적용 완료)
-
-| 기능 | 설명 |
-|------|------|
-| 🔼 **섹션 점프바** | 상단 sticky 바 — order: 클릭 시 해당 섹션으로 스크롤 / random: 섹션 필터 |
-| 💬 **정오 팝업** | 답 클릭 시 🎉/❌ 팝업 + 예문 표시, 1.4초 자동 닫힘 |
-| 🔊 **효과음** | 정답 도·미·솔↑ / 오답 버즈 — base64 WAV `new Audio()` 방식 (iOS 무음모드 대응) |
-
-> ⚠️ **효과음 주의사항**:
-> - Web Audio API(OscillatorNode) 사용 금지 → iOS에서 작동 안 함
-> - 반드시 **base64 WAV + `new Audio()`** 방식 사용
-> - `/home/claude/beep_js.txt` 에 표준 beep 코드 저장됨 (Ch.4~에 재사용)
-> - beep 코드는 `_SND` 객체 + `function beep(type)` 단 2개로 구성
 
 ---
 
@@ -227,7 +222,7 @@ Radford 텍스트: TG.md (프로젝트 지식)
 ## 주의사항
 
 - `raw.githubusercontent.com` URL은 캐시 딜레이 있음 → API로 직접 SHA 확인
-- 블로그 삽입 방식은 **iframe** → GitHub 파일 수정하면 블로그 자동 반영 (재업로드 불필요)
+- 블로그 삽입 방식은 **iframe** → GitHub 파일 수정하면 블로그 자동 반영
 - 새 대화에서도 이 claude.md + 프로젝트 지식 파일로 컨텍스트 자동 복원됨
-- **네비게이션**: Ch.2는 티스토리 URL, Ch.3~는 .html 내부 링크 — 기능상 동일하므로 수정 불필요
-- **concepts 누락 섹션**: 점검 시 TG 원서 챕터 목차와 대조 필수
+- **iOS 효과음**: `beep_js.txt` 없으면 위 재생성 코드로 만들고 시작
+- **OX JS 오류**: 여러 번 수정 시 beep 함수 잔재 코드 쌓임 → `node --check` 필수
