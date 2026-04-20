@@ -388,6 +388,125 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
 <div class="wrap">
 
 <!-- ════════════════════════════════════
+     0. Ambiguity
+════════════════════════════════════ -->
+<div class="sec-header">
+  <div class="sec-num">0</div>
+  <div>
+    <div class="sec-title">Ambiguity — 중의성</div>
+    <div class="sec-sub">§2.3–2.4 Lexical vs Structural — 임용 단골 개념</div>
+  </div>
+</div>
+
+<p class="body-text">
+  문장이나 표현이 <strong>두 가지 이상의 해석</strong>을 허용할 때, 이를 <em>ambiguous(중의적)</em>이라 한다.
+  중의성에는 크게 두 종류가 있다.
+</p>
+
+<div class="concept-box">
+  <div class="concept-box-title">① Lexical Ambiguity (어휘적 중의성)</div>
+  <p>특정 <strong>단어(lexical item)</strong>가 두 가지 이상의 의미를 가져서 생기는 중의성.</p>
+  <table class="mini-table">
+    <tr><td class="mono">The word <em>ball</em> is ambiguous.</td>
+        <td>→ 'round object' vs. 'dance' — 단어 자체의 의미 차이</td></tr>
+    <tr><td class="mono">Mistrust wounds.</td>
+        <td>→ [Noun + Verb] vs. [Verb + Noun] — 범주 차이에 따른 구조적 중의성과도 중첩</td></tr>
+  </table>
+</div>
+
+<div class="concept-box" style="margin-top:14px">
+  <div class="concept-box-title">② Structural Ambiguity (구조적 중의성)</div>
+  <p>단어의 의미는 같지만, <strong>통사 구조(수형도)가 달라서</strong> 생기는 중의성. 두 종류가 있다.</p>
+
+  <p style="font-weight:600;margin:10px 0 4px">ⓐ Scope Ambiguity (작용역 중의성)</p>
+  <p>부정어·조동사·부사 등이 <strong>어느 범위(scope)까지 적용되느냐</strong>에 따라 해석이 달라진다.</p>
+  <table class="mini-table">
+    <tr>
+      <td class="mono">(42) The President could not ratify the treaty.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="padding-left:16px;font-size:13px;color:#555">해석 (i)</td>
+      <td style="font-size:13px">It would <em>not be possible</em> for the President to ratify the treaty.<br>→ <strong>not</strong>이 Modal <em>could</em>의 scope</td>
+    </tr>
+    <tr>
+      <td style="padding-left:16px;font-size:13px;color:#555">해석 (ii)</td>
+      <td style="font-size:13px">It would be possible for the President <em>not to ratify</em> the treaty.<br>→ <strong>not</strong>이 VP <em>ratify the treaty</em>의 scope</td>
+    </tr>
+  </table>
+
+  <p style="font-weight:600;margin:14px 0 4px">ⓑ Attachment Ambiguity (부착 중의성)</p>
+  <p>특정 구(PP·AP 등)가 <strong>어느 노드에 부착(attach)되느냐</strong>에 따라 해석이 달라진다.</p>
+  <table class="mini-table">
+    <tr>
+      <td class="mono">Mary might seem very keen on the boat.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="padding-left:16px;font-size:13px;color:#555">해석 (i)</td>
+      <td style="font-size:13px">[keen on the boat] → <em>on the boat</em>가 AP 내부 complement<br>→ "Mary가 그 보트에 대해 열심인 것처럼 보인다"</td>
+    </tr>
+    <tr>
+      <td style="padding-left:16px;font-size:13px;color:#555">해석 (ii)</td>
+      <td style="font-size:13px"><em>on the boat</em>가 seem의 PP Adjunct<br>→ "Mary가 보트 위에서 열심인 것처럼 보인다"</td>
+    </tr>
+    <tr><td colspan="2" style="padding-top:8px"></td></tr>
+    <tr>
+      <td class="mono">The police will shoot terrorists with rifles.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="padding-left:16px;font-size:13px;color:#555">해석 (i)</td>
+      <td style="font-size:13px"><em>with rifles</em>가 VP에 부착 → "총으로 테러리스트를 쏜다"</td>
+    </tr>
+    <tr>
+      <td style="padding-left:16px;font-size:13px;color:#555">해석 (ii)</td>
+      <td style="font-size:13px"><em>with rifles</em>가 NP [terrorists]에 부착 → "총을 가진 테러리스트를 쏜다"</td>
+    </tr>
+  </table>
+  <div class="tip-box" style="margin-top:12px">
+    💡 <strong>시험 포인트</strong>: Structural Ambiguity는 반드시 <em>수형도 두 개</em>로 설명해야 한다. 의미만 쓰면 감점.
+  </div>
+</div>
+
+<div class="quiz-wrap">
+  <div class="quiz-title">✏️ 미니 퀴즈</div>
+
+  <div class="quiz-item">
+    <div class="quiz-q"><em>The President could not ratify the treaty.</em>의 중의성 유형은?</div>
+    <div class="quiz-opts">
+      <button onclick="qz(this,false)" class="quiz-btn">① Lexical Ambiguity</button>
+      <button onclick="qz(this,true)"  class="quiz-btn">② Structural Ambiguity — Scope</button>
+      <button onclick="qz(this,false)" class="quiz-btn">③ Structural Ambiguity — Attachment</button>
+      <button onclick="qz(this,false)" class="quiz-btn">④ 중의성 없음</button>
+    </div>
+    <div class="quiz-fb">② 정답. <em>not</em>의 scope가 Modal(could)인지 VP(ratify)인지에 따라 해석이 달라지는 Scope Ambiguity.</div>
+  </div>
+
+  <div class="quiz-item">
+    <div class="quiz-q"><em>The police will shoot terrorists with rifles.</em>의 중의성 유형은?</div>
+    <div class="quiz-opts">
+      <button onclick="qz(this,false)" class="quiz-btn">① Lexical Ambiguity</button>
+      <button onclick="qz(this,false)" class="quiz-btn">② Structural Ambiguity — Scope</button>
+      <button onclick="qz(this,true)"  class="quiz-btn">③ Structural Ambiguity — Attachment</button>
+      <button onclick="qz(this,false)" class="quiz-btn">④ 중의성 없음</button>
+    </div>
+    <div class="quiz-fb">③ 정답. PP <em>with rifles</em>가 VP에 붙느냐 NP [terrorists]에 붙느냐에 따른 Attachment Ambiguity.</div>
+  </div>
+
+  <div class="quiz-item">
+    <div class="quiz-q">Lexical Ambiguity와 Structural Ambiguity의 핵심 차이는?</div>
+    <div class="quiz-opts">
+      <button onclick="qz(this,false)" class="quiz-btn">① Lexical은 의미가 두 개, Structural은 단어가 두 개</button>
+      <button onclick="qz(this,true)"  class="quiz-btn">② Lexical은 단어 의미 차이, Structural은 통사 구조(수형도) 차이</button>
+      <button onclick="qz(this,false)" class="quiz-btn">③ Lexical은 문어체, Structural은 구어체에서만 발생</button>
+      <button onclick="qz(this,false)" class="quiz-btn">④ 차이 없음 — 동의어</button>
+    </div>
+    <div class="quiz-fb">② 정답. Lexical Ambiguity는 특정 단어 자체가 다의어이기 때문이고, Structural Ambiguity는 동일한 단어 배열이 두 가지 다른 수형도로 분석될 수 있기 때문이다.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
      1. Constituent Structure
 ════════════════════════════════════ -->
 <div class="sec-header">
