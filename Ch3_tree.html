@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.3 Phrase-markers — Tree Diagram 연습 | TG Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pri:#2d2d6b;--pri-l:#f0f0fa;--acc:#e8533a;
+  --grn:#1a6e42;--grn-bg:#eaf6f0;
+  --bdr:#e4e4f0;--gray:#f7f7f9;
+  --txt:#1a1a2e;--mut:#777;
+  --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
+
+.hero{background:#1e1e4a;color:#fff;padding:44px 24px 36px;text-align:center}
+.hero-tag{font-size:11px;letter-spacing:3px;color:rgba(255,255,255,.45);margin-bottom:12px;font-family:var(--mono);text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:24px;margin-bottom:10px;line-height:1.35}
+.hero h1 span{color:#ffd166}
+.hero p{font-size:13px;color:rgba(255,255,255,.55);max-width:480px;margin:0 auto}
+
+.wrap{max-width:740px;margin:0 auto;padding:36px 20px 60px}
+
+.qcard{background:#fff;border:1.5px solid var(--bdr);border-radius:14px;
+  padding:24px 26px;margin-bottom:28px;transition:border-color .2s}
+.qcard.revealed{border-color:#6dbf9a}
+
+.qmeta{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.qnum{font-family:var(--mono);font-size:12px;color:var(--mut)}
+.qtag{font-size:11px;padding:3px 10px;border-radius:10px;background:var(--pri-l);color:var(--pri);font-family:var(--mono)}
+
+.q-instruction{font-size:13px;color:var(--mut);margin-bottom:8px}
+.q-sentence{font-family:var(--mono);font-size:15px;color:var(--pri);
+  background:var(--gray);border-left:4px solid var(--pri);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px;font-weight:600}
+
+.hint-box{display:none;background:#fffbe0;border:1px solid #f0d060;border-radius:8px;
+  padding:10px 14px;margin-bottom:16px;font-size:13px;color:#7a6000}
+.hint-btn{width:100%;padding:9px;background:#fffbe0;color:#7a6000;
+  border:1px solid #f0d060;border-radius:8px;font-size:13px;cursor:pointer;
+  font-family:var(--sans);margin-bottom:12px;transition:all .15s;text-align:left}
+.hint-btn:hover{background:#fff8cc}
+.hint-box strong{color:#5a4000}
+
+.reveal-btn{width:100%;padding:12px;background:var(--pri);color:#fff;
+  border:none;border-radius:10px;font-size:14px;cursor:pointer;
+  font-family:var(--sans);font-weight:500;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:opacity .2s}
+.reveal-btn:hover{opacity:.88}
+.reveal-btn.open{background:var(--grn)}
+
+.answer{display:none;margin-top:18px}
+.answer.show{display:block}
+.answer-title{font-size:12px;font-family:var(--mono);letter-spacing:2px;
+  color:var(--grn);text-transform:uppercase;margin-bottom:12px}
+
+svg text{font-family:'Noto Serif KR',Georgia,serif}
+.tree-svg{display:block;margin:0 auto;width:100%;max-width:580px}
+
+.analysis{margin-top:16px;background:var(--grn-bg);border:1px solid #90d0b0;
+  border-radius:10px;padding:14px 18px}
+.analysis-title{font-size:12px;font-weight:700;color:var(--grn);
+  margin-bottom:8px;font-family:var(--mono);letter-spacing:1px}
+.analysis ul{padding-left:16px;font-size:13.5px;color:#145535;line-height:1.9}
+.analysis li{margin-bottom:3px}
+.analysis .key{font-family:var(--mono);font-size:12px;
+  background:rgba(26,110,66,.12);padding:1px 7px;border-radius:4px}
+
+.nav-row{display:flex;justify-content:space-between;align-items:center;
+  margin-top:48px;padding-top:24px;border-top:1px solid var(--bdr);flex-wrap:wrap;gap:12px}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;
+  border:1.5px solid var(--bdr);border-radius:8px;text-decoration:none;
+  color:var(--pri);font-size:13px;font-weight:500;transition:all .2s;background:#fff}
+.nav-btn:hover{border-color:var(--pri);background:var(--pri-l)}
+.nav-btn .arr{font-size:16px}
+.nav-center{font-family:var(--mono);font-size:11px;color:var(--mut)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Transformational Grammar · Ch.3</div>
+  <h1>Phrase-markers<br><span>Tree Diagram</span> 연습</h1>
+  <p>C-command · Anaphors · NPI 'ever' · No Crossing Branches<br>수형도를 직접 그려본 뒤 정답과 비교해보세요</p>
+</div>
+
+<div class="wrap">
+
+<!-- ===== Q1: c-command 기본 개념 트리 ===== -->
+<div class="qcard" id="q1">
+  <div class="qmeta">
+    <span class="qnum">Tree 01</span>
+    <span class="qtag">3.3 c-command</span>
+  </div>
+  <div class="q-instruction">다음 문장의 수형도를 그리고, <strong>themselves</strong>의 antecedent가 될 수 있는 NP를 c-command 관계로 설명하시오.</div>
+  <div class="q-sentence">The soldiers might disgrace themselves.</div>
+
+  <button class="hint-btn" onclick="toggleHint('h1',this)">💡 힌트 보기</button>
+  <div class="hint-box" id="h1">
+    <strong>힌트:</strong> S → NP M VP 구조. NP = [the soldiers], M = might, VP → V NP. <em>themselves</em>는 VP 내 NP 자리. c-command 정의: X의 첫 번째 branching node가 Y를 dominate하면 X c-commands Y.
+  </div>
+
+  <button class="reveal-btn" id="rb1" onclick="reveal(1)">🌳 수형도 보기</button>
+
+  <div class="answer" id="ans1">
+    <div class="answer-title">▸ 정답 수형도</div>
+    <!-- S → NP M VP -->
+    <svg class="tree-svg" viewBox="0 0 560 320">
+      <!-- S -->
+      <text x="280" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#2d2d6b">S</text>
+      <line x1="280" y1="34" x2="110" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="280" y1="34" x2="270" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="280" y1="34" x2="420" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <!-- NP  M  VP -->
+      <text x="110" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d2d6b">NP</text>
+      <text x="270" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d2d6b">M</text>
+      <text x="420" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d2d6b">VP</text>
+      <!-- NP → D N' → N → the soldiers -->
+      <line x1="110" y1="100" x2="70" y2="130" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="110" y1="100" x2="140" y2="130" stroke="#aaa" stroke-width="1.5"/>
+      <text x="70" y="147" text-anchor="middle" font-size="13" fill="#555">D</text>
+      <text x="140" y="147" text-anchor="middle" font-size="13" fill="#555">N</text>
+      <line x1="70" y1="152" x2="70" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="140" y1="152" x2="140" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="70" y="190" text-anchor="middle" font-size="12" fill="#1a1a2e">The</text>
+      <text x="140" y="190" text-anchor="middle" font-size="12" fill="#1a1a2e">soldiers</text>
+      <!-- M → might -->
+      <line x1="270" y1="100" x2="270" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="270" y="190" text-anchor="middle" font-size="12" fill="#1a1a2e">might</text>
+      <!-- VP → V NP -->
+      <line x1="420" y1="100" x2="370" y2="130" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="420" y1="100" x2="480" y2="130" stroke="#aaa" stroke-width="1.5"/>
+      <text x="370" y="147" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">V</text>
+      <text x="480" y="147" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">NP</text>
+      <!-- V → disgrace -->
+      <line x1="370" y1="152" x2="370" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="370" y="190" text-anchor="middle" font-size="12" fill="#1a1a2e">disgrace</text>
+      <!-- NP → themselves (anaphor, 빨간색) -->
+      <line x1="480" y1="152" x2="480" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="480" y="190" text-anchor="middle" font-size="12" fill="#c0392b" font-weight="bold">themselves</text>
+
+      <!-- c-command 화살표: NP(the soldiers) → themselves -->
+      <path d="M 110 98 Q 110 260 465 195" stroke="#e8533a" stroke-width="1.8" fill="none" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#e8533a"/>
+        </marker>
+      </defs>
+      <text x="180" y="270" text-anchor="middle" font-size="11" fill="#e8533a">c-commands</text>
+    </svg>
+
+    <div class="analysis">
+      <div class="analysis-title">📝 구조 분석</div>
+      <ul>
+        <li><span class="key">NP [the soldiers]</span>의 첫 번째 branching node = <span class="key">S</span></li>
+        <li><span class="key">S</span>는 <span class="key">themselves</span>를 dominate → c-command 성립 ✓</li>
+        <li><span class="key">themselves</span>는 anaphor → c-commanding antecedent [the soldiers] 필요</li>
+        <li>복수 선행사이므로 appropriateness 조건도 충족 → <strong>정문</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Q2: 비문 — soldiers' behaviour ===== -->
+<div class="qcard" id="q2">
+  <div class="qmeta">
+    <span class="qnum">Tree 02</span>
+    <span class="qtag">3.3 c-command</span>
+  </div>
+  <div class="q-instruction">다음 비문의 수형도를 그리고, <strong>why it is ungrammatical</strong>을 c-command로 설명하시오.</div>
+  <div class="q-sentence">*The soldiers' behaviour might disgrace themselves.</div>
+
+  <button class="hint-btn" onclick="toggleHint('h2',this)">💡 힌트 보기</button>
+  <div class="hint-box" id="h2">
+    <strong>힌트:</strong> Subject NP의 구조에 주목. [the soldiers']는 NP [the soldiers' behaviour] 내부 — NP 안에 갇혀 있어서 밖으로 c-command 불가.
+  </div>
+
+  <button class="reveal-btn" id="rb2" onclick="reveal(2)">🌳 수형도 보기</button>
+
+  <div class="answer" id="ans2">
+    <div class="answer-title">▸ 정답 수형도</div>
+    <svg class="tree-svg" viewBox="0 0 600 360">
+      <!-- S -->
+      <text x="300" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#2d2d6b">S</text>
+      <line x1="300" y1="34" x2="140" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="300" y1="34" x2="300" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="300" y1="34" x2="460" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <!-- NP  M  VP -->
+      <text x="140" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d2d6b">NP</text>
+      <text x="300" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d2d6b">M</text>
+      <text x="460" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d2d6b">VP</text>
+      <!-- NP → NP N' -->
+      <line x1="140" y1="100" x2="80" y2="134" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="140" y1="100" x2="185" y2="134" stroke="#aaa" stroke-width="1.5"/>
+      <!-- inner NP (possessive) -->
+      <text x="80" y="150" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">NP</text>
+      <text x="185" y="150" text-anchor="middle" font-size="13" fill="#555">N</text>
+      <!-- NP → D N -->
+      <line x1="80" y1="155" x2="50" y2="183" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="80" y1="155" x2="100" y2="183" stroke="#aaa" stroke-width="1.5"/>
+      <text x="50" y="198" text-anchor="middle" font-size="12" fill="#555">D</text>
+      <text x="100" y="198" text-anchor="middle" font-size="12" fill="#555">N</text>
+      <line x1="50" y1="203" x2="50" y2="225" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="100" y1="203" x2="100" y2="225" stroke="#aaa" stroke-width="1.5"/>
+      <text x="50" y="240" text-anchor="middle" font-size="11" fill="#1a1a2e">The</text>
+      <text x="100" y="240" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="bold">soldiers'</text>
+      <!-- N → behaviour -->
+      <line x1="185" y1="155" x2="185" y2="225" stroke="#aaa" stroke-width="1.5"/>
+      <text x="185" y="240" text-anchor="middle" font-size="11" fill="#1a1a2e">behaviour</text>
+      <!-- M → might -->
+      <line x1="300" y1="100" x2="300" y2="183" stroke="#aaa" stroke-width="1.5"/>
+      <text x="300" y="198" text-anchor="middle" font-size="12" fill="#1a1a2e">might</text>
+      <!-- VP → V NP -->
+      <line x1="460" y1="100" x2="420" y2="134" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="460" y1="100" x2="510" y2="134" stroke="#aaa" stroke-width="1.5"/>
+      <text x="420" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">V</text>
+      <text x="510" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">NP</text>
+      <line x1="420" y1="155" x2="420" y2="183" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="510" y1="155" x2="510" y2="183" stroke="#aaa" stroke-width="1.5"/>
+      <text x="420" y="198" text-anchor="middle" font-size="11" fill="#1a1a2e">disgrace</text>
+      <text x="510" y="198" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="bold">themselves</text>
+
+      <!-- X 표시: soldiers' c-command 불가 -->
+      <text x="300" y="295" text-anchor="middle" font-size="12" fill="#c0392b">
+        ✗ [the soldiers'] is trapped inside NP — cannot c-command [themselves]
+      </text>
+      <!-- 박스: inner NP 강조 -->
+      <rect x="30" y="120" width="180" height="130" rx="6" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="32" y="118" font-size="10" fill="#c0392b">내부 NP (갇힘)</text>
+    </svg>
+
+    <div class="analysis">
+      <div class="analysis-title">📝 비문 이유</div>
+      <ul>
+        <li><span class="key">[the soldiers']</span>의 첫 번째 branching node = <span class="key">NP [the soldiers' behaviour]</span></li>
+        <li>그 NP는 <span class="key">themselves</span>를 dominate하지 않음 → c-command ✗</li>
+        <li>NP [the soldiers' behaviour]는 c-command 조건을 만족하지만, <em>단수 개체</em>이므로 appropriateness 조건 위반</li>
+        <li>→ 적절한 antecedent 없음 → <strong>비문</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Q3: NPI 'ever' — No Frenchman ===== -->
+<div class="qcard" id="q3">
+  <div class="qmeta">
+    <span class="qnum">Tree 03</span>
+    <span class="qtag">NPI 'ever'</span>
+  </div>
+  <div class="q-instruction">다음 문장의 수형도를 그리고, <strong>ever</strong>가 정문인 이유를 c-command로 설명하시오.</div>
+  <div class="q-sentence">No Frenchman would ever help an Englishman.</div>
+
+  <button class="hint-btn" onclick="toggleHint('h3',this)">💡 힌트 보기</button>
+  <div class="hint-box" id="h3">
+    <strong>힌트:</strong> NPI 규칙 — <em>ever</em>는 S의 immediate constituent(ADVP)로 붙는다. 부정어 NP [No Frenchman]이 S의 Subject로서 <em>ever</em>를 c-command해야 한다.
+  </div>
+
+  <button class="reveal-btn" id="rb3" onclick="reveal(3)">🌳 수형도 보기</button>
+
+  <div class="answer" id="ans3">
+    <div class="answer-title">▸ 정답 수형도</div>
+    <svg class="tree-svg" viewBox="0 0 580 360">
+      <!-- S -->
+      <text x="290" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#2d2d6b">S</text>
+      <line x1="290" y1="34" x2="100" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="290" y1="34" x2="270" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="290" y1="34" x2="360" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="290" y1="34" x2="500" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <!-- NP  M  VP  ADVP -->
+      <text x="100" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#c0392b">NP</text>
+      <text x="270" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">M</text>
+      <text x="360" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">VP</text>
+      <text x="500" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a6e42">ADVP</text>
+      <!-- NP → D N -->
+      <line x1="100" y1="100" x2="60" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="100" y1="100" x2="135" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <text x="60" y="149" text-anchor="middle" font-size="13" fill="#c0392b" font-weight="bold">D</text>
+      <text x="135" y="149" text-anchor="middle" font-size="13" fill="#555">N</text>
+      <line x1="60" y1="154" x2="60" y2="178" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="135" y1="154" x2="135" y2="178" stroke="#aaa" stroke-width="1.5"/>
+      <text x="60" y="193" text-anchor="middle" font-size="12" fill="#c0392b" font-weight="bold">No</text>
+      <text x="135" y="193" text-anchor="middle" font-size="12" fill="#1a1a2e">Frenchman</text>
+      <!-- M → would -->
+      <line x1="270" y1="100" x2="270" y2="178" stroke="#aaa" stroke-width="1.5"/>
+      <text x="270" y="193" text-anchor="middle" font-size="12" fill="#1a1a2e">would</text>
+      <!-- VP → V NP -->
+      <line x1="360" y1="100" x2="330" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="360" y1="100" x2="410" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <text x="330" y="149" text-anchor="middle" font-size="13" font-weight="bold" fill="#2d2d6b">V</text>
+      <text x="410" y="149" text-anchor="middle" font-size="13" font-weight="bold" fill="#2d2d6b">NP</text>
+      <line x1="330" y1="154" x2="330" y2="178" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="410" y1="154" x2="380" y2="178" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="410" y1="154" x2="440" y2="178" stroke="#aaa" stroke-width="1.5"/>
+      <text x="330" y="193" text-anchor="middle" font-size="12" fill="#1a1a2e">help</text>
+      <text x="380" y="193" text-anchor="middle" font-size="12" fill="#555">D</text>
+      <text x="440" y="193" text-anchor="middle" font-size="12" fill="#555">N</text>
+      <line x1="380" y1="198" x2="380" y2="218" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="440" y1="198" x2="440" y2="218" stroke="#aaa" stroke-width="1.5"/>
+      <text x="380" y="233" text-anchor="middle" font-size="11" fill="#1a1a2e">an</text>
+      <text x="440" y="233" text-anchor="middle" font-size="11" fill="#1a1a2e">Englishman</text>
+      <!-- ADVP → ever -->
+      <line x1="500" y1="100" x2="500" y2="178" stroke="#aaa" stroke-width="1.5"/>
+      <text x="500" y="193" text-anchor="middle" font-size="13" fill="#1a6e42" font-weight="bold">ever</text>
+
+      <!-- c-command 화살표: NP → ADVP(ever) -->
+      <defs>
+        <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#e8533a"/>
+        </marker>
+      </defs>
+      <path d="M 100 93 Q 100 280 488 198" stroke="#e8533a" stroke-width="1.8" fill="none" stroke-dasharray="6,3" marker-end="url(#arr2)"/>
+      <text x="260" y="300" text-anchor="middle" font-size="11" fill="#e8533a">c-commands (precede ✓ · c-command ✓)</text>
+    </svg>
+
+    <div class="analysis">
+      <div class="analysis-title">📝 구조 분석</div>
+      <ul>
+        <li><span class="key">ever</span>는 ADVP로 S의 immediate constituent — NPI 위치 조건 충족 ✓</li>
+        <li>NP [No Frenchman]의 첫 번째 branching node = <span class="key">S</span></li>
+        <li>S가 ADVP [ever]를 dominate → c-command 성립 ✓</li>
+        <li>NP [No Frenchman]이 <em>ever</em>보다 앞에 위치 → precede 조건 ✓</li>
+        <li>→ 두 조건 모두 충족 → <strong>정문</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Q4: No Crossing Branches ===== -->
+<div class="qcard" id="q4">
+  <div class="qmeta">
+    <span class="qnum">Tree 04</span>
+    <span class="qtag">3.4 No Crossing Branches</span>
+  </div>
+  <div class="q-instruction">다음 비문의 수형도를 그리고, <strong>No Crossing Branches Constraint</strong> 위반을 설명하시오.</div>
+  <div class="q-sentence">*Drunks would put completely off the customers.</div>
+
+  <button class="hint-btn" onclick="toggleHint('h4',this)">💡 힌트 보기</button>
+  <div class="hint-box" id="h4">
+    <strong>힌트:</strong> <em>completely</em>는 VP-adverb → VP의 immediate constituent여야 한다. 그러나 <em>put off</em>가 Phrasal Verb를 이루므로 <em>off</em>와 <em>the customers</em>가 함께 붙어야 하는데, 중간에 <em>completely</em>가 끼어들면 가지가 교차한다.
+  </div>
+
+  <button class="reveal-btn" id="rb4" onclick="reveal(4)">🌳 수형도 보기</button>
+
+  <div class="answer" id="ans4">
+    <div class="answer-title">▸ 비문 구조 (Crossing Branches 발생)</div>
+    <svg class="tree-svg" viewBox="0 0 580 380">
+      <!-- S -->
+      <text x="290" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#2d2d6b">S</text>
+      <line x1="290" y1="34" x2="100" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="290" y1="34" x2="270" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="290" y1="34" x2="400" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <!-- NP  M  VP -->
+      <text x="100" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">NP</text>
+      <text x="270" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">M</text>
+      <text x="400" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d2d6b">VP</text>
+      <!-- NP → Drunks -->
+      <line x1="100" y1="100" x2="100" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="100" y="190" text-anchor="middle" font-size="12" fill="#1a1a2e">Drunks</text>
+      <!-- M → would -->
+      <line x1="270" y1="100" x2="270" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="270" y="190" text-anchor="middle" font-size="12" fill="#1a1a2e">would</text>
+      <!-- VP → V ADVP PP NP (문제 구조) -->
+      <line x1="400" y1="100" x2="320" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="400" y1="100" x2="400" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="400" y1="100" x2="480" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <text x="320" y="149" text-anchor="middle" font-size="13" font-weight="bold" fill="#2d2d6b">V</text>
+      <text x="400" y="149" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">ADVP</text>
+      <text x="480" y="149" text-anchor="middle" font-size="13" font-weight="bold" fill="#2d2d6b">PP</text>
+      <!-- V → put -->
+      <line x1="320" y1="154" x2="320" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="320" y="190" text-anchor="middle" font-size="12" fill="#1a1a2e">put</text>
+      <!-- ADVP → completely -->
+      <line x1="400" y1="154" x2="400" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="400" y="190" text-anchor="middle" font-size="12" fill="#c0392b" font-weight="bold">completely</text>
+      <!-- PP → P NP -->
+      <line x1="480" y1="154" x2="455" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="480" y1="154" x2="520" y2="175" stroke="#aaa" stroke-width="1.5"/>
+      <text x="455" y="190" text-anchor="middle" font-size="12" fill="#555">P</text>
+      <text x="520" y="190" text-anchor="middle" font-size="12" font-weight="bold" fill="#2d2d6b">NP</text>
+      <line x1="455" y1="195" x2="455" y2="215" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="520" y1="195" x2="520" y2="215" stroke="#aaa" stroke-width="1.5"/>
+      <text x="455" y="230" text-anchor="middle" font-size="11" fill="#1a1a2e">off</text>
+      <text x="520" y="230" text-anchor="middle" font-size="11" fill="#1a1a2e">the customers</text>
+
+      <!-- Crossing branches 표시 -->
+      <line x1="320" y1="154" x2="455" y2="148" stroke="#c0392b" stroke-width="2" stroke-dasharray="4,2"/>
+      <text x="390" y="143" text-anchor="middle" font-size="10" fill="#c0392b">교차! ✗</text>
+      <text x="290" y="275" text-anchor="middle" font-size="12" fill="#c0392b">
+        V(put)의 자손 off가 ADVP(completely)보다 뒤에 위치 → Crossing Branches
+      </text>
+    </svg>
+
+    <div class="analysis">
+      <div class="analysis-title">📝 위반 설명</div>
+      <ul>
+        <li>No Crossing Branches: 노드 A가 B보다 앞서면, A의 모든 자손도 B의 모든 자손보다 앞서야 한다</li>
+        <li><span class="key">V [put]</span>이 <span class="key">ADVP [completely]</span>보다 앞서 있지만, V의 자손 <span class="key">P [off]</span>는 뒤에 위치 → 위반 ✗</li>
+        <li>정문은 <em>Drunks would put the customers off completely.</em> — <em>off</em>를 VP 끝으로 이동시켜 교차 해소</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Q5: c-command 정의 트리 ===== -->
+<div class="qcard" id="q5">
+  <div class="qmeta">
+    <span class="qnum">Tree 05</span>
+    <span class="qtag">3.3 c-command 정의</span>
+  </div>
+  <div class="q-instruction">TG (9), (10)의 추상 트리를 참고하여, 각 노드가 c-command하는 노드를 나열하시오.</div>
+  <div class="q-sentence">[Abstract tree] A → B C; B → D E; C → F; F → G H</div>
+
+  <button class="hint-btn" onclick="toggleHint('h5',this)">💡 힌트 보기</button>
+  <div class="hint-box" id="h5">
+    <strong>힌트:</strong> c-command 정의: X c-commands Y iff (1) X의 첫 번째 branching node가 Y를 dominate, (2) X ≠ Y, (3) X가 Y를 dominate하지 않고 Y가 X를 dominate하지 않음.
+  </div>
+
+  <button class="reveal-btn" id="rb5" onclick="reveal(5)">🌳 수형도 보기</button>
+
+  <div class="answer" id="ans5">
+    <div class="answer-title">▸ 추상 트리 & c-command 관계</div>
+    <svg class="tree-svg" viewBox="0 0 520 300">
+      <!-- A (root) -->
+      <text x="260" y="28" text-anchor="middle" font-size="17" font-weight="bold" fill="#2d2d6b">A</text>
+      <line x1="260" y1="34" x2="120" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="260" y1="34" x2="390" y2="78" stroke="#aaa" stroke-width="1.5"/>
+      <!-- B  C -->
+      <text x="120" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d2d6b">B</text>
+      <text x="390" y="95" text-anchor="middle" font-size="15" font-weight="bold" fill="#2d2d6b">C</text>
+      <!-- B → D E -->
+      <line x1="120" y1="100" x2="70" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="120" y1="100" x2="165" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <text x="70" y="149" text-anchor="middle" font-size="14" fill="#555">D</text>
+      <text x="165" y="149" text-anchor="middle" font-size="14" fill="#555">E</text>
+      <!-- C → F -->
+      <line x1="390" y1="100" x2="390" y2="133" stroke="#aaa" stroke-width="1.5"/>
+      <text x="390" y="149" text-anchor="middle" font-size="14" fill="#2d2d6b" font-weight="bold">F</text>
+      <!-- F → G H -->
+      <line x1="390" y1="154" x2="350" y2="183" stroke="#aaa" stroke-width="1.5"/>
+      <line x1="390" y1="154" x2="430" y2="183" stroke="#aaa" stroke-width="1.5"/>
+      <text x="350" y="198" text-anchor="middle" font-size="14" fill="#555">G</text>
+      <text x="430" y="198" text-anchor="middle" font-size="14" fill="#555">H</text>
+    </svg>
+
+    <div class="analysis">
+      <div class="analysis-title">📝 c-command 관계 정리 (TG p.116)</div>
+      <ul>
+        <li><span class="key">A</span>: c-commands nothing (루트 노드 — 위에 branching node 없음)</li>
+        <li><span class="key">B</span>: c-commands [C, F, G, H] — 1st branching node = A, A는 C·F·G·H dominate</li>
+        <li><span class="key">C</span>: c-commands [B, D, E] — 1st branching node = A</li>
+        <li><span class="key">D</span>: c-commands [E] — 1st branching node = B, B는 E만 dominate(D 제외)</li>
+        <li><span class="key">E</span>: c-commands [D] — 마찬가지</li>
+        <li><span class="key">F</span>: c-commands [B, D, E] — 1st branching node = A → B·D·E dominate</li>
+        <li><span class="key">G</span>: c-commands [H] — 1st branching node = F</li>
+        <li><span class="key">H</span>: c-commands [G]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="nav-row">
+  <a href="ch3_concepts.html" class="nav-btn"><span class="arr">←</span> Ch.3 Concepts</a>
+  <span class="nav-center">Ch.3 · Tree Diagrams</span>
+  <a href="ch3_exercises.html" class="nav-btn">Ch.3 Exercises <span class="arr">→</span></a>
+</div>
+
+</div><!-- .wrap -->
+
+<script>
+function toggleHint(id, btn) {
+  const box = document.getElementById(id);
+  const show = box.style.display === 'block';
+  box.style.display = show ? 'none' : 'block';
+  btn.textContent = show ? '💡 힌트 보기' : '💡 힌트 닫기';
+}
+
+function reveal(n) {
+  const ans = document.getElementById('ans' + n);
+  const btn = document.getElementById('rb' + n);
+  const card = document.getElementById('q' + n);
+  const show = ans.classList.contains('show');
+  ans.classList.toggle('show', !show);
+  btn.classList.toggle('open', !show);
+  btn.textContent = show ? '🌳 수형도 보기' : '🌳 수형도 닫기';
+  if (!show) card.classList.add('revealed');
+}
+</script>
+</body>
+</html>
