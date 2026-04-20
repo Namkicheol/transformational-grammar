@@ -216,8 +216,8 @@ function beep(type) {
 /* ── 팝업 ── */
 let popTimer = null;
 function showPop(correct, sentText) {
-  if (AC.state === 'suspended') AC.resume();
-  beep(correct ? 'correct' : 'wrong');
+  const _play = () => beep(correct ? 'correct' : 'wrong');
+  if (AC.state === 'suspended') { AC.resume().then(_play); } else { _play(); }
   const overlay = document.getElementById('pop-overlay');
   const box     = document.getElementById('pop-box');
   document.getElementById('pop-icon').textContent  = correct ? '🎉' : '❌';
