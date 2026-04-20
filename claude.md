@@ -1,0 +1,158 @@
+# 트포(변형생성문법) HTML 프로젝트 지침
+
+> 중학교 영어교사의 임용시험(2차) 대비 변형생성문법 학습 사이트 제작 프로젝트.  
+> GitHub Pages로 배포, 티스토리 블로그(obangti.tistory.com) iframe 삽입 방식.
+
+---
+
+## 프로젝트 개요
+
+| 항목 | 내용 |
+|------|------|
+| GitHub Repo | `Namkicheol/transformational-grammar` |
+| GitHub Pages | `https://namkicheol.github.io/transformational-grammar/` |
+| 블로그 | `obangti.tistory.com` (Ch.2 스타일 유지) |
+| 교재 | Radford *Transformational Grammar* (TG.md로 텍스트 전환됨) |
+| 기준 답안 | gee 예상답안 PDF + 예문정리 PDF |
+
+---
+
+## 참조 자료 우선순위
+
+1. **TG.md** — 프로젝트 지식 저장. 원서 전체 텍스트. 예문·개념 1순위 참조
+2. **Radford 원서 PDF** — 수형도(tree diagram) 그림이 필요할 때만 참조
+3. **gee 예상답안 PDF** (`합격자_트포_예상답안.pdf`) — 정답·출제 포인트 확인
+4. **예문정리 PDF** (`11__트포_정비문_판단_모음_예문정리트포_39p구매.pdf`, `정T_트포_예문_정리_답안_해설.pdf`) — 빈출 예문 패턴 보조 참조
+5. **참고 블로그** — `obangti.tistory.com` Ch.2 스타일·디자인 유지
+
+---
+
+## 매 챕터 작업 순서
+
+챕터마다 아래 순서로 진행한다.
+
+1. **HTML 제작** (GitHub Pages 배포용 단일 파일, gee 답안 기준)
+2. **티스토리 제목** (SEO 최적화)
+3. **태그 10개**
+4. **제미나이 썸네일 프롬프트** (영어, 챕터 주제 반영한 구체적 이미지 묘사)
+
+---
+
+## HTML 파일 구성 (챕터당 최대 5개)
+
+| 파일명 | 내용 |
+|--------|------|
+| `chN_concepts.html` | 개념 정리 + 미니퀴즈 |
+| `chN_exercises.html` | 실전 문제 (gee 답안 기준) |
+| `ChN_ox_order.html` | OX 퀴즈 (순서 고정) |
+| `ChN_ox_random.html` | OX 퀴즈 (랜덤) |
+| `ChN_tree.html` | 수형도 (Tree Diagram) |
+
+---
+
+## HTML 제작 원칙
+
+### 예문 처리
+- 예문은 **Radford 원문(TG.md) 그대로** 사용
+- 저작권 보호를 위해 고유명사(John→Tom 등) 또는 명사(car→bike 등) **딱 1개만** 변형
+- **구조·문법 포인트 변경 금지**
+- gee 핵심 예문도 변형한 예문 사용 (변형 기준: 위 원칙 동일)
+
+### 해설 처리
+- gee 답안 → **정답·구조만** 참조
+- **gee 해설 문구 직접 사용 금지**
+- 한국어 설명은 **독자적으로 재작성**
+
+### 네비게이션
+- 챕터 하단 네비게이션:  
+  `← 이전 챕터 concepts` | `같은 챕터 exercises →`
+
+---
+
+## GitHub 자동 업로드 방식
+
+- 매 파일 완성 후 **GitHub API(PUT)** 로 자동 업로드
+- `index.html`도 매번 자동 수정 (완료 챕터 반영)
+- 업로드 성공 확인: HTTP 200/201 응답 코드
+
+```python
+# 업로드 기본 패턴
+import requests, base64, json
+
+TOKEN = "← 프로젝트 지침 맨 아래 토큰 참조 (보안상 여기 직접 기재 금지)"
+REPO  = "Namkicheol/transformational-grammar"
+HEADERS = {
+    "Authorization": f"token {TOKEN}",
+    "Content-Type": "application/json"
+}
+
+def upload_file(filename, html_content, commit_msg):
+    # 기존 SHA 가져오기
+    r = requests.get(
+        f"https://api.github.com/repos/{REPO}/contents/{filename}",
+        headers=HEADERS
+    )
+    sha = r.json().get("sha", "")   # 신규 파일이면 sha 없음
+
+    payload = {
+        "message": commit_msg,
+        "content": base64.b64encode(html_content.encode()).decode(),
+    }
+    if sha:
+        payload["sha"] = sha
+
+    res = requests.put(
+        f"https://api.github.com/repos/{REPO}/contents/{filename}",
+        headers=HEADERS,
+        data=json.dumps(payload)
+    )
+    return res.status_code  # 200 or 201
+```
+
+---
+
+## 현재 작업 진행 현황
+
+| 챕터 | 파일 | 상태 |
+|------|------|------|
+| Ch.2 | `ch2_concepts.html` | ✅ 완료 |
+| Ch.2 | `ch2_exercises.html` | ✅ 완료 |
+| Ch.2 | `Ch2_ox_order.html` | ✅ 완료 |
+| Ch.2 | `Ch2_ox_random.html` | ✅ 완료 |
+| Ch.2 | `Ch2_tree.html` | ✅ 완료 |
+| Ch.3 | `ch3_concepts.html` | ✅ 완료 |
+| Ch.3 | `ch3_exercises.html` | ✅ 완료 (예문 수정 이력 있음) |
+| Ch.4~ | — | ⏳ 미시작 |
+
+---
+
+## index.html 관리 원칙
+
+- 챕터 완료 시 해당 카드 `disabled` 제거 → 링크 연결
+- 진행바·상태 텍스트·포스팅 수 자동 업데이트
+- Ch.2처럼 챕터당 최대 5개 카드 (개념, 실전, OX순서, OX랜덤, 수형도)
+
+---
+
+## 새 대화 시작 시 붙여넣기 템플릿
+
+```
+트포 HTML 작업 이어서 진행
+
+현재까지 완료: Ch.2 (5개), Ch.3 (2개) — index.html 반영 완료
+GitHub 자동 업로드 설정 완료 (토큰·레포 지침에 있음)
+
+지금 할 작업: [챕터 번호 + 파일 종류 기재]
+
+Radford 텍스트: TG.md (프로젝트 지식)
+정답 기준: gee 예상답안 (프로젝트 지식)
+추가 첨부 불필요
+```
+
+---
+
+## 주의사항
+
+- `raw.githubusercontent.com` URL은 캐시 딜레이 있음 → API로 직접 SHA 확인
+- 블로그 삽입 방식은 **iframe** → GitHub 파일 수정하면 블로그 자동 반영 (재업로드 불필요)
+- 새 대화에서도 이 claude.md + 프로젝트 지식 파일로 컨텍스트 자동 복원됨
