@@ -710,11 +710,10 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 const TOTAL = 30;
 
 /* ── Web Audio 효과음 (lazy init) ── */
-/* ── 효과음 (클릭 시 즉시 AudioContext 생성) ── */
 function beep(type) {
   try {
     const ac = new (window.AudioContext || window.webkitAudioContext)();
-    const osc  = ac.createOscillator();
+    const osc = ac.createOscillator();
     const gain = ac.createGain();
     osc.connect(gain);
     gain.connect(ac.destination);
@@ -739,8 +738,6 @@ function beep(type) {
   } catch(e) {}
 }
 
-/* ── 팝업 ── */
-let popTimer = null;
 function showPop(correct, sentText) {
   beep(correct ? 'correct' : 'wrong');
 
