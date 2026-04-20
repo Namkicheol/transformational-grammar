@@ -244,8 +244,8 @@ function closePop() {
   document.getElementById('pop-overlay').classList.remove('show');
 }
 function filterSec(sec) {
-  document.querySelectorAll('.q-card').forEach(card => {
-    const secEl = card.querySelector('.q-sec');
+  document.querySelectorAll('.qcard').forEach(card => {
+    const secEl = card.querySelector('.qsec-tag');
     if (!secEl) { card.style.display=''; return; }
     card.style.display = (sec==='all' || secEl.textContent.includes(sec)) ? '' : 'none';
   });
