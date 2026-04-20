@@ -208,11 +208,10 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 
 <script>
 
-/* ── 효과음 (클릭 시 즉시 AudioContext 생성) ── */
 function beep(type) {
   try {
     const ac = new (window.AudioContext || window.webkitAudioContext)();
-    const osc  = ac.createOscillator();
+    const osc = ac.createOscillator();
     const gain = ac.createGain();
     osc.connect(gain);
     gain.connect(ac.destination);
@@ -235,14 +234,8 @@ function beep(type) {
     }
     osc.onended = () => ac.close();
   } catch(e) {}
-} else {
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(200, AC.currentTime);
-    gain.gain.setValueAtTime(.16, AC.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.001, AC.currentTime+.35);
-    osc.start(); osc.stop(AC.currentTime+.35);
-  }
 }
+
 let _popT = null;
 function showPop(ok, txt) {
   beep(ok ? 'correct' : 'wrong');
