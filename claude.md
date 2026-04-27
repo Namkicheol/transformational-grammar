@@ -200,6 +200,15 @@ OX 효과음: /home/claude/beep_js.txt 확인 후 사용
   </p>
   ```
 
+**📝 실전·OX 블로그 글 구조** (별도 발행 — 해설 중심 3섹션)
+- ① 짧은 도입 (1-2줄)
+- ② 본문 = **N문항 × 자세한 해설** (90%): 문항/답(✅❌)/영어 원문 인용 1-2문장/한글 풀이/⚠️ 함정/빨간 연도/5색 하이라이트
+- ③ 개념정리 글로 돌아가기 링크 버튼 (사이클 형성)
+- TG 특화: 통사 답안 패턴(`Sentence (X) is grammatical/ungrammatical because [violation]`) 해설에 명시 / **트리 다이어그램 해설은 iframe(`ChN_tree.html`) 또는 PNG 첨부**
+- 핵심 용어(C-command·Binding·Movement·Raising/Control 등) 영어 그대로
+- 분량: 5,000~10,000자 (문항당 250-500자)
+- 자세한 규칙은 `blog write.md` "📝 OX·실전·응용 블로그 글 구조" 참조
+
 **4섹션 보강 포인트 (TG 특화)**
 - ① **개념 정의**: C-command·Binding·NPI·Movement·Raising/Control 등 **핵심 용어 영어 그대로**. 영어 원문은 `refs/transformational_grammar.md` 원서에서 발췌
 - ② **기출 맥락**: 통사 기출 답안 패턴(`Sentence (X) is [grammatical/ungrammatical]. [Violation] is violated because ...`) 풀이
