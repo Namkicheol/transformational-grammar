@@ -176,7 +176,7 @@ OX 효과음: /home/claude/beep_js.txt 확인 후 사용
 - **기출 연도 빨간색 인라인** (`#c53030`)
 - 핵심 개념(C-command·Binding·NPI·Movement·Raising/Control 등)은 **영어 원문 한 문단 + 한글 설명 한 문단** 교차. 영어 원문은 `refs/transformational_grammar.md` 원서에서 발췌 (단, 본문에는 출처 표기 X)
 - **Radford 교재 표기**: `Radford 교수의 『Transformational Grammar』` 만 사용. "(국제판)" 표기 절대 금지
-- **썸네일은 Pencil MCP** (`blog-image-pencil` 스킬)로 생성
+- **신규 글 썸네일은 Pencil MCP** (`blog-image-pencil` 스킬)로 생성. 기존 글은 그대로 유지
 - **SVG 사용 금지** (블로그 한정. `ChN_tree.html` 등 웹앱 페이지 내부 SVG 수형도는 별개)
 
 ### TG(변형생성문법) 블로그 고유 규칙
@@ -187,11 +187,17 @@ OX 효과음: /home/claude/beep_js.txt 확인 후 사용
   - **통합 1편**: 개념 + 트리 + 실전 + OX 한 글 안에 4섹션으로 통합 (긴 글)
   - **분리 2편**: 개념편 (개념정리·키텀비교) + 응용편 (트리 다이어그램·실전·OX)
 
-**iframe 임베드 위치 (5개 페이지 모두 활용 가능)**
-- 본문 중반(개념 후): `chN_concepts.html`
-- 본문 ④ 직전(트리 다이어그램 시연 자리): `ChN_tree.html` — Tree는 시각 자료라 iframe이 가장 효과적
-- 본문 후반: `chN_exercises.html` (실전) → `ChN_ox_order.html` 또는 `ChN_ox_random.html` (OX)
-- iframe URL: `https://namkicheol.github.io/transformational-grammar/<filename>.html`
+**iframe / 링크 배치**
+- 본문 중반(개념 후): `chN_concepts.html` **iframe 임베드** — 개념정리
+- 본문 ④ 직전(트리 다이어그램 시연 자리): `ChN_tree.html` **iframe 임베드** — Tree는 시각 자료라 iframe이 가장 효과적
+- 본문 후반: 실전·OX는 **이미 발행된 `obangti.tistory.com` 별도 글로 링크 버튼** 처리 (iframe 중복 X)
+- iframe URL: `https://namkicheol.github.io/transformational-grammar/<filename>.html` (concepts·tree만)
+- 실전·OX 링크 버튼 템플릿:
+  ```html
+  <p align="center">
+  <a href="https://obangti.tistory.com/<post-id>" target="_blank" style="display:inline-block;padding:14px 28px;background:#3182ce;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:15px;">📝 실전·OX 풀러 가기 →</a>
+  </p>
+  ```
 
 **4섹션 보강 포인트 (TG 특화)**
 - ① **개념 정의**: C-command·Binding·NPI·Movement·Raising/Control 등 **핵심 용어 영어 그대로**. 영어 원문은 `refs/transformational_grammar.md` 원서에서 발췌
