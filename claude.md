@@ -187,15 +187,16 @@ OX 효과음: /home/claude/beep_js.txt 확인 후 사용
   - **통합 1편**: 개념 + 트리 + 실전 + OX 한 글 안에 4섹션으로 통합 (긴 글)
   - **분리 2편**: 개념편 (개념정리·키텀비교) + 응용편 (트리 다이어그램·실전·OX)
 
-**iframe / 링크 배치**
-- 본문 중반(개념 후): `chN_concepts.html` **iframe 임베드** — 개념정리
-- 본문 ④ 직전(트리 다이어그램 시연 자리): `ChN_tree.html` **iframe 임베드** — Tree는 시각 자료라 iframe이 가장 효과적
-- 본문 후반: 실전·OX는 **이미 발행된 `obangti.tistory.com` 별도 글로 링크 버튼** 처리 (iframe 중복 X)
-- iframe URL: `https://namkicheol.github.io/transformational-grammar/<filename>.html` (concepts·tree만)
+**iframe / 링크 배치 — iframe 최소 원칙**
+- ❌ **개념정리(`chN_concepts.html`) iframe 임베드 금지** — 4섹션 본문에 이미 개념을 풀어 썼으므로 중복
+- ❌ **실전·OX(`chN_exercises.html`, `ChN_ox_*.html`) iframe 임베드 금지** — 이미 별도 obangti.tistory.com 글로 발행됨
+- ⚪ **트리(`ChN_tree.html`) iframe 임베드 허용** — 시각 자료(SVG 트리)는 본문 텍스트 중복이 아닌 고유 자료. 단, 트리도 별도 블로그 글로 발행됐다면 링크 버튼 우선
+- ✅ **본문 끝에 실전·OX 링크 버튼**만 추가 — `obangti.tistory.com/<post-id>` 형식
+- 트리 iframe URL: `https://namkicheol.github.io/transformational-grammar/ChN_tree.html` (필요 시만)
 - 실전·OX 링크 버튼 템플릿:
   ```html
   <p align="center">
-  <a href="https://obangti.tistory.com/<post-id>" target="_blank" style="display:inline-block;padding:14px 28px;background:#3182ce;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:15px;">📝 실전·OX 풀러 가기 →</a>
+  <a href="https://obangti.tistory.com/<post-id>" target="_blank" style="display:inline-block;padding:14px 28px;background:#3182ce;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:15px;">📝 [Ch.N] 실전·OX 풀러 가기 →</a>
   </p>
   ```
 
