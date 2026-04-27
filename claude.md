@@ -13,7 +13,7 @@
 | GitHub Pages | `https://namkicheol.github.io/transformational-grammar/` |
 | 블로그 | `obangti.tistory.com` (Ch.2 스타일 유지) |
 | 교재 | Radford *Transformational Grammar* |
-| 기준 답안 | gee 예상답안 PDF + 예문정리 PDF |
+| 기준 답안 | gee 예상답안 기준 (Ch.2~3 완료) |
 
 ---
 
@@ -31,40 +31,29 @@
 ### 🥇 1순위 — 반드시 먼저 확인
 | 파일 | 용도 |
 |------|------|
-| **TG.md** | 원서 전체 텍스트. 예문 원문·규칙 정의 **무조건 여기서 찾기** |
-| **Radford 원서 PDF** (`transformational_grammar_OCR_compressed-*.pdf`) | TG.md에 그림·수형도 없을 때만 보조 참조 |
+| **`refs/transformational_grammar.md`** | 원서 전체 텍스트. 예문 원문·규칙 정의 **무조건 여기서 찾기** |
+| **`refs/transformational_grammar_images/`** | 원서 이미지·수형도 (그림 필요 시 보조) |
 
 ### 🥈 2순위 — 해설·출제 포인트 보조
 | 파일 | 강점 챕터 |
 |------|----------|
-| `2__정T_트포_theory_단권화.md` | Ch2~3 규칙 요약 |
-| `합격자_트포_예상답안.pdf` (gee) | 정답·출제 포인트 전 챕터 |
-| `정T_트포_예문_정리_답안_해설.pdf` | 빈출 예문 정오 판정 |
-| `11__트포_정비문_판단_모음_예문정리트포_39p구매.pdf` | 정비문 패턴 |
-| `단숲_TG_정리.md` | Ch5 Negation |
-| `단숲_트포_정리.md` | Ch7 Raising/Control |
-| `트포_단권화__구매_.md` | Ch4~7 전반 보조 |
-| `윤영어학.md` | Ch5 Negation |
-| `최진호_영어학_중급_OCR.md` | Ch5·7 (OCR 일부 깨짐 주의) |
-| `1__트포_원서정리_87p_구입_.md` | 기출문제 형식 참조 |
-| `movement_단권화.md` | Ch6 Movement 전용 |
-| `Raising_And_Control_.md` | Ch7 Raising/Control 전용 |
-| `밍우_영어학분석.md` | 기출 출제 패턴 분류 |
-
-### ❌ 참조 불가
-| 파일 | 이유 |
-|------|------|
-| `메가쌤_기출분석.md` | PDF→OCR 변환 실패. 실제 내용 없음 |
+| `refs/단숲_TG 정리.md` | Ch5 Negation |
+| `refs/트포 단권화 (구매).md` | Ch4~7 전반 보조 |
+| `refs/영어학 정리.md` | 영어학 전반 |
+| `refs/1. 트포 원서정리 87p(구입).md` | 기출문제 형식 참조 |
+| `refs/movement 단권화.md` | Ch6 Movement 전용 |
+| `refs/Raising And Control .md` | Ch7 Raising/Control 전용 |
+| `refs/raising and control.md` | Ch7 기출 문장 위주 |
 
 ### 📋 Ch별 2순위 참조 우선순위
 | 챕터 | 참조 순서 |
 |------|---------|
-| Ch4 NP | 2__정T단권화 → 트포_단권화 → 윤영어학 → 최진호 |
-| Ch5 Negation | 단숲_TG_정리 → 윤영어학 → 최진호 → 트포_단권화 |
-| Ch6 Movement | movement_단권화 → 트포_단권화 → 윤영어학 → 밍우기출 |
-| Ch7 Raising/Control | Raising_And_Control_.md → 단숲_트포 → 최진호 → 트포_단권화 |
+| Ch4 NP | 트포 단권화 → 영어학 정리 → 1.트포원서정리 |
+| Ch5 Negation | 단숲_TG 정리 → 트포 단권화 → 영어학 정리 |
+| Ch6 Movement | movement 단권화 → 트포 단권화 |
+| Ch7 Raising/Control | Raising And Control → raising and control → 단숲_TG 정리 → 트포 단권화 |
 
-> ⚠️ **원칙**: 예문은 반드시 TG.md 원문 그대로. 규칙 정의도 TG.md 기준.  
+> ⚠️ **원칙**: 예문은 반드시 `refs/transformational_grammar.md` 원문 그대로. 규칙 정의도 동일 기준.  
 > 나머지 md는 해설 보조·임용 출제 포인트 파악용으로만 사용.
 
 ---
@@ -154,7 +143,7 @@ def upload(filename, html, msg):
 완료: Ch.2 (5개), Ch.3 (5개) — index.html 반영 완료
 다음 작업: [챕터 번호 + 파일 종류]
 
-참조: TG.md (프로젝트 지식) / gee 예상답안 (프로젝트 지식)
+참조: refs/transformational_grammar.md (로컬 파일) / gee 답안 기반 Ch.2~3 완료
 OX 효과음: /home/claude/beep_js.txt 확인 후 사용
 ```
 
@@ -167,3 +156,62 @@ OX 효과음: /home/claude/beep_js.txt 확인 후 사용
 - **iOS 효과음**: beep_js.txt 없으면 위 재생성 코드 실행 후 시작
 - **OX JS 오류**: 반복 수정 시 beep 함수 잔재 코드 쌓임 → `node --check` 필수
 - **concepts 누락 섹션**: TG 원서 챕터 목차와 대조 필수
+
+---
+
+## 블로그 글 작성
+
+전역 블로그 지침 `~/Library/CloudStorage/OneDrive-학장중학교/blog write.md` 의 **"임용고시 (영어학·영교론)"** 섹션과 그 하위 **"📚 임용 블로그 글쓰기 규칙"** 을 따른다.
+
+본 레포 유형: **A형 (변형생성문법 서브노트, Radford)** — 블로그 작성 대상.
+
+핵심:
+- 블로그 글은 `.md` 파일로 작성 (티스토리 마크다운 에디터)
+- **본문 = 서브노트 핵심 + 4섹션 보강** (① 개념 정의 [필수] + ②③④ 중 최소 2개)
+  - ② 기출 맥락 / ③ 키텀 비교 / ④ 수험 활용 팁
+  - **합격자 노트·gee 답안·`refs/단숲_TG 정리.md` 등에 팁 있으면 ④ 무조건 포함**
+- **한글 설명 시 용어는 영어 원문 그대로** (예: `C-command`·`Binding`·`Raising`·`Control` 그대로. "C-통제"·"결속" 등 어설픈 번역 X). 학자명·이론명·기술 용어 모두 영어 유지
+- **본문에 출처 인용 표기 불필요** (`— Radford Ch.4` 같은 표기 X)
+- **키워드 하이라이트 필수** (5색): 통사 용어(C-command·Binding·Movement 등) → 파랑 `#3182ce` / 학자명(Radford·Chomsky 등) → 보라 `#805ad5` / 함정·비문(*표시 등) → 빨강 `#c53030` / 정문·올바른 분석 → 청록 `#319795` / 현직쌤 팁 → 주황 `#dd6b20`
+- **기출 연도 빨간색 인라인** (`#c53030`)
+- 핵심 개념(C-command·Binding·NPI·Movement·Raising/Control 등)은 **영어 원문 한 문단 + 한글 설명 한 문단** 교차. 영어 원문은 `refs/transformational_grammar.md` 원서에서 발췌 (단, 본문에는 출처 표기 X)
+- **Radford 교재 표기**: `Radford 교수의 『Transformational Grammar』` 만 사용. "(국제판)" 표기 절대 금지
+- **썸네일은 Pencil MCP** (`blog-image-pencil` 스킬)로 생성
+- **SVG 사용 금지** (블로그 한정. `ChN_tree.html` 등 웹앱 페이지 내부 SVG 수형도는 별개)
+
+### TG(변형생성문법) 블로그 고유 규칙
+
+**사이트 구조 → 블로그 매핑**
+- 사이트는 챕터당 5개: `chN_concepts.html` / `chN_exercises.html` / `ChN_ox_order.html` / `ChN_ox_random.html` / `ChN_tree.html`
+- **블로그 글 단위 옵션**:
+  - **통합 1편**: 개념 + 트리 + 실전 + OX 한 글 안에 4섹션으로 통합 (긴 글)
+  - **분리 2편**: 개념편 (개념정리·키텀비교) + 응용편 (트리 다이어그램·실전·OX)
+
+**iframe 임베드 위치 (5개 페이지 모두 활용 가능)**
+- 본문 중반(개념 후): `chN_concepts.html`
+- 본문 ④ 직전(트리 다이어그램 시연 자리): `ChN_tree.html` — Tree는 시각 자료라 iframe이 가장 효과적
+- 본문 후반: `chN_exercises.html` (실전) → `ChN_ox_order.html` 또는 `ChN_ox_random.html` (OX)
+- iframe URL: `https://namkicheol.github.io/transformational-grammar/<filename>.html`
+
+**4섹션 보강 포인트 (TG 특화)**
+- ① **개념 정의**: C-command·Binding·NPI·Movement·Raising/Control 등 **핵심 용어 영어 그대로**. 영어 원문은 `refs/transformational_grammar.md` 원서에서 발췌
+- ② **기출 맥락**: 통사 기출 답안 패턴(`Sentence (X) is [grammatical/ungrammatical]. [Violation] is violated because ...`) 풀이
+- ③ **키텀 비교 (Ch별 보조 자료 활용)**:
+  - Ch4 NP: `refs/트포 단권화 (구매).md` + `refs/영어학 정리.md`
+  - Ch5 Negation: `refs/단숲_TG 정리.md` (강함)
+  - Ch6 Movement: `refs/movement 단권화.md`
+  - Ch7 Raising/Control: `refs/Raising And Control .md` + `refs/raising and control.md`
+- ④ **수험 팁**: gee 답안 기준 + 합격자 노트의 답안 작성 패턴 무조건 포함
+
+**Tree Diagram 시각화 규칙 (TG 특화)**
+
+블로그 글 SVG 금지의 **유일한 예외**가 syntactic tree diagram. 단, 우선순위는 다음과 같이 적용:
+
+| 순위 | 방법 | 비고 |
+|---|---|---|
+| 1순위 | `ChN_tree.html` iframe 임베드 | 사이트 SVG 트리 그대로 활용 — 가장 정확·자연스러움 |
+| 2순위 | 사이트 트리 페이지 **스크린샷 → PNG** 업로드 | 정적 이미지로 박고 싶을 때 |
+| 3순위 | 마크다운 **bracketed notation** | 짧은 구조에만. 예: `[CP [C that] [TP [DP John] [VP left]]]` |
+| **예외** | **SVG 직접 삽입 허용** | 위 1~3 모두 부적절한 경우만 (예: 본문 흐름 중에 partial tree 시연이 꼭 필요) |
+
+- ❌ **Pencil MCP 트리 생성 금지** — AI 이미지 생성은 노드 라벨·가지 연결이 부정확해 통사 트리에 부적합
