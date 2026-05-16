@@ -1,4 +1,9 @@
-# 트포(변형생성문법) HTML 프로젝트 지침
+# 트포(변형생성문법) HTML 프로젝트 지침 — CLAUDE.md (Claude Code)
+
+
+> Claude Code 진입 문서. Codex는 `AGENTS.md`를 사용. 두 파일은 도구 framing만 다르고 섹션·순서·규칙은 동일. 새 규칙은 양쪽 모두 갱신.
+> Claude Code 도구: `Glob`/`Grep` (탐색), `Edit`/`Write` (수정), Task 도구 (sub-agent), Playwright MCP (브라우저), Pencil MCP / Gemini (이미지).
+
 
 > 중학교 영어교사의 임용시험(2차) 대비 변형생성문법 학습 사이트 제작 프로젝트.  
 > GitHub Pages로 배포, 티스토리 블로그(obangti.tistory.com) iframe 삽입 방식.
@@ -38,7 +43,7 @@
    ```
 4. 출력에서 `깨진링크: 0건` 확인. 깨졌으면 anchor 이름 수정.
 
-### 트리거 (Claude 자동 실행)
+### 트리거 (Claude Code 자동 실행)
 
 다음 상황에서 별도 지시 없이 위 절차를 실행한다:
 - 새 `_study.html` / `_concepts.html` 챕터 생성/완성 직후
@@ -70,7 +75,7 @@ GitHub: `https://github.com/Namkicheol/testmaster`
 | 상황 | 호출할 스킬 |
 |------|------------|
 | HTML 파일 제작 (예문·해설·OX 퀴즈·효과음·점검 규칙) | `transformational-grammar-html` |
-| 이미지 생성 (Pencil MCP) | `blog-image-pencil` |
+| 이미지 생성 (Gemini) | Gemini 채팅창에서 이미지 프롬프트 직접 입력 |
 
 ---
 
@@ -242,7 +247,7 @@ OX 효과음: /home/claude/beep_js.txt 확인 후 사용
 - **기출 연도 빨간색 인라인** (`#c53030`)
 - 핵심 개념(C-command·Binding·NPI·Movement·Raising/Control 등)은 **영어 원문 한 문단 + 한글 설명 한 문단** 교차. 영어 원문은 `refs/transformational_grammar.md` 원서에서 발췌 (단, 본문에는 출처 표기 X)
 - **Radford 교재 표기**: `Radford 교수의 『Transformational Grammar』` 만 사용. "(국제판)" 표기 절대 금지
-- **신규 글 썸네일은 Pencil MCP** (`blog-image-pencil` 스킬)로 생성. 기존 글은 그대로 유지
+- **신규 글 썸네일은 Gemini로 생성** — Gemini 채팅창에서 이미지 프롬프트 직접 입력. 기존 글은 그대로 유지
 - **SVG 사용 금지** (블로그 한정. `ChN_tree.html` 등 웹앱 페이지 내부 SVG 수형도는 별개)
 
 ### TG(변형생성문법) 블로그 고유 규칙
@@ -296,4 +301,4 @@ OX 효과음: /home/claude/beep_js.txt 확인 후 사용
 | 3순위 | 마크다운 **bracketed notation** | 짧은 구조에만. 예: `[CP [C that] [TP [DP John] [VP left]]]` |
 | **예외** | **SVG 직접 삽입 허용** | 위 1~3 모두 부적절한 경우만 (예: 본문 흐름 중에 partial tree 시연이 꼭 필요) |
 
-- ❌ **Pencil MCP 트리 생성 금지** — AI 이미지 생성은 노드 라벨·가지 연결이 부정확해 통사 트리에 부적합
+- ❌ **AI 이미지로 통사 트리 생성 금지** — AI 이미지 생성은 노드 라벨·가지 연결이 부정확해 통사 트리에 부적합
