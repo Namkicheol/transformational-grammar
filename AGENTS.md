@@ -1,9 +1,8 @@
-# 트포(변형생성문법) HTML 프로젝트 지침 — AGENTS.md (Codex)
+# 트포(변형생성문법) HTML 프로젝트 지침
 
+이 파일이 canonical 작업 지침이다. `CLAUDE.md`(Claude Code)와 `AGENTS.md`(Codex)는 같은 파일이다(symlink). Claude Code·Codex 공통.
 
-> Codex 진입 문서. Claude Code는 `CLAUDE.md`를 사용. 두 파일은 도구 framing만 다르고 섹션·순서·규칙은 동일. 새 규칙은 양쪽 모두 갱신.
-> Codex 도구: `rg`/`rg --files` (탐색), `apply_patch` (수정), `image_gen` 또는 Canva plugin (이미지).
-
+> 도구: 검색 `rg/Grep`, 수정 `apply_patch/Edit·Write`, 이미지 `image_gen/Canva/Pencil·Gemini`, 브라우저 `Playwright/Browser`.
 
 > 중학교 영어교사의 임용시험(2차) 대비 변형생성문법 학습 사이트 제작 프로젝트.  
 > GitHub Pages로 배포, 티스토리 블로그(obangti.tistory.com) iframe 삽입 방식.
@@ -14,7 +13,7 @@
 
 `_study.html` / `_concepts.html` 본문 / OX 퀴즈 `why` / 트리 도식 캡션 등 **한글이 등장하는 모든 본문**에서 학술 키워드는 영어 원어로 통일한다(예: `의미역 기준` → `Theta Criterion`, `의문사 이동` → `wh-movement`, `격 여과` → `Case Filter`). 한글 설명 블록 자체는 유지. 표준 통사 원리 이름(EPP, ECP, Theta Criterion 등)은 항상 영어 원어.
 
-> 상세 매핑표·예시·위반 트리거는 **`docs/한글용어.md`** 참조. 정책 원본은 전역 `~/.claude/CLAUDE.md` "임용 관련 작업: 한국어 용어 규칙" 및 testmaster `docs/한글용어.md`.
+> 상세 매핑표·예시·위반 트리거는 **`docs/한글용어.md`** 참조. 정책 원본은 전역 `~/.claude/CLAUDE.md` / `~/.codex/AGENTS.md` "임용 관련 작업: 한국어 용어 규칙" 및 testmaster `docs/한글용어.md`.
 
 ---
 
@@ -43,7 +42,7 @@
    ```
 4. 출력에서 `깨진링크: 0건` 확인. 깨졌으면 anchor 이름 수정.
 
-### 트리거 (Codex 자동 실행)
+### 트리거 (자동 실행)
 
 다음 상황에서 별도 지시 없이 위 절차를 실행한다:
 - 새 `_study.html` / `_concepts.html` 챕터 생성/완성 직후
@@ -160,6 +159,13 @@ def upload(filename, html, msg):
                        headers=HEADERS, data=json.dumps(payload))
     return res.status_code
 ```
+
+---
+
+## Git 브랜치 및 커밋 관례
+
+- 브랜치 prefix는 사용하는 도구 관례를 따른다 (Claude Code `claude/`, Codex `codex/`).
+- 커밋 트레일러(`Co-Authored-By: Claude…`)는 도구 기본 동작을 따르되 강제하지 않는다. Codex 커밋에는 넣지 않는다.
 
 ---
 
