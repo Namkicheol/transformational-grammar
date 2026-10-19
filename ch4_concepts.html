@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.4 Noun Phrases — 심화 개념 | TG Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --surface: #ffffff;
+    --surface2: #f4f1ec;
+    --accent: #2d5016;
+    --accent2: #4a7c2f;
+    --accent3: #8fbc5a;
+    --text: #1a1a1a;
+    --text2: #4a4a4a;
+    --muted: #8a8a8a;
+    --border: #e0dbd2;
+    --red: #c0392b;
+    --green: #27ae60;
+    --gold: #b8860b;
+    --blue: #1a4a7a;
+    --tag-bg: #eef5e8;
+    --tag-color: #2d5016;
+    --check-bg: #f0f7e8;
+    --check-border: #8fbc5a;
+    --tree-line: #4a7c2f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--accent);
+    color: white;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  nav a:hover { color: white; }
+  nav .sep { color: rgba(255,255,255,0.3); }
+  nav .current { color: white; font-weight: 600; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    color: white;
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+  .hero .chapter-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  .hero h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .hero h1 em { font-style: italic; }
+  .hero .subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+    max-width: 540px;
+    margin: 0 auto 28px;
+  }
+  .hero-tags {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+  }
+
+  /* STATS */
+  .stats {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+  .stat {
+    padding: 16px 32px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* TOC */
+  .toc-wrap {
+    max-width: 780px;
+    margin: 32px auto;
+    padding: 0 24px;
+  }
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+  .toc-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .toc-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+  }
+  .toc-list li a {
+    color: var(--accent2);
+    text-decoration: none;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toc-list li a:hover { color: var(--accent); }
+  .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 20px;
+  }
+
+  /* MAIN */
+  .main { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* SECTION */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+    scroll-margin-top: 60px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--surface2);
+  }
+  .section-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 2rem;
+    color: var(--accent3);
+    line-height: 1;
+    min-width: 36px;
+  }
+  .section-title-wrap h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .section-title-wrap .section-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* CONTENT BLOCKS */
+  .section p {
+    color: var(--text2);
+    margin-bottom: 14px;
+    line-height: 1.85;
+  }
+  .section p strong { color: var(--text); }
+
+
+  .section p:last-child { margin-bottom: 0; }
+  .overview { margin: 24px 0; color: var(--text2); }
+  details { margin-top: 20px; border-top: 1px solid var(--border); }
+  summary { padding: 14px 0; cursor: pointer; color: var(--accent); font-weight: 700; }
+  summary:focus-visible, a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+  .detail-content { padding: 4px 0; }
+  .example { padding: 16px 20px; background: var(--surface2); border-radius: 8px; margin: 18px 0; }
+  .example p { margin-bottom: 10px; }
+  .example-label, figcaption { font-size: 12px; color: var(--text2); }
+  .en { font-family: 'EB Garamond', serif; font-size: 1.22rem; overflow-wrap: anywhere; }
+  .key { color: var(--accent); font-weight: 700; }
+  u { text-decoration-color: var(--accent3); text-underline-offset: 4px; }
+  mark { background: #edf3e6; color: inherit; padding: 0 3px; }
+  .exam { font-size: 13px; margin-top: 18px; }
+  .exam-link { color: #c53030; font-weight: 700; text-underline-offset: 3px; margin-right: 8px; }
+  .tree { margin: 20px 0; padding: 16px; background: var(--surface2); border-radius: 8px; }
+  svg { display: block; width: 100%; height: auto; max-width: 580px; margin: auto; }
+  svg text { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; fill: var(--text); }
+  svg .word { font-family: 'EB Garamond', serif; font-size: 19px; }
+  svg .role { font-size: 12px; fill: var(--accent); }
+  svg line { stroke: var(--accent2); stroke-width: 1.5; }
+  figcaption { margin-top: 12px; }
+  .source { padding: 0 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+  .source p { padding-bottom: 16px; color: var(--text2); font-size: 13px; }
+  footer { text-align: center; padding: 24px; color: var(--text2); font-size: 12px; }
+  @media (max-width: 600px) {
+    nav { flex-wrap: wrap; gap: 8px 14px; padding: 12px 18px; }
+    .hero { padding: 36px 20px; } .hero h1 { font-size: 2.1rem; }
+    .main, .toc-wrap { padding-left: 16px; padding-right: 16px; }
+    .section { padding: 24px 20px; } .section-header { gap: 10px; }
+    .toc-list { grid-template-columns: 1fr; } .tree { padding: 8px; }
+  }
+
+  nav.toc { display: block; position: static; color: var(--text); font-size: inherit; }
+
+  .year-circle { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; border: 1.5px solid currentColor; border-radius: 50%; line-height: 1; }
+  .exam-link { display: inline-block; text-decoration: none; }
+  .concept-link { color: inherit; text-decoration: underline dotted; text-underline-offset: 4px; }
+.tree { overflow-x: auto; }
+.tree svg { min-width: 580px; }
+.section-title-wrap { min-width: 0; }
+.section-title-wrap h2 { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<nav aria-label="챕터 탐색"><a href="index.html">TG Study</a><span class="sep" aria-hidden="true">/</span><a href="ch3_concepts.html">← Ch.3 개념 정리</a><span class="current" aria-current="page">Ch.4 Noun Phrases</span></nav>
+<header class="hero"><div class="chapter-num">Chapter 4 · 심화 개념</div><h1><em>Noun Phrases</em></h1><p class="subtitle">N′의 구조를 읽고, Complement와 Adjunct를 기출의 진단 조건에 맞춰 구분하기</p><div class="hero-tags"><span class="hero-tag">NP structure</span><span class="hero-tag">one-replacement</span><span class="hero-tag">coordination</span></div></header>
+<div class="toc-wrap"><nav class="toc" aria-label="이 페이지 목차"><div class="toc-title">핵심 개념 4</div><ol class="toc-list"><li><a href="#nominal-levels"><span class="toc-num">01</span>N–N′–NP와 결합 위치</a></li><li><a href="#complement-adjunct"><span class="toc-num">02</span>Complement / Adjunct</a></li><li><a href="#one-replacement"><span class="toc-num">03</span>one의 대체 범위</a></li><li><a href="#coordination-interpretation"><span class="toc-num">04</span>coordination과 의미 해석</a></li></ol></nav></div>
+<main class="main">
+<p class="overview">이 노트는 <strong>Radford의 NP / X-bar 분석</strong>을 기준으로, 임용 기출의 구조 판단에 필요한 부분을 다룹니다. 아래 예문은 모두 <strong>학습용 창작 예문</strong>입니다. 진단은 제시된 구조와 해석 조건에 맞춰 적용하세요.</p>
+<section class="section" id="nominal-levels" aria-labelledby="levels-title">
+<div class="section-header"><span class="section-num" aria-hidden="true">01</span><div class="section-title-wrap"><h2 id="levels-title">N–N′–NP</h2><p class="section-sub">단어의 나열보다 결합 위치를 먼저 확인</p></div></div>
+<p><span class="key">N</span>은 head, <span class="key">N′</span>는 중간 단위, <span class="key">NP (= N″)</span>는 전체 phrase입니다. <u>Complement는 N의 sister, Adjunct는 N′의 sister</u>로 분석합니다.</p>
+<details><summary>자세히 보기 · 같은 PP라도 붙는 높이가 다르다</summary><div class="detail-content">
+<p>먼저 head와 Complement가 낮은 N′를 이룹니다. Adjunct는 그 N′에 붙어 더 높은 N′를 만들고, determiner는 N′와 결합해 NP를 이룹니다. 여기서 ‘먼저’는 <mark>구조상 더 안쪽에서 결합한다</mark>는 뜻입니다.</p>
+<div class="example"><p class="example-label">학습용 창작 예문 · 구조 분석</p><p class="en" lang="en">an author <u>of travel guides</u> <u>with a green jacket</u></p><p><strong>of travel guides</strong>는 저술 대상을 채우는 Complement, <strong>with a green jacket</strong>은 인물의 속성을 덧붙이는 Adjunct로 읽습니다. 도서관에서 작가를 구분하는 창작 문맥이며 실제 기출 예문은 아닙니다.</p></div>
+<figure class="tree"><svg viewBox="0 0 580 345" role="img" aria-labelledby="np-tree-title np-tree-desc"><title id="np-tree-title">Complement와 Adjunct의 결합 위치</title><desc id="np-tree-desc">NP는 D an과 높은 N′로 나뉩니다. 높은 N′는 낮은 N′와 PP Adjunct with a green jacket으로, 낮은 N′는 N author와 PP Complement of travel guides로 나뉩니다.</desc>
+<g><line x1="260" y1="35" x2="70" y2="80"/><line x1="260" y1="35" x2="330" y2="80"/><line x1="330" y1="105" x2="230" y2="150"/><line x1="330" y1="105" x2="450" y2="150"/><line x1="230" y1="175" x2="150" y2="220"/><line x1="230" y1="175" x2="300" y2="220"/><line x1="70" y1="105" x2="70" y2="270"/><line x1="150" y1="245" x2="150" y2="270"/><line x1="300" y1="245" x2="300" y2="270"/><line x1="450" y1="175" x2="450" y2="270"/></g>
+<g text-anchor="middle"><text x="260" y="25">NP (= N″)</text><text x="70" y="100">D</text><text x="330" y="100">N′</text><text x="230" y="170">N′</text><text x="450" y="170">PP</text><text x="150" y="240">N</text><text x="300" y="240">PP</text><text class="word" x="70" y="295">an</text><text class="word" x="150" y="295">author</text><text class="word" x="300" y="295">of travel guides</text><text class="word" x="450" y="295">with a green jacket</text><text class="role" x="150" y="323">head</text><text class="role" x="300" y="323">Complement</text><text class="role" x="450" y="323">Adjunct</text></g></svg><figcaption>학습용 창작 예문 · head + Complement → 낮은 N′, 낮은 N′ + Adjunct → 높은 N′.</figcaption></figure>
+<p>따라서 Complement와 Adjunct는 둘 다 PP일 수 있어도 같은 구조적 관계를 갖지는 않습니다. <u>PP라는 category와 Complement / Adjunct라는 function을 구분</u>하세요.</p>
+</div></details></section>
+<section class="section" id="complement-adjunct" aria-labelledby="ca-title">
+<div class="section-header"><span class="section-num" aria-hidden="true">02</span><div class="section-title-wrap"><h2 id="ca-title"><a class="concept-link" href="https://etwiki.net/concept.html?term=complement">Complement</a> / <a class="concept-link" href="https://etwiki.net/concept.html?term=adjunct">Adjunct</a></h2><p class="section-sub">thematic relation과 어순을 함께 확인</p></div></div>
+<p>Complement는 head가 나타내는 관계의 내용을 채우고, Adjunct는 추가 속성을 덧붙입니다. <u>생략 가능성만으로 둘을 구분할 수는 없습니다.</u></p>
+<details><summary>자세히 보기 · 의미와 구조를 연결하는 순서</summary><div class="detail-content">
+<div class="example"><p class="example-label">학습용 창작 예문 · 두 PP의 역할 비교</p><p class="en" lang="en">an author <u>of travel guides</u> → someone who writes travel guides</p><p class="en" lang="en">an author <u>with a green jacket</u> → an author who is wearing a green jacket</p></div>
+<p>첫 PP는 author가 무엇을 저술하는지 나타내므로 head와 밀접한 thematic relation을 갖습니다. 두 번째 PP는 저술의 대상을 채우지 않고 그 사람의 옷차림을 설명합니다. 전치사의 모양만 외우지 말고 <mark>head와 어떤 관계를 맺는지</mark> 확인하세요.</p>
+<p>이 노트의 postnominal PP 구조에서는 Complement가 head에 더 가깝고 Adjunct가 그 뒤에 옵니다. 두 PP를 가진 위 예문은 <strong>N + Complement + Adjunct</strong> 순서로 분석됩니다. 기출에서 주어진 어순 대조도 이 결합 위치와 연결해 설명해야 합니다.</p>
+<div class="example"><p class="example-label">학습용 창작 예문 · 생략 가능성 비교</p><p class="en" lang="en">an author of travel guides with a green jacket<br>an author with a green jacket<br>an author of travel guides<br>an author</p></div>
+<p>이 예문에서는 Complement도 Adjunct도 생략할 수 있습니다. <u>‘필수이면 Complement, 선택이면 Adjunct’라는 기준은 성립하지 않습니다.</u> 그렇다고 모든 head의 Complement를 언제나 생략할 수 있다는 뜻도 아닙니다.</p>
+<p>답안에서는 <strong>의미 관계 → 어순 등 제시된 진단 → 결합 위치</strong>를 연결하세요. wh-movement를 묻는 문항에서는 해당 문항의 이동 가능성 대조까지 근거로 써야 하며, 의미 풀이만으로 입증을 끝내지 않습니다.</p>
+</div></details>
+<p class="exam"><a class="exam-link" href="https://etwiki.net/index.html?id=linguistics_2016_B06" rel="noopener noreferrer" aria-label="2016년 관련 기출 열기"><span class="year-circle">16</span></a>nominal PP의 function을 어순과 wh-movement 진단으로 구분해 출제했습니다.</p>
+</section>
+<section class="section" id="one-replacement" aria-labelledby="one-title">
+<div class="section-header"><span class="section-num" aria-hidden="true">03</span><div class="section-title-wrap"><h2 id="one-title"><a class="concept-link" href="https://etwiki.net/concept.html?term=one-replacement">one-replacement</a></h2><p class="section-sub">one이 대신하는 constituent의 범위를 표시</p></div></div>
+<p>이 분석에서 <span class="key">one은 N′를 대체</span>합니다. <u>N만 지우는 것으로 처리하지 말고</u>, 어느 N′가 대체되는지 괄호로 표시하세요.</p>
+<details><summary>자세히 보기 · 남은 modifier에서 대체 범위를 거슬러 읽기</summary><div class="detail-content">
+<p><u>[N + PP] 전체가 one으로 대체된다는 사실만으로 그 PP를 Complement라고 확정할 수는 없습니다.</u> 다음 두 분석 모두 N과 PP를 포함한 전체가 N′이므로, 전체 대체는 두 분석과 모두 양립합니다.</p>
+<div class="example"><p class="example-label">구조 비교 · 같은 전체 대체, 서로 다른 결합 위치</p><p class="en">[N′ N Complement]<br>[N′ [N′ N] Adjunct]</p></div>
+<p>둘을 구분하려면 <mark>PP를 남긴 채 더 작은 단위를 대체할 수 있는지</mark> 같은 추가 대조가 필요합니다. 아래 예시는 of travel guides를 Complement로 분석한 뒤 대체 범위를 설명하는 예시이며, 전체 대체만으로 그 function을 입증하는 예시는 아닙니다.</p>
+
+<div class="example"><p class="example-label">학습용 창작 예문 · 낮은 N′ 대체</p><p class="en" lang="en">the [author of travel guides] with a green jacket<br>and the <u>one</u> with a navy jacket</p><p><strong>one = [author of travel guides]</strong>. Complement가 포함된 낮은 N′ 전체가 대체되고, 바깥 Adjunct는 남습니다.</p></div>
+
+<p>여러 N′가 있으면 one이 대체할 수 있는 구조적 범위도 하나 이상입니다. 위 예문에서 낮은 N′는 <strong>[author of travel guides]</strong>, 높은 N′는 <strong>[author of travel guides with a green jacket]</strong>입니다. 어느 범위를 대체했는지에 따라 남는 modifier와 이어받는 내용이 달라집니다. 위 대조에서는 with-PP가 밖에 남으므로 낮은 N′를 대체한 것으로 분석합니다.</p>
+<p>Complement가 있는 낮은 N′는 <strong>[N + Complement]</strong>입니다. 그 Complement를 남긴 채 N만 one으로 바꾸는 분석은 이 구조의 N′ 대체를 충족하지 않습니다. 반면 Complement가 없는 경우에는 <strong>[N′ N]</strong>이 가능하므로, 겉으로 단어 하나가 대체되어 보여도 구조상 N′ 대체일 수 있습니다.</p>
+<p>기출에서는 <mark>무엇이 one 바깥에 남아 있는지</mark>와 주어진 해석을 함께 확인하세요. 영어의 모든 one 용법을 이 진단 하나로 판단하지는 않습니다.</p>
+</div></details>
+<p class="exam"><a class="exam-link" href="https://etwiki.net/index.html?id=linguistics_2022_A07" rel="noopener noreferrer" aria-label="2022년 관련 기출 열기"><span class="year-circle">22</span></a>one-replacement 뒤에 남은 pre-nominal modifier의 function과 해석을 구분해 출제했습니다.</p>
+</section>
+<section class="section" id="coordination-interpretation" aria-labelledby="coord-title">
+<div class="section-header"><span class="section-num" aria-hidden="true">04</span><div class="section-title-wrap"><h2 id="coord-title"><a class="concept-link" href="https://etwiki.net/concept.html?term=coordination">Coordination</a> &amp; interpretation</h2><p class="section-sub">같은 function의 연결에서 의미 해석까지</p></div></div>
+<p>겉모양이 같은 PP끼리라도 function은 다를 수 있습니다. 이 기출에서는 <u>연결되는 두 성분의 function이 같은지</u> 확인합니다.</p>
+<details><summary>자세히 보기 · 무엇과 연결되는지가 해석의 단서</summary><div class="detail-content">
+<div class="example"><p class="example-label">학습용 창작 예문 · 같은 PP, 서로 다른 function</p><p class="en" lang="en">an author [of travel guides] and [of biographies]</p><p>두 PP는 저술 대상을 채우는 <strong>Complement + Complement</strong>입니다.</p><p class="en" lang="en">an author [with a green jacket] and [with a brown scarf]</p><p>두 PP는 그 사람의 복장·소지품을 덧붙이는 <strong>Adjunct + Adjunct</strong>입니다.</p></div>
+<p>category가 달라도 같은 function을 수행하고 해당 문맥의 coordination 조건을 충족하면 연결될 수 있습니다. 예를 들어 관련 기출은 AP와 PP의 연결도 제시합니다. category 일치 자체를 필수 조건으로 삼지 마세요.</p>
+<p>이 대조에서 PP라는 category만으로는 구분이 끝나지 않습니다. 기출에서 Complement와 Adjunct를 섞은 coordination을 제시한다면, <mark>주어진 coordination 조건에서 function이 일치하는지</mark>를 근거로 판단합니다.</p>
+<div class="example"><p class="example-label">학습용 창작 예문 · pre-nominal modifier의 두 해석</p><p class="en" lang="en">a French teacher</p><p><strong>Complement 해석:</strong> French를 가르치는 사람.<br><strong>Adjunct 해석:</strong> 프랑스 출신인 교사.</p></div>
+<p>이런 유형은 modifier가 head의 내용을 채우는지, 사람의 속성을 덧붙이는지에 따라 해석이 갈립니다. 기출이 제시한 조건에서 <strong>가르치는 분야인 Complement와 coordination</strong>을 이루면 같은 function의 분야 해석을, <strong>head 쪽 N′가 one으로 대체된 뒤 modifier가 남으면</strong> Adjunct 해석을 검토합니다.</p>
+<p>one이 사용되었다는 사실 자체보다, <mark>어떤 modifier가 대체 범위 밖에 남았는지</mark>가 이 유형의 function·해석 판별에 중요합니다.</p>
+<p>답안을 쓸 때에는 <u>진단 결과 → Complement / Adjunct → 해당 의미</u>의 순서로 연결하세요. 문맥을 떼어 낸 모든 pre-nominal modifier에 동일한 해석을 강제하는 규칙으로 확대하지 않습니다.</p>
+</div></details>
+<p class="exam"><a class="exam-link" href="https://etwiki.net/index.html?id=linguistics_2008_N15" rel="noopener noreferrer" aria-label="2008년 관련 기출 열기"><span class="year-circle">08</span></a>Complement와 Adjunct의 coordination을 구분해 출제했습니다.</p>
+<p class="exam"><a class="exam-link" href="https://etwiki.net/index.html?id=linguistics_2022_A07" rel="noopener noreferrer" aria-label="2022년 관련 기출 열기"><span class="year-circle">22</span></a>coordination과 one-replacement에 따른 pre-nominal modifier의 해석 차이를 출제했습니다.</p>
+</section>
+<details class="source"><summary>참고 문헌</summary><p lang="en">Radford, <cite>Transformational Grammar</cite>, Ch4.</p><p lang="en">Bas Aarts (2018), <cite>English Syntax and Argumentation</cite>, 5th ed., §12.2.1.</p></details>
+</main><footer>TG Study · Ch.4 Noun Phrases</footer>
+<script src="scripts/study-note-navigation.js"></script>
+</body>
+</html>
