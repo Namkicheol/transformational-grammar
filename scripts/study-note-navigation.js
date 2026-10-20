@@ -10,7 +10,8 @@
       if (url.protocol !== 'https:' || url.username || url.password) return null;
       if (url.origin !== 'https://etwiki.net' && url.origin !== 'https://namkicheol.github.io') return null;
       if (!/^\/(?:englisheducation|linguistics|phonetics-phonology|transformational-grammar)\/[^/]+(?:_study|_concepts)\.html$/.test(url.pathname)
-          && url.pathname !== '/transformational-grammar/ch4_exercises.html') return null;
+          && url.pathname !== '/transformational-grammar/ch4_exercises.html'
+          && url.pathname !== '/transformational-grammar/ch5_exercises.html') return null;
       return url;
     } catch (_) { return null; }
   }
@@ -124,7 +125,8 @@
         else gestures.set(anchor, {token: token, time: Date.now()});
       }
       var origin = new URL(here);
-      if (here.pathname === '/transformational-grammar/ch4_exercises.html') {
+      if (here.pathname === '/transformational-grammar/ch4_exercises.html'
+          || here.pathname === '/transformational-grammar/ch5_exercises.html') {
         var question = anchor.closest('article[id]');
         if (question) origin.hash = question.id;
       }
