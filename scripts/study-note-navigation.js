@@ -15,7 +15,8 @@
           && url.pathname !== '/transformational-grammar/ch6_exercises.html'
           && url.pathname !== '/transformational-grammar/ch7_exercises.html'
           && url.pathname !== '/transformational-grammar/ch8_exercises.html'
-          && url.pathname !== '/transformational-grammar/ch9_exercises.html') return null;
+          && url.pathname !== '/transformational-grammar/ch9_exercises.html'
+          && url.pathname !== '/transformational-grammar/ch10_exercises.html') return null;
       return url;
     } catch (_) { return null; }
   }
@@ -134,7 +135,8 @@
           || here.pathname === '/transformational-grammar/ch6_exercises.html'
           || here.pathname === '/transformational-grammar/ch7_exercises.html'
           || here.pathname === '/transformational-grammar/ch8_exercises.html'
-          || here.pathname === '/transformational-grammar/ch9_exercises.html') {
+          || here.pathname === '/transformational-grammar/ch9_exercises.html'
+          || here.pathname === '/transformational-grammar/ch10_exercises.html') {
         var question = anchor.closest('article[id]');
         if (question) origin.hash = question.id;
       }
