@@ -715,6 +715,7 @@ const _SND={correct:'data:audio/wav;base64,UklGRhQTAABXQVZFZm10IBAAAAABAAEAESsAA
 function beep(type){try{const a=new Audio(_SND[type]);a.volume=0.7;a.play().catch(()=>{});}catch(e){}}
 
 
+let popTimer = null;
 function showPop(correct, sentText) {
   beep(correct ? 'correct' : 'wrong');
 
