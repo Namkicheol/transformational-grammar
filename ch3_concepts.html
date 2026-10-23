@@ -473,6 +473,9 @@
   }
   .nav-btn:hover { background: var(--surface2, #f4f1ec); }
   .nav-btn.next-btn { font-weight: 600; }
+
+/* Keep each diagnostic beside its example; narrow screens scroll this region only. */
+.diagnostic-scroll{max-width:100%;overflow-x:auto;margin:12px 0}.diagnostic-scroll:focus-visible{outline:2px solid #2d5016;outline-offset:3px}.diagnostic-table{width:100%;min-width:530px;border-collapse:collapse;font-size:inherit;line-height:1.7}.diagnostic-table caption{text-align:left;font-weight:700;padding:6px 0}.diagnostic-table th,.diagnostic-table td{padding:10px 12px;border:1px solid #d8ded3;text-align:left;vertical-align:top}.diagnostic-table th{background:#eef5e8}.diagnostic-table .en{font-size:1.1rem}.example strong,.diagnostic-table strong{color:#2d5016;font-weight:700}
 </style>
 </head>
 <body>
@@ -543,7 +546,7 @@
     <p style="margin-top:8px; color: var(--muted); font-size:13px;">→ 즉, A에서 올라가서 처음 만나는 <strong>분기(branching) node</strong>가 B도 지배해야 한다.</p>
   </div>
 
-  <p>가장 흔한 착각: <strong>D node가 N을 c-command한다</strong>고 생각하는 것. 하지만 NP에서 D와 N은 형제(sister) 관계로 서로 c-command하며, D가 N을 일방적으로 지배하지 않습니다.</p>
+  <p><strong>C-command와 dominance를 구분하세요.</strong> 아래 NP 도식에서 D와 N은 sister이므로 서로 c-command합니다. D가 N을 dominate한다는 뜻은 아닙니다. <u>왼쪽에 있다는 사실만으로는 c-command를 판단할 수 없습니다.</u></p>
 
   <div class="tree-wrap">
     <div class="tree-label">NP 구조에서 D와 N의 관계</div>
@@ -608,15 +611,15 @@
       <div class="options">
         <button class="opt" onclick="checkAns(this,'wrong')">① A가 B를 precede하면 반드시 c-command한다</button>
         <button class="opt" onclick="checkAns(this,'wrong')">② C-command는 선형적 순서, Precede는 구조적 관계다</button>
-        <button class="opt" onclick="checkAns(this,'correct')">③ Binding과 NPI는 precede가 아닌 c-command를 요구한다</button>
+        <button class="opt" onclick="checkAns(this,'correct')">③ Binding과 여기서 다루는 NPI는 선형 순서만으로 판단할 수 없고 c-command를 확인해야 한다</button>
         <button class="opt" onclick="checkAns(this,'wrong')">④ C-command와 Precede는 항상 동시에 성립한다</button>
       </div>
       <div class="explanation">
         <strong>정답: ③</strong><br>
         Precede는 <strong>선형적(linear) 순서</strong>, c-command는 <strong>구조적(hierarchical) 관계</strong>입니다.<br>
-        예: <em>*I will ever forgive nobody for that.</em> — nobody는 ever보다 앞에(precede) 있지만,<br>
-        트리에서 nobody가 ever를 c-command하지 못하므로 비문.<br>
-        <strong>Binding(anaphor/pronoun)과 NPI('ever', 'any')는 반드시 c-command가 필요합니다.</strong>
+        예: <em>*I will ever forgive nobody for that.</em>에서 <strong>nobody는 ever보다 뒤</strong>에 있으므로 precede하지 못합니다.<br>
+        Radford의 이 문제에서 ever는 S의 immediate constituent입니다. Object NP nobody의 첫 branching node인 VP는 ever를 dominate하지 않으므로 c-command도 성립하지 않습니다.<br>
+        <strong>선형 순서와 구조 관계는 별도로 확인</strong>하세요. 여기서의 ever 조건은 제시된 부정문과 구조에 적용합니다.
       </div>
     </div>
   </div>
@@ -777,7 +780,7 @@
     </div>
   </div>
 
-  <p>'Ever'는 <strong>Negative Polarity Item(NPI)</strong>입니다. 부정 요소(negative constituent)와 함께 써야만 문법적입니다. 단순히 부정어가 앞에 나오는 것으로는 부족하고, 반드시 <strong>c-command</strong>가 성립해야 합니다.</p>
+  <p>'Ever'는 <strong>Negative Polarity Item(NPI)</strong>입니다. 여기서는 <strong>부정문 안의 ever</strong>를 다룹니다. 단순히 부정어가 앞에 나오는 것으로는 부족하고, 반드시 <strong>c-command</strong>가 성립해야 합니다.</p>
 
   <div class="def-box">
     <div class="def-title">NPI 'ever' 사용 조건</div>
@@ -834,7 +837,7 @@
           <td class="bad-cell">비문</td>
         </tr>
         <tr>
-          <td><em>Some Frenchman who don't like English people would <strong>ever</strong> help an Englishman.</em></td>
+          <td><em>Some <strong>Frenchmen</strong> who don't like English people would <strong>ever</strong> help an Englishman.</em></td>
           <td class="ok-cell">✓</td>
           <td class="bad-cell">✗</td>
           <td class="bad-cell">비문</td>
@@ -872,18 +875,18 @@
     <div class="quiz-item">
       <div class="quiz-q"><span class="q-num">Q7.</span> <em>Some Frenchman would ever help no Englishman.</em>이 비문인 이유는?</div>
       <div class="options">
-        <button class="opt" onclick="checkAns(this,'wrong')">① no Englishman이 ever를 선행하지 못해서</button>
+        <button class="opt" onclick="checkAns(this,'correct')">① no Englishman이 ever를 선행하지 못해서</button>
         <button class="opt" onclick="checkAns(this,'wrong')">② Some이 부정어여서</button>
-        <button class="opt" onclick="checkAns(this,'correct')">③ no Englishman이 ever를 선행(precede)하지만 c-command하지 못해서</button>
+        <button class="opt" onclick="checkAns(this,'wrong')">③ no Englishman이 ever를 선행(precede)하지만 c-command하지 못해서</button>
         <button class="opt" onclick="checkAns(this,'wrong')">④ ever가 S의 immediate constituent가 아니어서</button>
       </div>
       <div class="explanation">
-        <strong>정답: ③</strong><br>
+        <strong>정답: ①</strong><br>
         <em>Some Frenchman would ever help no Englishman.</em><br>
-        → 'no Englishman'은 help의 목적어 NP 내부에 있음<br>
+        → <strong>no Englishman</strong>은 help의 Object NP입니다.<br>
         → 트리에서 'no Englishman'은 ever보다 <strong>뒤에 있어 precede ✗</strong><br>
         → 설령 뒤에 ever를 쓴다 해도(Some Frenchman would help no Englishman ever) c-command ✗<br>
-        → ever는 VP adjunct로서 VP 아래 V'-bar에 붙는데, no Englishman은 V의 목적어 NP 내부 → c-command 불성립
+        → 이 문제의 분석에서 <strong>ever는 S의 immediate constituent</strong>입니다. Object NP에서 처음 만나는 branching node VP는 ever를 dominate하지 않으므로 c-command도 성립하지 않습니다.
       </div>
     </div>
   </div>
@@ -918,17 +921,17 @@
       <thead><tr><th>예문</th><th>판정</th><th>이유</th></tr></thead>
       <tbody>
         <tr>
-          <td class="mono">*Drunks would put completely off the customers.</td>
+          <td class="mono">*Drunks would put <strong>completely</strong> off the customers.</td>
           <td class="badge-x">✗</td>
           <td><em>completely</em>가 V[put]과 P[off] 사이에 위치 → V의 자손 off가 ADVP보다 뒤에 → Crossing 위반</td>
         </tr>
         <tr>
-          <td class="mono">Drunks would put the customers off completely.</td>
+          <td class="mono">Drunks would put the customers off <strong>completely</strong>.</td>
           <td class="badge-o">✓</td>
           <td><em>completely</em>가 VP 끝에 위치 → 교차 없음</td>
         </tr>
         <tr>
-          <td class="mono">Drunks would completely put off the customers.</td>
+          <td class="mono">Drunks would <strong>completely</strong> put off the customers.</td>
           <td class="badge-o">✓</td>
           <td><em>completely</em>가 V 앞에 위치 → 교차 없음</td>
         </tr>
@@ -1086,11 +1089,6 @@
           <td class="bad-cell">항상 Adjective 앞<br><em>*big the bang</em> ✗</td>
         </tr>
         <tr>
-          <td><strong>Cleft sentence</strong><br>focus 위치</td>
-          <td class="ok-cell">focus 가능<br><em>It was a car that she bought.</em> ✓</td>
-          <td class="bad-cell">focus 불가<br><em>*It is very pretty that she is.</em> ✗</td>
-        </tr>
-        <tr>
           <td><strong>Very 수식</strong></td>
           <td class="ok-cell">very 수식 가능<br><em>very tall</em> ✓</td>
           <td class="bad-cell">very 수식 불가<br><em>*very this</em> ✗</td>
@@ -1115,12 +1113,8 @@
   </div>
 
   <div class="rule-box">
-    <div class="rule-title">Cleft sentence Focus 위치 — NP, PP만 가능</div>
-    <p><em>It was a car that she bought.</em> → NP: focus position ✓</p>
-    <p><em>It was in the shop that I met her.</em> → PP: focus position ✓</p>
-    <p><em>*It is very pretty that she is.</em> → AP: focus position ✗</p>
-    <p><em>*It is very quickly that she writes.</em> → ADVP: focus position ✗</p>
-    <p><em>*It is go home that I will.</em> → VP: focus position ✗</p>
+    <div class="rule-title">Cleft focus 대조 — Adjective / Determiner가 아닌 phrase category 진단</div>
+    <p>Radford §3.6의 제시된 대조입니다. <strong>focus에 놓인 phrase 전체</strong>를 판별합니다.</p><div class="diagnostic-scroll" role="region" aria-label="Cleft focus의 phrase category" tabindex="0"><table class="diagnostic-table"><caption>Cleft focus의 phrase category</caption><thead><tr><th scope="col">예문</th><th scope="col">focus category · 판정</th></tr></thead><tbody><tr><td><span class="en" lang="en">It was <strong>a car</strong> that she bought.</span></td><td>NP · ✓</td></tr><tr><td><span class="en" lang="en">It was <strong>in the shop</strong> that I met her.</span></td><td>PP · ✓</td></tr><tr><td><span class="en" lang="en">*It is <strong>very pretty</strong> that she is.</span></td><td>AP · ✗</td></tr><tr><td><span class="en" lang="en">*It is <strong>very quickly</strong> that she writes.</span></td><td>ADVP · ✗</td></tr><tr><td><span class="en" lang="en">*It is <strong>go home</strong> that I will.</span></td><td>VP · ✗</td></tr></tbody></table></div>
   </div>
 
   <!-- QUIZ 4 -->
@@ -1185,7 +1179,7 @@
     <p><strong>형용사(Adjective)</strong>: very의 수식이 가능 / 목적어 동반 ✗ / by-phrase ✗</p>
     <p><strong>동사(Verb)</strong>: very의 수식이 불가 / 목적어 동반 ✓ / by-phrase 가능</p>
     <p><strong>Gerund(동명사)</strong>: 주어·목적어·보어 자리에 옴 / V-ing 형태</p>
-    <p>→ very의 수식이 가능하면 형용사, 불가능하면 동사</p>
+    <p>이 예문에서는 <strong>very 수식과 direct object 동반 여부</strong>를 함께 비교합니다. very가 안 된다는 사실 하나만으로 Verb라고 단정하지 마세요.</p>
   </div>
 
   <div class="ex-block">
@@ -1201,10 +1195,9 @@
 
   <div class="rule-box">
     <div class="rule-title">예외 — very + by-phrase 가능한 경우</div>
-    <p><em>The man was very offended <strong>by the policeman</strong>.</em> ✓</p>
     <p><em>I'm very disturbed <strong>by your attitude</strong>.</em> ✓</p>
     <p><em>We were very pleased <strong>by his behavior</strong>.</em> ✓</p>
-    <p>→ by-phrase contains a <strong>nonpersonal NP that expresses cause or reason</strong></p>
+    <p>이 두 예문에서는 by-phrase의 <strong>nonpersonal NP가 원인·이유</strong>를 나타냅니다. 이를 모든 adjectival participle의 by-phrase에 대한 제한으로 일반화하지 마세요.</p>
   </div>
 
   <div class="tbl-wrap">
@@ -1230,12 +1223,12 @@
         <tr>
           <td><strong>Gerund</strong></td>
           <td><em>Killing his dog upset John.</em></td>
-          <td>John이 직접 개를 죽임 (factive)</td>
+          <td>이 비교에서는 John이 죽인 행위로 읽음</td>
         </tr>
         <tr>
           <td><strong>Nominalization</strong></td>
-          <td><em>The killings of his dog upset John.</em></td>
-          <td>누군가 개를 죽인 방식/사건</td>
+          <td><em>The <strong>killing</strong> of his dog upset John.</em></td>
+          <td>개가 죽임을 당한 사건 · 행위자는 별도 해석</td>
         </tr>
       </tbody>
     </table>
@@ -1244,9 +1237,7 @@
   <div class="rule-box">
     <div class="rule-title">Famous Ambiguous Sentence</div>
     <p><em>The shooting of the hunters was awful.</em></p>
-    <p>① <strong>Gerund</strong>: the fact of shooting the hunters was awful (사냥꾼들을 쏜 사실 자체)</p>
-    <p>② <strong>Nominalization</strong>: the manner of the hunters' shooting was awful (사냥꾼들이 쏘는 방식)</p>
-    <p>해결법: Shooting the hunters was a tragic mistake (factive ✓) / Shooting was pathetically inaccurate (manner ✓)</p>
+    <p>두 해석 모두 <strong>Nominalization</strong>입니다. 달라지는 것은 <u>the hunters의 의미 관계</u>입니다.</p><div class="diagnostic-scroll" role="region" aria-label="Nominalization 안의 두 해석" tabindex="0"><table class="diagnostic-table"><caption>Nominalization 안의 두 해석</caption><thead><tr><th scope="col">the hunters의 관계</th><th scope="col">해석</th></tr></thead><tbody><tr><td>Patient · 쏘는 대상</td><td>사냥꾼들을 쏜 사실이 끔찍했다.</td></tr><tr><td>Agent · 쏘는 주체</td><td>사냥꾼들이 쏘는 방식이 형편없었다.</td></tr></tbody></table></div><p>반면 <em><strong>Shooting the hunters</strong> was a tragic mistake.</em>의 Gerund는 the hunters를 직접 Object로 취합니다. 이 대조에서 해석 차이와 단어의 category 차이를 동일시하지 마세요.</p>
   </div>
 
   <!-- QUIZ 5 -->
@@ -1284,12 +1275,9 @@
       </div>
       <div class="explanation">
         <strong>정답: ①</strong><br>
-        <strong>Gerund</strong>: 행위 자체(factive interpretation) — 특정 행위가 일어났다는 사실<br>
-        <em>John enjoyed reading The Bald Soprano.</em> → John 본인이 읽는 행위<br><br>
-        <strong>Nominalization</strong>: 방식(manner) — 행위가 어떻게 일어났는지<br>
-        <em>John enjoyed a reading of The Bald Soprano.</em> → 누군가가 읽어주는 것을 들음<br><br>
-        The missing subject of gerunds is co-referential with another NP in the sentence,<br>
-        while the missing subject of nominalizations refers to some other participant.
+        선택지의 <strong>‘경향’</strong>에 주목하세요. 이 자료의 대조에서 Gerund는 행위가 일어난 사실(factive), Nominalization은 방식(manner)으로 읽히는 경우가 있습니다. <u>모든 용법에 강제되는 의미 규칙은 아닙니다.</u><br>
+        <em>John enjoyed reading The Bald Soprano.</em>에서는 John이 읽는 행위로, <em>John enjoyed a reading of The Bald Soprano.</em>에서는 다른 사람의 낭독을 듣는 것으로 읽는 것이 이 비교의 기본 해석입니다.<br>
+        이를 모든 Gerund의 생략된 subject가 반드시 같은 문장의 NP와 coreferential하다는 규칙으로 확대하지 마세요. <strong>Nominalization도 factive 해석을 가질 수 있습니다.</strong> 다음 hunters 예문의 두 해석을 함께 비교하세요.
       </div>
     </div>
 
@@ -1298,16 +1286,16 @@
       <div class="options">
         <button class="opt" onclick="checkAns(this,'wrong')">① hunters가 복수여서 생기는 의미적 중의성</button>
         <button class="opt" onclick="checkAns(this,'wrong')">② shooting이 자동사/타동사로 쓰일 수 있어서</button>
-        <button class="opt" onclick="checkAns(this,'correct')">③ shooting이 Gerund(factive)와 Nominalization(manner) 두 가지로 해석 가능해서</button>
-        <button class="opt" onclick="checkAns(this,'wrong')">④ the hunters가 주어나 목적어로 해석될 수 있어서</button>
+        <button class="opt" onclick="checkAns(this,'wrong')">③ shooting이 Gerund(factive)와 Nominalization(manner) 두 가지로 해석 가능해서</button>
+        <button class="opt" onclick="checkAns(this,'correct')">④ the hunters가 주어나 목적어로 해석될 수 있어서</button>
       </div>
       <div class="explanation">
-        <strong>정답: ③</strong><br>
-        <em>The shooting of the hunters was awful.</em><br>
-        해석 1: <strong>Gerund(factive)</strong> — 사냥꾼들을 쏜 사실이 끔찍했다<br>
-        해석 2: <strong>Nominalization(manner)</strong> — 사냥꾼들이 총을 쏜 방식이 끔찍했다<br><br>
-        해결: <em>Shooting the hunters was a tragic mistake.</em> → factive ✓<br>
-        <em>The hunters' shooting was pathetically inaccurate.</em> → manner ✓
+        <strong>정답: ④</strong><br>
+        <em>The shooting of the hunters was awful.</em>은 두 해석 모두 <strong>Nominalization</strong>입니다.<br>
+        ① the hunters = shooting의 Patient: 사냥꾼들을 쏜 사실이 끔찍했다.<br>
+        ② the hunters = shooting의 Agent: 사냥꾼들이 쏘는 방식이 형편없었다.<br>
+        여기서 선택지 ④의 subject/object는 <strong>쏘는 주체/대상에 대응하는 해석</strong>을 가리킵니다. 실제 phrase 안에서 <em>the hunters</em>는 두 경우 모두 <em>of</em>의 Complement입니다.<br>
+        <em>Shooting the hunters was a tragic mistake.</em>의 Gerund와, 위 Nominalization 안의 두 해석을 혼동하지 마세요.
       </div>
     </div>
   </div>
