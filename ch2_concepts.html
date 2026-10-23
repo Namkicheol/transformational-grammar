@@ -563,7 +563,7 @@ body { font-family: var(--sans); color: var(--text); background: #fff; line-heig
 
 <p class="body-text">
   또한 <strong>단어 하나도 phrase가 될 수 있습니다</strong> (§2.7 Words used as Phrases).
-  예를 들어 <em>Hypocrisy, most people can't stand</em>에서 <em>dishonesty</em>는 단어 하나지만,
+  예를 들어 <em>Hypocrisy, most people can't stand</em>에서 <strong>Hypocrisy</strong>는 단어 하나지만,
   prepose되고 sentence-fragment로도 쓰이므로 완전한 NP입니다.
   <strong>단어의 개수가 아니라 distribution이 phrase를 결정합니다.</strong>
 </p>
@@ -762,13 +762,13 @@ completely(VP-adverb)가 V(finish)와 NP(the assignment) 사이에 끼어들면 
   <br>
   <span class="en ok">You can rely on my help <u>entirely</u>, naturally. ✓</span>
   <span class="en bad">*You can rely on my help naturally, <u>entirely</u>. ✗</span>
-  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ S-adverb(naturally)는 VP-adverb(entirely) 앞에 와야 함.</span>
+  <span class="en" style="color:var(--muted); font-size:12px; margin-left:4px">→ 문장 끝에서는 VP-adverb <strong>entirely</strong> 다음에 S-adverb <strong>naturally</strong>가 옵니다.</span>
 </div>
 
 <div class="point-box">
-  <strong>순서 규칙</strong>: S-adverb &gt; VP-adverb<br>
-  S-adverb가 VP-adverb보다 앞에 와야 합니다.<br>
-  VP-adverb가 Modal 앞에 오거나, S-adverb 앞에 오면 비문입니다.
+  <strong>판별 기준: 선형 순서보다 부착 위치</strong><br>
+  이 분석에서 S-adverb는 S에, VP-adverb는 VP에 붙습니다.<br>
+  앞쪽에서는 <strong>obviously … passionately</strong>, 문장 끝에서는 <strong>entirely, naturally</strong>가 가능합니다. “S-adverb가 항상 먼저”라는 규칙으로 외우지 마세요.
 </div>
 
 <!-- 미니퀴즈 3 -->
@@ -796,16 +796,16 @@ VP-adverb: completely, entirely, passionately, carefully, quickly
       <span class="en">*He passionately will appeal obviously for support.</span>
     </div>
     <div class="quiz-opts">
-      <button class="quiz-btn" onclick="qz(this,1)">① passionately=VP-adverb가 Modal 앞에 왔고, obviously=S-adverb가 VP-adverb 뒤에 옴</button>
+      <button class="quiz-btn" onclick="qz(this,1)">① passionately=VP-adverb가 VP 밖인 Modal 앞에 옴</button>
       <button class="quiz-btn" onclick="qz(this,0)">② 두 부사가 연속으로 나오는 것 자체가 비문</button>
       <button class="quiz-btn" onclick="qz(this,0)">③ obviously가 VP 내부에서만 써야 하는 부사여서</button>
     </div>
     <div class="quiz-fb" id="qf6">정답: ①
 passionately = VP-adverb → [S NP M [VP * … ]] 위치에만 가능
 → Modal(will) 앞에 올 수 없음
-obviously = S-adverb → [S * NP * M * VP *] 위치 가능
-→ S-adverb(obviously)가 VP-adverb(passionately) 뒤에 오면 비문
-올바른 순서: He obviously will appeal passionately for support. ✓</div>
+obviously = S-adverb → S에 붙는 위치에서 가능하며, 이 분석에서는 appeal과 for support 사이에 넣지 않습니다.
+올바른 예: He obviously will appeal passionately for support. ✓
+문장 끝의 entirely, naturally도 가능합니다. “S-adverb는 언제나 VP-adverb보다 먼저”가 아니라 각 부사가 붙는 node를 확인하세요.</div>
   </div>
 </div>
 
