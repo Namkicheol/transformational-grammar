@@ -54,7 +54,8 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
 .qmeta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .qnum{font-family:var(--mono);font-size:11px;color:var(--mut);background:var(--gray);
   padding:2px 8px;border-radius:4px}
-.qbadge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
+.qbadge{visibility:hidden;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
+.qcard.ok .qbadge,.qcard.ng .qbadge{visibility:visible}
 .qbadge.O{background:#eaf6f0;color:#1a6e42}
 .qbadge.X{background:#fdf0ed;color:#c0392b}
 
@@ -241,7 +242,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">04</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*John despises each other.</div>
+  <div class="sent">John despises each other.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(4,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(4,'X','X')">❌ 비문</button>
@@ -257,7 +258,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">05</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*I despise himself.</div>
+  <div class="sent">I despise himself.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(5,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(5,'X','X')">❌ 비문</button>
@@ -273,7 +274,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">06</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*Each other are always arguing.</div>
+  <div class="sent">Each other are always arguing.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(6,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(6,'X','X')">❌ 비문</button>
@@ -305,7 +306,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">08</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*The soldiers' behaviour might disgrace themselves.</div>
+  <div class="sent">The soldiers' behaviour might disgrace themselves.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(8,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(8,'X','X')">❌ 비문</button>
@@ -327,7 +328,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <button class="xbtn" onclick="check(9,'X','O')">❌ 비문</button>
   </div>
   <div class="exp" id="exp9">
-    <strong>✓ 정문 (구조적 중의성).</strong> <em>each other</em>의 선행사로 [the men]도 가능하고, [the arrows]도 가능하다 — "화살들이 서로에게 쏠린다" vs "남자들이 서로를 향해 쏜다".
+    <strong>✓ 정문 (antecedent 해석의 중의성).</strong> <em>each other</em>는 [the men] 또는 [the arrows]를 antecedent로 삼을 수 있습니다. 두 NP 모두 같은 phrase-marker에서 <em>each other</em>를 c-command합니다. 서로 다른 두 tree가 필요한 Structural Ambiguity와 구별합니다.
   </div>
 </div>
 
@@ -360,13 +361,13 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">11</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*Drunks would put completely off the customers.</div>
+  <div class="sent">Drunks would put completely off the customers.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(11,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(11,'X','X')">❌ 비문</button>
   </div>
   <div class="exp" id="exp11">
-    <strong>✗ 비문.</strong> VP-adverb <em>completely</em>는 VP의 immediate constituent여야 한다. 그러나 이 구조에서 <em>completely</em>를 VP에 붙이면 <em>off</em>와 <em>the customers</em>가 가지를 교차하게 되어 No Crossing Branches Constraint 위반.
+    <strong>✗ 비문.</strong> <em>completely</em>를 VP의 immediate constituent로 붙이면서 [put off]를 하나의 V constituent로 유지하면, 그 V의 일부인 <em>off</em>가 ADVP 뒤에 남아 No Crossing Branches Constraint를 위반합니다. ADVP를 V 내부에 붙이는 분석도 VP-adverb의 부착 조건에 어긋납니다.
   </div>
 </div>
 
@@ -399,13 +400,13 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">13</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*I will ever forgive you for that.</div>
+  <div class="sent">I will ever forgive you for that.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(13,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(13,'X','X')">❌ 비문</button>
   </div>
   <div class="exp" id="exp13">
-    <strong>✗ 비문.</strong> <em>ever</em>는 Negative Polarity Item(NPI)으로, 부정 표현이 선행하며 c-command해야 한다. 긍정문에는 사용 불가.
+    <strong>✗ 비문.</strong> 이 문장의 NPI <em>ever</em>를 허용할 환경이 없습니다. 여기서 다루는 negative declarative의 분석에서는 negative constituent가 <em>ever</em>를 precede하고 c-command해야 합니다. 이 조건을 의문문 등 모든 <em>ever</em> 용법에 일반화하지 않습니다.
   </div>
 </div>
 
@@ -447,13 +448,13 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">16</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*I will ever forgive nobody for that.</div>
+  <div class="sent">I will ever forgive nobody for that.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(16,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(16,'X','X')">❌ 비문</button>
   </div>
   <div class="exp" id="exp16">
-    <strong>✗ 비문.</strong> <em>nobody</em>는 <em>ever</em>를 선행하지 않는다(precede ✗). NPI는 부정 표현이 선행 AND c-command 두 조건 모두 충족해야 한다.
+    <strong>✗ 비문.</strong> <em>nobody</em>가 <em>ever</em> 뒤에 있어 precede 조건을 충족하지 못합니다. 또한 이 분석에서 object NP는 VP 안에 있고 <em>ever</em>는 S의 immediate constituent이므로, object NP가 <em>ever</em>를 c-command하지도 못합니다.
   </div>
 </div>
 
@@ -463,7 +464,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">17</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*Someone who didn't like you would ever forgive you for that.</div>
+  <div class="sent">Someone who didn't like you would ever forgive you for that.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(17,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(17,'X','X')">❌ 비문</button>
@@ -501,7 +502,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <button class="xbtn" onclick="check(19,'X','O')">❌ 비문</button>
   </div>
   <div class="exp" id="exp19">
-    <strong>✓ 정문.</strong> NP [No Frenchman]이 <em>ever</em>를 선행하고 c-command. 위치(Subject→VP 내부)가 달라져도 조건 충족.
+    <strong>✓ 정문.</strong> NP [No Frenchman]이 <em>ever</em>를 precede하고 c-command합니다. 이 exercise에서 <em>ever</em>는 Modal 뒤에 있어도 VP 내부가 아니라 S의 immediate constituent로 분석합니다.
   </div>
 </div>
 
@@ -527,7 +528,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">21</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*Some Frenchmen ever wouldn't help an Englishman.</div>
+  <div class="sent">Some Frenchmen ever wouldn't help an Englishman.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(21,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(21,'X','X')">❌ 비문</button>
@@ -559,7 +560,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">23</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*Some Frenchmen ever would help no Englishman.</div>
+  <div class="sent">Some Frenchmen ever would help no Englishman.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(23,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(23,'X','X')">❌ 비문</button>
@@ -575,13 +576,13 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">24</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*Some Frenchmen would ever help no Englishman.</div>
+  <div class="sent">Some Frenchmen would ever help no Englishman.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(24,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(24,'X','X')">❌ 비문</button>
   </div>
   <div class="exp" id="exp24">
-    <strong>✗ 비문.</strong> <em>no Englishman</em>이 VP 내에서 <em>ever</em>를 c-command하지 못한다(precede ✗). 부정어가 NPI를 선행해야 하는 조건 위반.
+    <strong>✗ 비문.</strong> <em>no Englishman</em>은 <em>ever</em> 뒤에 있어 precede 조건을 충족하지 못합니다. 또한 object NP는 VP 안에 있고 <em>ever</em>는 S의 immediate constituent이므로, c-command 조건도 충족하지 못합니다.
   </div>
 </div>
 
@@ -620,7 +621,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <button class="xbtn" onclick="check(26,'X','O')">❌ 비문</button>
   </div>
   <div class="exp" id="exp26">
-    <strong>✓ 정문.</strong> cleft sentence의 focus 자리(it be ___ that S)에는 NP 또는 PP만 올 수 있다. NP [a car]는 적합한 범주.
+    <strong>✓ 정문.</strong> Radford가 비교하는 이 it-cleft의 focus 위치에 NP [a car]가 올 수 있습니다. 이 예문군에서는 NP·PP와 AP·ADVP·VP의 분포를 대조합니다.
   </div>
 </div>
 
@@ -630,13 +631,13 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">27</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*It is very pretty that she is.</div>
+  <div class="sent">It is very pretty that she is.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(27,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(27,'X','X')">❌ 비문</button>
   </div>
   <div class="exp" id="exp27">
-    <strong>✗ 비문.</strong> cleft sentence의 focus 자리에 AP [very pretty]는 올 수 없다. NP·PP만 허용되는 범주 제약 위반.
+    <strong>✗ 비문.</strong> Radford가 제시하는 이 it-cleft의 focus 위치에는 AP [very pretty]를 넣을 수 없습니다. NP·PP가 허용되는 예문과 대조합니다.
   </div>
 </div>
 
@@ -668,7 +669,7 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <button class="xbtn" onclick="check(29,'X','O')">❌ 비문</button>
   </div>
   <div class="exp" id="exp29">
-    <strong>✓ 정문.</strong> <em>carefully</em>는 Adverb(ADV). TG에서 Adjective와 Adverb는 동일 범주[+N, +V]의 위치적 변이형으로 분석된다.
+    <strong>✓ 정문.</strong> <em>carefully</em>는 Verb <em>works</em>를 수식하는 Adverb입니다. 이 장의 Radford 분석에서는 Adjective와 Adverb를 같은 범주 A의 positional variants로 묶습니다.
   </div>
 </div>
 
@@ -678,13 +679,13 @@ body{font-family:var(--sans);color:var(--txt);background:#fff;line-height:1.9}
     <span class="qnum">30</span>
     <span class="qbadge X">X</span>
   </div>
-  <div class="sent">*It is go home that I will.</div>
+  <div class="sent">It is go home that I will.</div>
   <div class="btn-row">
     <button class="obtn" onclick="check(30,'O','X')">⭕ 정문</button>
     <button class="xbtn" onclick="check(30,'X','X')">❌ 비문</button>
   </div>
   <div class="exp" id="exp30">
-    <strong>✗ 비문.</strong> cleft sentence의 focus 자리에 VP [go home]은 올 수 없다. NP·PP만 허용(VP는 pseudo-cleft "What I will do is go home"에서만 가능).
+    <strong>✗ 비문.</strong> 이 it-cleft의 focus 위치에는 VP [go home]을 넣을 수 없습니다. 반면 pseudo-cleft인 <em>What I will do is go home</em>에서는 이 VP가 가능합니다.
   </div>
 </div>
 

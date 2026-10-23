@@ -292,14 +292,14 @@ const DATA = [
    eng:'[Give in to threats], I never will!',
    ask:'이 문장은 문법적이다.',
    ans:true,
-   why:'VP 전체 [give in to blackmail]이 prepose된 문법적인 문장입니다.',
+   why:"VP 전체 [give in to threats]가 prepose된 문법적인 문장입니다.",
    key:'VP preposing ✓'},
 
   {sec:'§2.5 Preposing',
    eng:'[Up his sister], John rang.',
    ask:'이 문장은 문법적이다.',
    ans:false,
-   why:'ring up은 Phrasal Verb입니다. up his mother는 constituent가 아니므로 prepose 불가합니다.',
+   why:"ring up은 Phrasal Verb입니다. up his sister는 constituent가 아니므로 함께 prepose할 수 없습니다.",
    key:'Phrasal V particle → nonconstituent → 전치 불가'},
 
   // §2.5 Postposing
@@ -329,14 +329,14 @@ const DATA = [
    eng:'A: Who were you ringing up?\nB: Up my old sister.',
    ask:'B의 답변은 sentence fragment로 적절하다.',
    ans:false,
-   why:'ring up = Phrasal Verb. "up my elder sister"는 constituent가 아니므로 sentence fragment로 사용 불가합니다.',
+   why:"ring up은 Phrasal Verb입니다. up my old sister는 constituent가 아니므로 이 질문의 sentence fragment로 사용할 수 없습니다.",
    key:'Nonconstituent → fragment 불가'},
 
   {sec:'§2.5 Sentence Fragment',
    eng:'A: Where did he go?\nB: The park.',
    ask:'B의 답변은 sentence fragment로 적절하다.',
    ans:true,
-   why:'"the cinema"는 PP(to the cinema)의 일부처럼 보이지만, 그 자체로 완전한 NP constituent입니다.',
+   why:"the park는 그 자체로 완전한 NP constituent이므로, 장소를 묻는 이 문맥에서 sentence fragment로 사용할 수 있습니다.",
    key:'NP constituent → fragment ✓'},
 
   // §2.5 S/VP-adverb
@@ -401,36 +401,36 @@ const DATA = [
    eng:'John wrote a letter to Jane and to Fred.',
    ask:'이 문장은 문법적이다.',
    ans:true,
-   why:'PP(to Mary)와 PP(to Fred)로 같은 범주끼리 등위접속했습니다.',
+   why:"PP [to Jane]과 PP [to Fred]를 coordination한 문장입니다.",
    key:'PP and PP → ✓'},
 
   {sec:'§2.6 Coordination',
    eng:'John wrote a note and to Fred.',
    ask:'이 문장은 문법적이다.',
    ans:false,
-   why:'NP(a letter)와 PP(to Fred)로 서로 다른 범주를 등위접속했습니다.',
+   why:"이 문장에서는 NP [a note]와 PP [to Fred]를 같은 자리에 coordination할 수 없습니다.",
    key:'NP and PP → 범주 불일치 → 비문'},
 
   {sec:'§2.6 Coordination',
    eng:'Your mother won\'t put (and your wife is fed) up with your behaviour.',
    ask:'이 문장은 문법적이다.',
-   ans:true,
-   why:'[up the hill]은 완전한 PP constituent로 Shared Constituent Coordination이 성립합니다.',
-   key:'Shared Constituent Coordination ✓'},
+   ans:false,
+   why:"공유된 up with your behaviour가 두 conjunct 모두에서 동일한 constituent로 성립하지 않습니다. put up with와 be fed up with의 표면적인 문자열이 같아도 Shared Constituent Coordination을 허용하지 않습니다.",
+   key:"Shared string ≠ shared constituent → 비문"},
 
   {sec:'§2.6 Coordination',
    eng:'John rang (and Bill picked) up their colleague.',
    ask:'이 문장은 문법적이다.',
    ans:false,
-   why:'ring up / pick up = Phrasal Verb. "up Mary\'s sister"는 constituent가 아니어서 공유 불가합니다.',
+   why:"ring up과 pick up은 Phrasal Verb입니다. up their colleague는 어느 conjunct에서도 constituent가 아니므로 함께 공유할 수 없습니다.",
    key:'Phrasal V → nonconstituent → Shared Coordination 불가'},
 
   // §2.6 Proform
   {sec:'§2.6 Proform',
    eng:'A: Have you ever been to Rome?\nB: No, I have never been there.',
-   ask:'"there"는 Pro-NP로 London을 대치한다.',
+   ask:"\"there\"는 Pro-NP로 Rome을 대치한다.",
    ans:false,
-   why:'there는 Pro-PP입니다. been 동사는 PP를 요구하므로 there가 PP 위치를 채웁니다.',
+   why:"이 문장의 there는 Pro-PP로, 장소를 나타내는 PP [to Rome]에 대응합니다. Rome만 대치하는 Pro-NP가 아닙니다.",
    key:'there = Pro-PP (not Pro-NP)'},
 
   {sec:'§2.6 Proform',
@@ -451,7 +451,7 @@ const DATA = [
    eng:'John might [leave early], and so might Bill.',
    ask:'"so"는 Pro-VP이다.',
    ans:true,
-   why:'so는 앞서 나온 VP [go home]을 대치하는 Pro-VP입니다.',
+   why:"so는 앞서 나온 VP [leave early]에 대응하는 Pro-VP입니다.",
    key:'so = Pro-VP ✓'},
 
   {sec:'§2.6 Proform',
@@ -466,21 +466,21 @@ const DATA = [
    eng:'Max didn\'t help me with the dishes, but his brother did.',
    ask:'이 문장은 문법적이다.',
    ans:true,
-   why:'VP [help me with the dishes] 전체가 생략되었습니다. Only VPs can undergo Ellipsis.',
+   why:"두 번째 clause에서 VP [help me with the dishes] 전체가 생략되었습니다. 여기서 다루는 VP Ellipsis는 VP 전체를 대상으로 합니다.",
    key:'VP ellipsis ✓'},
 
   {sec:'§2.6 VP Ellipsis',
-   eng:'John will put the juice into the glass,\nbut he won\'t put the tonic into it.',
+   eng:"John will put the juice into the glass,\nbut his brother will put.",
    ask:'이 문장은 문법적이다.',
    ans:false,
-   why:'"put"만 남기고 목적어가 생략되었습니다. VP의 일부만 생략할 수 없습니다.',
-   key:'Partial VP ellipsis → 비문'},
+   why:"두 번째 clause에서 lexical V put은 남겨 두고 필요한 NP·PP complements만 생략했습니다. 이는 VP 전체의 Ellipsis가 아니므로 비문입니다.",
+   key:"put을 남긴 NP·PP complement 생략 → 비문"},
 
   {sec:'§2.6 VP Ellipsis',
    eng:'She may finish the project early, but then again she may not.',
    ask:'이 문장은 문법적이다.',
    ans:true,
-   why:'VP [come home early] 전체가 생략된 문법적인 문장입니다.',
+   why:"두 번째 clause에서 VP [finish the project early] 전체가 생략된 문법적인 문장입니다.",
    key:'VP ellipsis ✓'},
 
   // §2.8 Phrasal V vs Prep V — S/VP-adverb 위치
@@ -509,14 +509,14 @@ const DATA = [
    eng:'Drunks would get [off the bus] and [onto the platform].',
    ask:'이 문장은 문법적이다.',
    ans:true,
-   why:'[off the bus]와 [on the train]은 모두 PP constituent입니다. PP and PP 등위접속이 성립합니다.',
-   key:'get off/get on = Prep V → PP and PP ✓'},
+   why:"[off the bus]와 [onto the platform]은 모두 PP constituent이므로 coordination할 수 있습니다.",
+   key:"PP and PP → coordination ✓"},
 
   {sec:'§2.8 Phrasal V vs Prep V',
    eng:'Drunks would put off the customers and off the waiters.',
    ask:'이 문장은 문법적이다.',
    ans:false,
-   why:'put off = Phrasal Verb. "off the waitresses"는 constituent가 아니므로 등위접속 불가합니다.',
+   why:"put off는 Phrasal Verb입니다. off the waiters는 constituent가 아니므로 이와 같은 coordination은 불가능합니다.",
    key:'Phrasal V → nonconstituent → coordination 불가'},
 
   {sec:'§2.8 Phrasal V vs Prep V',
@@ -538,29 +538,29 @@ const DATA = [
    eng:'She will thoroughly review the document.',
    ask:'이 문장은 문법적이다.',
    ans:true,
-   why:'completely(VP-adverb)가 VP 앞에 위치했습니다. V와 NP 사이에 끼어들지 않아 문법적입니다.',
+   why:"thoroughly가 VP 앞에 위치합니다. V review와 NP [the document] 사이를 분리하지 않으므로 문법적입니다.",
    key:'VP-adverb → VP 앞 ✓'},
 
   {sec:'§2.8 Strict Adjacency Principle',
    eng:'She will review thoroughly the document.',
    ask:'이 문장은 문법적이다.',
    ans:false,
-   why:'completely가 V(finish)와 NP(the assignment) 사이에 끼어들었습니다. Strict Adjacency Principle 위반입니다.',
+   why:"thoroughly가 V review와 NP [the document] 사이에 끼어들어, 이 구조의 Strict Adjacency Principle을 위반합니다.",
    key:'V와 NP 사이 부사 삽입 → 비문'},
 
   {sec:'§2.8 Strict Adjacency Principle',
    eng:'He discussed every detail with the supervisor.',
    ask:'이 문장은 문법적이다.',
    ans:true,
-   why:'PP complement(about every point)가 동사 뒤에, 또 다른 PP(with the tax-man)가 그 뒤에 위치했습니다. PP는 순서를 바꿔도 됩니다.',
-   key:'PP complement → 위치 유연 ✓'},
+   why:"NP complement [every detail]이 V discussed 바로 뒤에 오고, PP [with the supervisor]가 그 뒤에 옵니다. V와 NP의 adjacency를 지킨 구조입니다.",
+   key:"V + NP complement + PP → ✓"},
 
   {sec:'§2.8 Strict Adjacency Principle',
    eng:'He discussed with the supervisor every detail.',
    ask:'이 문장은 문법적이다.',
    ans:false,
-   why:'NP complement(every point)가 다른 PP(with the tax-man) 뒤에 위치했습니다. NP complement는 반드시 V 바로 뒤에 와야 합니다.',
-   key:'NP complement는 V 바로 뒤 → Strict Adjacency Principle'}
+   why:"이 문항에서는 짧은 NP complement [every detail] 앞에 PP [with the supervisor]가 끼어들어 V와 NP의 adjacency를 깨뜨립니다.",
+   key:"짧은 NP complement: V와의 adjacency 필요"}
 ];
 
 let ANS, COR, SHUFFLED;
