@@ -164,8 +164,8 @@
     </div>
     <div class="explanation" id="exp-q1">
       <div class="ans-label">정답: ⭕ 정문</div>
-      <strong>[the soldiers]</strong>의 first branching node는 S이고, S는 [themselves]를 dominate합니다.<br>
-      → <strong>[the soldiers] c-commands [themselves]</strong> ✓<br>
+      <strong>[the players]</strong>의 first branching node는 S이고, S는 [themselves]를 dominate합니다.<br>
+      → <strong>[the players] c-commands [themselves]</strong> ✓<br>
       → C-command Condition on Anaphors 충족 → 정문
     </div>
   </div>
@@ -177,13 +177,13 @@
     <em>The players' behaviour might disgrace themselves.</em></div>
     <div class="ox-wrap">
       <button class="ox-btn" onclick="oxCheck(this,'O','X','q2')">⭕ 정문</button>
-      <button class="ox-btn" onclick="oxCheck(this,'X','O','q2')">❌ 비문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','X','q2')">❌ 비문</button>
     </div>
     <div class="explanation" id="exp-q2">
       <div class="ans-label">정답: ❌ 비문</div>
-      <strong>[the soldiers']</strong>의 first branching node는 NP ([the soldiers' behaviour])입니다.<br>
+      <strong>[the players']</strong>의 first branching node는 NP ([the players' behaviour])입니다.<br>
       NP는 [themselves]를 dominate하지 않으므로,<br>
-      → [the soldiers'] <strong>c-commands [themselves] ✗</strong> (precede ✓ / c-command ✗)<br>
+      → [the players'] <strong>c-commands [themselves] ✗</strong> (precede ✓ / c-command ✗)<br>
       → C-command Condition on Anaphors 불충족 → 비문
     </div>
   </div>
@@ -199,9 +199,9 @@
     </div>
     <div class="explanation" id="exp-q3">
       <div class="ans-label">정답: ⭕ 정문</div>
-      <strong>John</strong>의 first branching node는 S이고, S는 [himself]를 dominate합니다.<br>
-      → <strong>John c-commands himself</strong> ✓<br>
-      → antecedent John, anaphor himself → 인칭·수·성 일치 ✓ → 정문
+      <strong>Tom</strong>의 first branching node는 S이고, S는 [himself]를 dominate합니다.<br>
+      → <strong>Tom c-commands himself</strong> ✓<br>
+      → antecedent Tom, anaphor himself → 인칭·수·성 일치 ✓ → 정문
     </div>
   </div>
 
@@ -218,7 +218,7 @@
       <div class="ans-label">정답: ⭕ 정문</div>
       <strong>consider</strong>는 Subject-to-Object Raising(SOR)을 허용하는 동사입니다.<br>
       himself는 [himself to be the champion] 절의 주어였지만, SOR로 인해 절 boundary 밖으로 이동합니다.<br>
-      새로운 binding domain 안에서 <strong>John</strong>이 himself를 c-command ✓<br>
+      새로운 binding domain 안에서 <strong>Tom</strong>이 himself를 c-command ✓<br>
       → C-command Condition on Anaphors 충족 → 정문
     </div>
   </div>
@@ -270,7 +270,7 @@
   <div class="q-card" id="q7">
     <div class="q-meta"><span class="q-num">Q07</span><span class="q-type">빈칸</span></div>
     <div class="q-stem">다음 빈칸에 영어로 쓰시오.<br><br>
-    <em>The boys will shoot the arrows at each other.</em>에서 each other의 antecedent가 <strong>two ways</strong>로 해석되는 이유는, the men과 the arrows 둘 다 each other를 ________하기 때문이다.</div>
+    <em>The boys will shoot the arrows at each other.</em>에서 each other의 antecedent가 <strong>two ways</strong>로 해석되는 이유는, the boys과 the arrows 둘 다 each other를 ________하기 때문이다.</div>
     <div class="blank-wrap">
       <input type="text" class="blank-input" id="blank-q7" placeholder="영어로 입력">
       <button class="blank-submit" onclick="blankCheck('q7', ['c-command','c command','ccommand'])">확인</button>
@@ -278,9 +278,9 @@
     <div class="explanation" id="exp-q7">
       <div class="ans-label">정답: c-command</div>
       <em>The boys will shoot the arrows at each other.</em><br>
-      → <strong>the men</strong>: first branching node = S → S dominates each other ✓ → c-command ✓<br>
+      → <strong>the boys</strong>: first branching node = S → S dominates each other ✓ → c-command ✓<br>
       → <strong>the arrows</strong>: first branching node = VP → VP dominates each other ✓ → c-command ✓<br>
-      두 NP 모두 c-command 조건을 만족 → <strong>구조적 중의성(structural ambiguity)</strong>
+      제시된 하나의 구조에서 두 NP 모두 c-command 조건을 만족하므로 antecedent 선택이 달라질 수 있습니다. <strong>서로 다른 antecedent 해석</strong>만으로 두 개의 통사 구조가 있다고 결론 내리지는 않습니다.
     </div>
   </div>
 </section>
@@ -319,11 +319,11 @@
     <em>I will ever forgive you for that.</em></div>
     <div class="ox-wrap">
       <button class="ox-btn" onclick="oxCheck(this,'O','X','q9')">⭕ 정문</button>
-      <button class="ox-btn" onclick="oxCheck(this,'X','O','q9')">❌ 비문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','X','q9')">❌ 비문</button>
     </div>
     <div class="explanation" id="exp-q9">
       <div class="ans-label">정답: ❌ 비문</div>
-      ever는 영어의 긍정문(positive sentence)에서는 일반적으로 사용될 수 없는 <strong>NPI(Negative Polarity Item)</strong>입니다.<br>
+      이 예문의 ever는 <strong>NPI(Negative Polarity Item)</strong>이며, 제시된 affirmative declarative에는 이를 허용하는 환경이 없습니다. 의문문이나 조건절 등에서 쓰이는 ever까지 배제하는 규칙은 아닙니다.<br>
       부정 요소(negative modal / negative Det 'no' 포함 NP)가 없으므로 → 비문
     </div>
   </div>
@@ -366,29 +366,29 @@
       ㄱ. ✓ No Frenchman → ever precede ✓, c-command ✓<br>
       ㄷ. ✓ No Frenchman → ever(문장 끝) precede ✓, c-command ✓<br><br>
       ㄴ. ✗ <em>Some Frenchmen ever wouldn't</em> — negative item(wouldn't)이 ever <strong>뒤에</strong> 위치 → precede ✗<br>
-      ㄹ. ✗ <em>don't</em>은 관계절 [who don't like English people] 내부 → ever를 c-command ✗
+      ㄹ. ✗ <em>don't</em>은 관계절 [who don't like German people] 내부 → ever를 c-command ✗
     </div>
   </div>
 
   <!-- Q12 MC: 원문 Ex4-7 Some Frenchmen / no Englishman 세트 -->
   <div class="q-card" id="q12">
     <div class="q-meta"><span class="q-num">Q12</span><span class="q-type">객관식</span></div>
-    <div class="q-stem">다음 세 문장이 모두 비문인 이유로 가장 적절한 것은?
+    <div class="q-stem">이 자료처럼 ever를 S의 immediate constituent로 분석할 때, (a)(b)의 precede 조건과 (c)의 c-command 조건을 각각 구별하여 설명한 것은?
     <div class="q-examples">
       (a) *Some Frenchmen ever would help no German.<br>
       (b) *Some Frenchmen would ever help no German.<br>
       (c) *Some Frenchmen would help no German ever.
     </div></div>
     <div class="mc-options">
-      <button class="mc-opt" onclick="mcCheck(this,'wrong','q12')">① no Englishman이 ever를 c-command하지 못하기 때문에</button>
+      <button class="mc-opt" onclick="mcCheck(this,'wrong','q12')">① no German이 ever를 c-command하지 못하기 때문에</button>
       <button class="mc-opt" onclick="mcCheck(this,'wrong','q12')">② ever는 문장 맨 끝에만 올 수 있기 때문에</button>
-      <button class="mc-opt" onclick="mcCheck(this,'correct','q12')">③ (a)(b)는 no Englishman이 ever를 precede하지 못하고, (c)는 no Englishman이 ever를 c-command하지 못하기 때문에</button>
+      <button class="mc-opt" onclick="mcCheck(this,'correct','q12')">③ (a)(b)는 no German이 ever를 precede하지 못하고, (c)는 no German이 ever를 c-command하지 못하기 때문에</button>
       <button class="mc-opt" onclick="mcCheck(this,'wrong','q12')">④ Some Frenchmen이 부정어를 포함하지 않기 때문에</button>
     </div>
     <div class="explanation" id="exp-q12">
       <div class="ans-label">정답: ③</div>
-      (a)(b): <strong>no Englishman</strong>이 ever <strong>뒤에</strong> 위치 → <strong>precede ✗</strong> → 비문<br>
-      (c): <strong>no Englishman</strong>이 ever 앞에 있지만(precede ✓), VP 내부에 있어 ever(S의 immediate constituent)를 <strong>c-command ✗</strong> → 비문<br><br>
+      (a)(b): <strong>no German</strong>이 ever <strong>뒤에</strong> 위치 → <strong>precede ✗</strong> → 비문<br>
+      (c): <strong>no German</strong>이 ever 앞에 있지만(precede ✓), VP 내부에 있어 ever(S의 immediate constituent)를 <strong>c-command ✗</strong> → 비문<br><br>
       NPI 조건: ever는 negative constituent에 의해 <strong>preceded AND c-commanded</strong> 되어야 함
     </div>
   </div>
@@ -430,7 +430,7 @@
     <em>He waited until.</em></div>
     <div class="ox-wrap">
       <button class="ox-btn" onclick="oxCheck(this,'O','X','q14')">⭕ 정문</button>
-      <button class="ox-btn" onclick="oxCheck(this,'X','O','q14')">❌ 비문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','X','q14')">❌ 비문</button>
     </div>
     <div class="explanation" id="exp-q14">
       <div class="ans-label">정답: ❌ 비문</div>
@@ -448,7 +448,7 @@
     <em>He left during the party was still going on.</em></div>
     <div class="ox-wrap">
       <button class="ox-btn" onclick="oxCheck(this,'O','X','q15')">⭕ 정문</button>
-      <button class="ox-btn" onclick="oxCheck(this,'X','O','q15')">❌ 비문</button>
+      <button class="ox-btn" onclick="oxCheck(this,'X','X','q15')">❌ 비문</button>
     </div>
     <div class="explanation" id="exp-q15">
       <div class="ans-label">정답: ❌ 비문</div>
@@ -462,7 +462,7 @@
   <!-- Q16 MC: 원문 (68a~c) ever since Particle/Preposition/Conjunction -->
   <div class="q-card" id="q16">
     <div class="q-meta"><span class="q-num">Q16</span><span class="q-type">객관식</span></div>
-    <div class="q-stem">밑줄 친 단어의 범주(category)를 바르게 짝지은 것은?
+    <div class="q-stem">전통적인 Preposition / Conjunction / Particle 구분에 따라 밑줄 친 표현의 since를 분류한 것은?
     <div class="q-examples">
       (a) He's been difficult <u>ever since</u> the party.<br>
       (b) He's been difficult <u>ever since</u> the party began.<br>
@@ -479,14 +479,14 @@
       <strong>(a) Preposition</strong> — NP complement [the party] 동반<br>
       <strong>(b) Conjunction</strong> — Clause complement [the party began] 동반<br>
       <strong>(c) Particle</strong> — complement 없이 단독 사용<br><br>
-      세 가지 용법 모두 가능한 since/after/before 등은 <strong>Preposition</strong>으로 통합 분석합니다.
+      이와 달리 Radford의 통합 분석에서는 세 가지 용법 모두 가능한 since/after/before 등을 <strong>Preposition</strong>으로 분석합니다.
     </div>
   </div>
 
   <!-- Q17 MC: 원문 cleft test — it was ... that -->
   <div class="q-card" id="q17">
     <div class="q-meta"><span class="q-num">Q17</span><span class="q-type">객관식</span></div>
-    <div class="q-stem">다음 중 Cleft sentence의 focus position에 올 수 <strong>없는</strong> 것은?
+    <div class="q-stem">다음 네 예문에서 Cleft sentence의 focus position에 올 수 있는 범주를 모두 고른 것은?
     <div class="q-examples">
       (a) It was a book that she bought.<br>
       (b) It was in the park that I met her.<br>
@@ -501,12 +501,12 @@
     </div>
     <div class="explanation" id="exp-q17">
       <div class="ans-label">정답: ③ NP와 PP만 가능</div>
-      Cleft sentence의 focus position에는 <strong>NP와 PP</strong>만 올 수 있습니다.<br>
-      (a) <em>a car</em> = NP ✓<br>
-      (b) <em>in the shop</em> = PP ✓<br>
-      (c) <em>*very pretty</em> = AP ✗<br>
-      (d) <em>*go home</em> = VP ✗<br><br>
-      → AP, VP는 focus position에 올 수 없음 → <strong>category 판별 테스트</strong>로 활용
+      제시된 네 예문에서는 Cleft sentence의 focus position에 <strong>NP와 PP</strong>가 허용됩니다.<br>
+      (a) <em>a book</em> = NP ✓<br>
+      (b) <em>in the park</em> = PP ✓<br>
+      (c) <em>*very clever</em> = AP ✗<br>
+      (d) <em>*leave early</em> = VP ✗<br><br>
+      → 제시된 AP와 VP는 이 예문의 focus position에 올 수 없음 → <strong>category 판별 테스트</strong>로 활용
     </div>
   </div>
 
@@ -614,7 +614,7 @@
     </div>
     <div class="explanation" id="exp-q23">
       <div class="ans-label">정답: ⭕ 정문</div>
-      Cleft sentence의 focus position에 <strong>NP</strong> [a car]가 위치 → ✓<br>
+      Cleft sentence의 focus position에 <strong>NP</strong> [a book]가 위치 → ✓<br>
       → 정문 (NP는 cleft focus position에 올 수 있음)<br>
       이 테스트를 통해 focus 위치의 성분이 NP 또는 PP임을 확인할 수 있습니다.
     </div>
